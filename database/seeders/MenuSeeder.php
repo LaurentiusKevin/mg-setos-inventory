@@ -19,7 +19,7 @@ class MenuSeeder extends Seeder
         $data = [
             [
                 'name' => 'System Utility',
-                'segment_name' => 'system',
+                'segment_name' => 'system-utility',
                 'icon' => 'fas fa-cogs',
                 'ord' => 1,
                 'is_private' => 1,
