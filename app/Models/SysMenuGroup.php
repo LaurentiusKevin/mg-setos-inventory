@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer ord
  * @property boolean is_private
  * @method static hasMenu()
+ * @method static find(mixed $id)
  */
 class SysMenuGroup extends Model
 {

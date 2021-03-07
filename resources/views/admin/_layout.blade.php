@@ -6,10 +6,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="MG Setos - Inventory - Stock Management System">
+    <meta name="description" content="MG Setos - Inventory - Stock Management System @hasSection('description') - @yield('description') @endif">
     <meta name="author" content="Laurentius Kevin">
     <meta name="keyword" content="MgSetos,Hotel,Inventory,StockManagement,System">
-    <title>MG Setos</title>
+    <title>MG Setos @hasSection('title') - @yield('title') @endif</title>
     {{--    <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">--}}
     {{--    <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-icon-60x60.png">--}}
     {{--    <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-icon-72x72.png">--}}
@@ -30,7 +30,8 @@
 
     <link href="{{ asset('icons/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
-    @yield('styles')
+    <link href="{{ asset('css/sweetalert2-default.css') }}" rel="stylesheet">
+    @yield('style')
 </head>
 <body class="c-app">
 <x-admin.sidebar-component></x-admin.sidebar-component>
@@ -50,7 +51,7 @@
 <script src="{{ asset('js/admin/coreui.bundle.min.js') }}"></script>
 <script src="{{ asset('js/axios.js') }}"></script>
 <script src="{{ asset('js/sweetalert2.js') }}"></script>
-<script>
+<script type="text/javascript">
     axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').content;
 
     const Toast = Swal.mixin({
@@ -64,6 +65,29 @@
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     })
+
+    const Loader = {
+        button: function (btn, classData, text = null) {
+            if (text !== null) {
+                btn.html(text);
+            }
+
+            if (btn.hasClass(classData)) {
+                btn.removeClass(classData);
+                btn.prop("disabled", false);
+            } else {
+                btn.addClass(classData);
+                btn.prop("disabled", true);
+            }
+        },
+        label: function (label, classData) {
+            if (label.hasClass(classData)) {
+                label.removeClass(classData);
+            } else {
+                label.addClass(classData);
+            }
+        }
+    }
 </script>
 @yield('script')
 </body>
