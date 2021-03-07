@@ -35,7 +35,7 @@ class MenuGroupController extends Controller
         }
     }
 
-    public function indexCreate()
+    public function createIndex()
     {
         return view('admin.system-utility.menu-group.create');
     }
