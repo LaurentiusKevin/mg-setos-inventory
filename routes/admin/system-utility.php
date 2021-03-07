@@ -15,7 +15,7 @@ Route::group(
             ['as' => 'view.'],
             function () {
                 Route::get('/',[MenuGroupController::class,'index'])->name('index');
-                Route::get('create',[MenuGroupController::class,'indexCreate'])->name('create');
+                Route::get('create',[MenuGroupController::class,'createIndex'])->name('create');
                 Route::get('edit/{id}',[MenuGroupController::class,'editIndex'])->name('edit');
             }
         );
@@ -37,15 +37,15 @@ Route::group(
     [
         'prefix' => 'admin/system-utility/menu',
         'as' => 'admin.system-utility.menu.',
-        'middleware' => ['auth']
+//        'middleware' => ['auth']
     ],
     function () {
         Route::group(
             ['as' => 'view.'],
             function () {
-                Route::get('/',[MenuController::class,'index'])->name('view.index');
-                Route::get('create',[MenuController::class,'createIndex'])->name('view.create');
-                Route::get('edit/{id}',[MenuController::class,'editIndex'])->name('view.edit');
+                Route::get('/',[MenuController::class,'index'])->name('index');
+                Route::get('create',[MenuController::class,'createIndex'])->name('create');
+                Route::get('edit/{id}',[MenuController::class,'editIndex'])->name('edit');
             }
         );
 
@@ -53,8 +53,7 @@ Route::group(
             ['prefix' => 'api', 'as' => 'api.'],
             function () {
                 Route::post('data',[MenuController::class,'data'])->name('data');
-                Route::post('store',[MenuController::class,'storeNew'])->name('store');
-                Route::post('store-edit',[MenuController::class,'storeEdit'])->name('store-edit');
+                Route::post('store',[MenuController::class,'storeData'])->name('store');
                 Route::post('show-unshow',[MenuController::class,'showUnshow'])->name('show-unshow');
                 Route::post('delete',[MenuController::class,'delete'])->name('delete');
             }

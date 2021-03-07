@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\DB;
  * @property boolean is_private
  * @method static select(mixed $columns)
  * @method static where(string $columns, string $operator, mixed $value)
+ * @method static withGroup()
+ * @method static find(mixed $id)
  */
 class SysMenu extends Model
 {
