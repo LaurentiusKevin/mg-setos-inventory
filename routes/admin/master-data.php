@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MasterData\UserAplikasiController;
 use App\Http\Controllers\Admin\MasterData\UserRoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +34,8 @@ Route::group(
 
 Route::group(
     [
-        'prefix' => 'admin/system-utility/user-sistem',
-        'as' => 'admin.system-utility.user-sistem.',
+        'prefix' => 'admin/master-data/user-aplikasi',
+        'as' => 'admin.master-data.user-aplikasi.',
 //        'middleware' => ['auth']
     ],
     function () {
@@ -42,8 +43,8 @@ Route::group(
             ['as' => 'view.'],
             function () {
                 Route::get('/',[UserAplikasiController::class,'index'])->name('index');
-                Route::get('create',[UserAplikasiController::class,'createIndex'])->name('create');
-                Route::get('edit/{id}',[UserAplikasiController::class,'editIndex'])->name('edit');
+                Route::get('create',[UserAplikasiController::class,'indexCreate'])->name('create');
+                Route::get('edit/{id}',[UserAplikasiController::class,'indexEdit'])->name('edit');
             }
         );
 
@@ -52,7 +53,6 @@ Route::group(
             function () {
                 Route::post('data',[UserAplikasiController::class,'data'])->name('data');
                 Route::post('store',[UserAplikasiController::class,'store'])->name('store');
-                Route::post('store-edit',[UserAplikasiController::class,'editSubmit'])->name('store-edit');
                 Route::post('delete',[UserAplikasiController::class,'delete'])->name('delete');
                 Route::post('reset-password',[UserAplikasiController::class,'resetPassword'])->name('reset-password');
             }
