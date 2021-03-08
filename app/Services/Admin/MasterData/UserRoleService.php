@@ -30,12 +30,14 @@ class UserRoleService
     public function menuData()
     {
         $menu = [];
-        $group = SysMenuGroup::hasMenu()->get();
+        $group = SysMenuGroup::hasMenu()->where('is_private','=',0)->get();
 
         foreach ($group AS $item) {
             $menu[$item->id] = [
                 'name' => $item->name,
-                'menu' => SysMenu::where('sys_menu_group_id','=',$item->id)->get()->toArray()
+                'menu' => SysMenu::where('sys_menu_group_id','=',$item->id)
+                    ->where('is_private','=',0)
+                    ->get()->toArray()
             ];
         }
 
@@ -86,6 +88,52 @@ class UserRoleService
 
             DB::commit();
             return response()->json(['status' => 'success', 'redirect' => route('admin.master-data.user-role.view.index')]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'details' => $th
+            ],500);
+        }
+    }
+
+    public function masterRoleData($id)
+    {
+        $menu = [];
+        $group = SysMenuGroup::hasMenu()->get();
+
+        foreach ($group AS $item) {
+            if ($item->is_private == 0) {
+                $menu[$item->id] = [
+                    'name' => $item->name,
+                    'menu' => SysMenu::withRoles($item->id, $id)->where('sys_menu_group_id','=',$item->id)->get()->toArray()
+                ];
+            }
+        }
+
+        return $menu;
+    }
+
+    public function editIndexData($id)
+    {
+        return [
+            'groups' => $this->masterRoleData($id),
+            'data' => Role::find($id)
+        ];
+    }
+
+    public function deleteData($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $role = Role::find($id);
+            RoleMenu::where('roles_id','=',$role->id)->delete();
+            $role->delete();
+
+            DB::commit();
+
+            return response()->json(['status' => 'success']);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',

@@ -82,7 +82,7 @@
                     <div class="card-footer bg-gradient-secondary">
                         <div class="row justify-content-between">
                             <div class="col-sm-12 col-md-4 col-lg-2">
-                                <a href="{{ route('admin.system-utility.menu-group.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>
+                                <a href="{{ route('admin.master-data.user-role.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-2 mt-2 mt-lg-0 mt-sm-2">
                                 <button type="submit" class="btn btn-block btn-success"><i class="fas fa-check mr-2"></i>Simpan</button>

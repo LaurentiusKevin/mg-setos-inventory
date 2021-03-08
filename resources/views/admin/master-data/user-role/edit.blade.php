@@ -20,24 +20,64 @@
                     <strong>Edit Group Menu</strong>
                 </div>
                 <form id="formData">
+                    <input type="hidden" name="id" value="{{ $data->id }}">
                     <div class="card-body">
-                        <input type="hidden" id="sys_menu_group_id" value="{{ $data->id }}">
                         <div class="form-group">
                             <label for="iName">Name</label>
                             <input id="iName" name="name" type="text" class="form-control" value="{{ $data->name }}" required>
                         </div>
                         <div class="form-group">
-                            <label for="iSegmentName">Segment Name</label>
-                            <input id="iSegmentName" name="segment_name" type="text" class="form-control" value="{{ $data->segment_name }}" required>
+                            <label for="iInfo">Info</label>
+                            <input type="text" class="form-control" name="info" id="iInfo" value="{{ $data->info }}">
                         </div>
-                        <div class="form-group">
-                            <label for="iIcon">Icon</label>
-                            <input id="iIcon" name="icon" type="text" class="form-control" value="{{ $data->icon }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="iOrder">Order</label>
-                            <input id="iOrder" name="ord" type="text" class="form-control" value="{{ $data->ord }}" required>
-                        </div>
+                        <label>Menu</label>
+                        <table class="table table-sm table-bordered table-hover">
+                            <thead>
+                            <tr class="table-primary">
+                                <th class="text-center">Nama Menu</th>
+                                <th class="text-center" style="width: 10%">View</th>
+                                <th class="text-center" style="width: 10%">Create</th>
+                                <th class="text-center" style="width: 10%">Edit</th>
+                                <th class="text-center" style="width: 10%">Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($groups AS $group)
+                                <tr class="table-active">
+                                    <th colspan="5">{{ $group['name'] }}</th>
+                                </tr>
+                                @foreach($group['menu'] AS $m)
+                                    <tr>
+                                        <th>&nbsp;&nbsp;{{ $m['name'] }}</th>
+                                        <td class="text-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="view[]" value="{{ $m['id'] }}" id="view-{{ $m['id'] }}" {{ ($m['view']) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="view-{{ $m['id'] }}"></label>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="create[]" value="{{ $m['id'] }}" id="create-{{ $m['id'] }}" {{ ($m['create']) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="create-{{ $m['id'] }}"></label>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="edit[]" value="{{ $m['id'] }}" id="edit-{{ $m['id'] }}" {{ ($m['edit']) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="edit-{{ $m['id'] }}"></label>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="delete[]" value="{{ $m['id'] }}" id="delete-{{ $m['id'] }}" {{ ($m['delete']) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="delete-{{ $m['id'] }}"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="card-footer bg-gradient-secondary">
                         <div class="row justify-content-between">
@@ -56,27 +96,16 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('js/jquery.js') }}"></script>
     <script type="text/javascript">
-        const id = () => document.getElementById('sys_menu_group_id').value
-        const name = () => document.getElementById('iName').value
-        const segment_name = () => document.getElementById('iSegmentName').value
-        const icon = () => document.getElementById('iIcon').value
-        const order = () => document.getElementById('iOrder').value
-
         document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById('formData').addEventListener('submit', event => {
+            $('#formData').on('submit', function (event) {
                 event.preventDefault()
 
                 axios({
-                    url: '{{ route('admin.system-utility.menu-group.api.store-edit') }}',
+                    url: '{{ route('admin.master-data.user-role.api.store') }}',
                     method: 'post',
-                    data: {
-                        id: id(),
-                        name: name(),
-                        segment_name: segment_name(),
-                        icon: icon(),
-                        order: order()
-                    }
+                    data: $(this).serialize()
                 }).then(response => {
                     if (response.data.status === 'success') {
                         Swal.fire({

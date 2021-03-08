@@ -55,4 +55,20 @@ class UserRoleController extends Controller
 
         return $this->service->storeData($name,$info,$view,$create,$edit,$delete,$id);
     }
+
+    public function editIndex($id)
+    {
+        return view('admin.master-data.user-role.edit',$this->service->editIndexData($id));
+    }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id' => 'required'
+        ]);
+
+        $id = $request->get('id');
+
+        return $this->service->deleteData($id);
+    }
 }

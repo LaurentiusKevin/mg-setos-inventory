@@ -82,7 +82,7 @@
         t_list_tbody.on('click','button.action-edit', function (event) {
             console.log('coba')
             let data = t_list_data($(event.target).parents('tr'));
-            window.location = `{{ url('admin/system-utility/menu-group/edit') }}/${data.id}`;
+            window.location = `{{ url('admin/master-data/user-role/edit') }}/${data.id}`;
         });
 
         t_list_tbody.on('click','button.action-change-status', event => {
@@ -136,7 +136,7 @@
             let data = t_list_data($(event.target).parents('tr'));
 
             Swal.fire({
-                title: 'Hapus menu ini?',
+                title: 'Hapus role ini?',
                 icon: 'warning',
                 showCancelButton: true,
                 reverseButtons: true,
@@ -144,7 +144,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios({
-                        url: '{{ route('admin.system-utility.menu-group.api.delete') }}',
+                        url: '{{ route('admin.master-data.user-role.api.delete') }}',
                         method: 'post',
                         data: {
                             id: data.id
@@ -153,7 +153,7 @@
                         if (response.data.status === 'success') {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Tersimpan',
+                                title: 'Terhapus',
                                 timer: 1200,
                                 showConfirmButton: false,
                                 willClose(popup) {
