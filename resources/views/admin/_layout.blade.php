@@ -88,8 +88,6 @@
             }
         }
     }
-
-    document.getElementsByClassName('action-logout').
 </script>
 @yield('script')
 </body>
