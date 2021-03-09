@@ -37,13 +37,14 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right pt-0">
+                <div class="dropdown-header bg-info py-2"><strong class="text-white">{{ auth()->user()['name'] }}</strong></div>
                 <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div>
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-user c-icon mr-2"></i>
                     Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ route('admin.logout') }}">
                     <i class="fas fa-sign-out-alt c-icon mr-2 text-danger"></i>
                     Logout
                 </a>
