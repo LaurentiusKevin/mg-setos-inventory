@@ -28,9 +28,10 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('1111')
             ]
         ];
-        $user = new User();
+
         DB::beginTransaction();
         foreach ($data AS $item) {
+            $user = new User();
             $user->name = $item['name'];
             $user->username = $item['username'];
             $user->password = $item['password'];

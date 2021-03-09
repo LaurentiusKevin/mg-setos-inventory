@@ -8,7 +8,7 @@ Route::group(
     [
         'prefix' => 'admin/system-utility/menu-group',
         'as' => 'admin.system-utility.menu-group.',
-//        'middleware' => ['auth']
+        'middleware' => ['auth']
     ],
     function () {
         Route::group(
@@ -37,7 +37,7 @@ Route::group(
     [
         'prefix' => 'admin/system-utility/menu',
         'as' => 'admin.system-utility.menu.',
-//        'middleware' => ['auth']
+        'middleware' => ['auth']
     ],
     function () {
         Route::group(

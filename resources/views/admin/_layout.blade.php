@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <base href="{{ url('/') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">

@@ -39,7 +39,30 @@ class MenuSeeder extends Seeder
                         'is_private' => 1,
                     ]
                 ]
-            ]
+            ],
+            [
+                'name' => 'Master Data',
+                'segment_name' => 'master-data',
+                'icon' => 'fas fa-database',
+                'ord' => 2,
+                'is_private' => 0,
+                'menu' => [
+                    [
+                        'name' => 'User Role',
+                        'segment_name' => 'user-role',
+                        'route' => 'admin/master-data/user-role',
+                        'ord' => 1,
+                        'is_private' => 0,
+                    ],
+                    [
+                        'name' => 'User Aplikasi',
+                        'segment_name' => 'user-aplikasi',
+                        'route' => 'admin/master-data/user-aplikasi',
+                        'ord' => 2,
+                        'is_private' => 0,
+                    ]
+                ]
+            ],
         ];
 
         DB::beginTransaction();

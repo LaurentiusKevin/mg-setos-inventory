@@ -8,7 +8,7 @@ Route::group(
     [
         'prefix' => 'admin/master-data/user-role',
         'as' => 'admin.master-data.user-role.',
-//        'middleware' => ['auth']
+        'middleware' => ['auth']
     ],
     function () {
         Route::group(
@@ -36,7 +36,7 @@ Route::group(
     [
         'prefix' => 'admin/master-data/user-aplikasi',
         'as' => 'admin.master-data.user-aplikasi.',
-//        'middleware' => ['auth']
+        'middleware' => ['auth']
     ],
     function () {
         Route::group(
