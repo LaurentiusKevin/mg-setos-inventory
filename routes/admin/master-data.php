@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MasterData\SatuanProductController;
 use App\Http\Controllers\Admin\MasterData\UserAplikasiController;
 use App\Http\Controllers\Admin\MasterData\UserRoleController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,34 @@ Route::group(
                 Route::post('store',[UserAplikasiController::class,'store'])->name('store');
                 Route::post('delete',[UserAplikasiController::class,'delete'])->name('delete');
                 Route::post('reset-password',[UserAplikasiController::class,'resetPassword'])->name('reset-password');
+            }
+        );
+    }
+);
+
+Route::group(
+    [
+        'prefix' => 'admin/master-data/satuan-produk',
+        'as' => 'admin.master-data.satuan-produk.',
+        'middleware' => ['auth']
+    ],
+    function () {
+        Route::group(
+            ['as' => 'view.'],
+            function () {
+                Route::get('/',[SatuanProductController::class,'index'])->name('index');
+                Route::get('create',[SatuanProductController::class,'indexCreate'])->name('create');
+                Route::get('edit/{id}',[SatuanProductController::class,'indexEdit'])->name('edit');
+            }
+        );
+
+        Route::group(
+            ['prefix' => 'api', 'as' => 'api.'],
+            function () {
+                Route::post('data',[SatuanProductController::class,'data'])->name('data');
+                Route::post('store',[SatuanProductController::class,'store'])->name('store');
+                Route::post('delete',[SatuanProductController::class,'delete'])->name('delete');
+                Route::post('reset-password',[SatuanProductController::class,'resetPassword'])->name('reset-password');
             }
         );
     }
