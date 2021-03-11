@@ -26,7 +26,20 @@ class UserAplikasiController extends Controller
     {
         try {
             return DataTables::of(
-                User::all()
+                User::join('roles','users.role_id','=','roles.id')
+                    ->select([
+                        'users.id',
+                        'users.role_id',
+                        'roles.name AS role',
+                        'users.username',
+                        'users.name',
+                        'users.email',
+                        'users.email_verified_at',
+                        'users.password',
+                        'users.remember_token',
+                        'users.created_at',
+                        'users.updated_at',
+                    ])
             )->addColumn('action', function ($data) {
                 return view('admin.master-data.user-aplikasi.action');
             })->make(true);

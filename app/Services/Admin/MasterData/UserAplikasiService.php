@@ -32,6 +32,7 @@ class UserAplikasiService
                     ['username','=',$username],
                     ['deleted_at','=',null],
                 ]);
+            if ($id !== null) $checkUser->where('id','<>',$id);
 
             if ($checkUser->exists()) {
                 return response()->json(['status' => 'failed', 'message' => 'Username sudah terdaftar']);

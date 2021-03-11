@@ -30,6 +30,7 @@
                         <thead class="bg-dark">
                         <tr>
                             <th>Nama</th>
+                            <th>Role</th>
                             <th>Username</th>
                             <th>e-Mail</th>
                             <th>Terdaftar Pada</th>
@@ -66,19 +67,24 @@
         },
         columns: [
             {data: 'name'},
+            {data: 'role'},
             {data: 'username'},
             {data: 'email'},
             {
                 data: 'created_at',
                 render: (data, type, row, meta) => {
                     return moment(data).format('DD MMMM YYYY, HH:mm:ss')
-                }
+                },
+                className: 'text-nowrap',
+                width: '5%'
             },
             {
                 data: 'updated_at',
                 render: (data, type, row, meta) => {
                     return moment(data).format('DD MMMM YYYY, HH:mm:ss')
-                }
+                },
+                className: 'text-nowrap',
+                width: '5%'
             },
             {data: 'action', width: '5%'},
         ],
