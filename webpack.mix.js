@@ -120,3 +120,28 @@ mix
     .scripts([
         'node_modules/select2/dist/js/select2.js',
     ],'public/js/select2.js')
+
+    /**
+     * FILEPOND
+     */
+    .styles([
+        'node_modules/filepond/dist/filepond.css',
+        'node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css',
+    ],'public/css/filepond.css')
+    .scripts([
+        'node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js',
+        'node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js',
+        'node_modules/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js',
+        'node_modules/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js',
+        'node_modules/filepond/dist/filepond.js',
+    ],'public/js/filepond.js')
+
+    /**
+     * FANCYBOX
+     */
+    .styles([
+        'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.css',
+    ],'public/css/fancybox.css')
+    .scripts([
+        'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.js',
+    ],'public/js/fancybox.js')

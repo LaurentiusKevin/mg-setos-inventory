@@ -140,5 +140,9 @@
     "/css/datatables.css": "/css/datatables.css",
     "/js/datatables.js": "/js/datatables.js",
     "/css/select2.css": "/css/select2.css",
-    "/js/select2.js": "/js/select2.js"
+    "/js/select2.js": "/js/select2.js",
+    "/css/filepond.css": "/css/filepond.css",
+    "/js/filepond.js": "/js/filepond.js",
+    "/css/fancybox.css": "/css/fancybox.css",
+    "/js/fancybox.js": "/js/fancybox.js"
 }
