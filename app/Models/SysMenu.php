@@ -26,9 +26,9 @@ class SysMenu extends Model
 {
     use HasFactory;
 
-    public static function apply()
+    public static function booted()
     {
-        static::addGlobalScope('ord', function (Builder $builder) {
+        static::addGlobalScope('ordered', function (Builder $builder) {
             $builder->orderBy('ord');
         });
     }
