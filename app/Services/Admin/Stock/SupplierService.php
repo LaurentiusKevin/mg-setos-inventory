@@ -48,10 +48,10 @@ class SupplierService
 
             if ($id == null) {
                 $data = new Supplier();
-                $data->logo = $image;
+                $data->logo = encrypt($image);
             } else {
                 $data = Supplier::find($id);
-                $data->logo = ($image == null) ? $data->logo : $image;
+                $data->logo = ($image == null) ? $data->logo : encrypt($image);
             }
             $data->name = $name;
             $data->phone = $phone;

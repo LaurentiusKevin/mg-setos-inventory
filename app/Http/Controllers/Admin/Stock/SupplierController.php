@@ -27,7 +27,7 @@ class SupplierController extends Controller
         try {
             return DataTables::of(Supplier::all())
                 ->editColumn('logo', function ($data) {
-                    return ($data->logo == null) ? url('icons/picture.svg') : url("admin/stock/supplier/api/get-image/".encrypt($data->logo));
+                    return ($data->logo == null) ? url('icons/picture.svg') : url("admin/stock/supplier/api/get-image/{$data->logo}");
                 })
                 ->editColumn('phone', function ($data) {
                     return ($data->phone == null) ? '-' : $data->phone;
