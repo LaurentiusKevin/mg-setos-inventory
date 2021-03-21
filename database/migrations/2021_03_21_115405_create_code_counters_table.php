@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePurchaseOrderInfosTable extends Migration
+class CreateCodeCountersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreatePurchaseOrderInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_order_infos', function (Blueprint $table) {
+        Schema::create('code_counters', function (Blueprint $table) {
             $table->id();
-            $table->string('invoice_number');
-            $table->integer('supplier_id');
-            $table->float('total_price',12,0);
-            $table->text('catatan')->nullable();
+            $table->string('kode');
+            $table->integer('tahun');
+            $table->integer('bulan');
+            $table->integer('counter');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +30,6 @@ class CreatePurchaseOrderInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase_order_infos');
+        Schema::dropIfExists('code_counters');
     }
 }

@@ -21,6 +21,7 @@
         "@fortawesome/fontawesome-free": "^5.15.2",
         "@popperjs/core": "^2.8.6",
         "@sweetalert2/themes": "^4.0.3",
+        "@ttskch/select2-bootstrap4-theme": "^1.5.2",
         "bootstrap": "^4.6.0",
         "cleave.js": "^1.6.0",
         "datatables.net": "^1.10.23",
@@ -35,6 +36,7 @@
         "filepond-plugin-image-transform": "^3.7.5",
         "jquery": "^3.5.1",
         "moment": "^2.29.1",
+        "numeral": "^2.0.6",
         "select2": "^4.1.0-rc.0",
         "sweetalert2": "^10.15.5"
     }

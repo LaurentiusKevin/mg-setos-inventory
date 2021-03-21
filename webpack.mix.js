@@ -145,3 +145,10 @@ mix
     .scripts([
         'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.js',
     ],'public/js/fancybox.js')
+
+    /**
+     * FANCYBOX
+     */
+    .scripts([
+        'node_modules/numeral/src/numeral.js',
+    ],'public/js/numeral.js')

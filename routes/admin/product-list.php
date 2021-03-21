@@ -75,7 +75,8 @@ Route::group(
             function () {
                 Route::get('/',[PurchaseOrderController::class,'index'])->name('index');
                 Route::get('create',[PurchaseOrderController::class,'indexCreate'])->name('create');
-                Route::get('edit/{id}',[PurchaseOrderController::class,'indexEdit'])->name('edit');
+                Route::get('info/{id}',[PurchaseOrderController::class,'indexInfo'])->name('edit');
+                Route::get('invoice/{id}',[PurchaseOrderController::class,'indexPdf'])->name('invoice');
             }
         );
 
@@ -83,6 +84,7 @@ Route::group(
             ['prefix' => 'api', 'as' => 'api.'],
             function () {
                 Route::post('data',[PurchaseOrderController::class,'data'])->name('data');
+                Route::post('product-list',[PurchaseOrderController::class,'getProductList'])->name('product-list');
                 Route::post('store',[PurchaseOrderController::class,'store'])->name('store');
                 Route::post('delete',[PurchaseOrderController::class,'delete'])->name('delete');
             }

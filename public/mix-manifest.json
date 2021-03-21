@@ -144,5 +144,6 @@
     "/css/filepond.css": "/css/filepond.css",
     "/js/filepond.js": "/js/filepond.js",
     "/css/fancybox.css": "/css/fancybox.css",
-    "/js/fancybox.js": "/js/fancybox.js"
+    "/js/fancybox.js": "/js/fancybox.js",
+    "/js/numeral.js": "/js/numeral.js"
 }
