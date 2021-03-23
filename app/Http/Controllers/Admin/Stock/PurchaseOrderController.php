@@ -82,17 +82,6 @@ class PurchaseOrderController extends Controller
         return $this->service->storeData($supplier_id,$product,$catatan);
     }
 
-    public function getImage($file_path)
-    {
-        $file_path = decrypt($file_path);
-
-        if ($file_path !== null) {
-            return response()->file(storage_path("app/public/{$file_path}"));
-        } else {
-            return response()->file(public_path('icons/picture.svg'));
-        }
-    }
-
     public function indexInfo($id)
     {
         return view('admin.stock.purchase-order.info',$this->service->indexEditData($id));
@@ -110,16 +99,5 @@ class PurchaseOrderController extends Controller
                 'details' => $th
             ]);
         }
-    }
-
-    public function delete(Request $request)
-    {
-        $request->validate([
-            'id' => 'required'
-        ]);
-
-        $id = $request->get('id');
-
-        return $this->service->deleteData($id);
     }
 }
