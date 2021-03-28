@@ -218,6 +218,12 @@
             ],
             columnDefs: [
                 {
+                    targets: 1,
+                    render: (data, type, row, meta) => {
+                        return data.nama;
+                    }
+                },
+                {
                     targets: 2,
                     render: (data, type, row, meta) => {
                         return `<input type="text" class="form-control text-right text-white border-primary font-weight-bold bg-gradient-primary" value="${numeral(data).format('0,0')}" readonly>`;
@@ -250,8 +256,10 @@
             ],
             drawCallback: function (setting) {
                 let api = this.api();
+                let lastRow = (api.data().length) - 1;
+
                 if (list_po_counter > 0 && api.data().length > 0 && $(`.input-quantity[data-id="${list_po_counter}"]`).length) {
-                    data_cleave.product_id[list_po_counter] = api.rows( {page:'current'} ).data()[0].id;
+                    data_cleave.product_id[list_po_counter] = api.rows( {page:'current'} ).data()[lastRow].id;
                     data_cleave.input_quantity[list_po_counter] = new Cleave(`.input-quantity[data-id="${list_po_counter}"]`, {
                         numeral: true,
                         numeralThousandsGroupStyle: 'thousand'
@@ -260,8 +268,10 @@
                         numeral: true,
                         numeralThousandsGroupStyle: 'thousand'
                     });
+                    list_po_counter++;
+                } else {
+                    list_po_counter++;
                 }
-                list_po_counter++;
             }
         });
 
@@ -417,7 +427,6 @@
                 let data_product = [];
 
                 data_cleave.product_id.forEach((v,i) => {
-                    console.log(i)
                     data_product.push({
                         product_id: v,
                         quantity: parseInt(data_cleave.input_quantity[i].getRawValue()),
