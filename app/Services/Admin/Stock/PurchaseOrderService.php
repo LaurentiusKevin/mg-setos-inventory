@@ -62,7 +62,11 @@ class PurchaseOrderService
             DB::beginTransaction();
 
             $total_price = 0;
-            foreach ($product AS $item) $total_price += $item['quantity'] * $item['price'];
+            $total_item = 0;
+            foreach ($product AS $item) {
+                $total_price += $item['quantity'] * $item['price'];
+                $total_item += $item['quantity'];
+            }
 
             $invoiceNumber = CounterHelper::getNewCode('PO');
 
@@ -70,6 +74,7 @@ class PurchaseOrderService
             $info->invoice_number = $invoiceNumber;
             $info->supplier_id = $supplier_id;
             $info->total_price = $total_price;
+            $info->total_item = $total_item;
             $info->catatan = $catatan;
             $info->save();
 

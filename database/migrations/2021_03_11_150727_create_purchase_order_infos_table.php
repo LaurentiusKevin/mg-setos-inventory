@@ -17,9 +17,12 @@ class CreatePurchaseOrderInfosTable extends Migration
             $table->id();
             $table->string('invoice_number');
             $table->integer('supplier_id');
+            $table->integer('total_item');
+            $table->integer('received_item');
             $table->float('total_price',12,0);
             $table->text('catatan')->nullable();
             $table->timestamps();
+            $table->dateTime('receive_completed_at')->nullable();
             $table->softDeletes();
         });
     }

@@ -22,4 +22,16 @@ class PurchaseOrderInfo extends Model
     {
         return $this->hasMany(PurchaseOrderProduct::class,'purchase_order_info_id','id');
     }
+
+    public function received()
+    {
+        return $this->hasManyThrough(
+            ReceivingOrderProduct::class,
+            ReceivingOrderInfo::class,
+            'purchase_order_info_id',
+            'receiving_order_info_id',
+            'id',
+            'id'
+        );
+    }
 }

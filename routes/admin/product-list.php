@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Stock\ProductListController;
 use App\Http\Controllers\Admin\Stock\PurchaseOrderController;
+use App\Http\Controllers\Admin\Stock\ReceivingOrderController;
 use App\Http\Controllers\Admin\Stock\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,6 +87,35 @@ Route::group(
                 Route::post('data',[PurchaseOrderController::class,'data'])->name('data');
                 Route::post('product-list',[PurchaseOrderController::class,'getProductList'])->name('product-list');
                 Route::post('store',[PurchaseOrderController::class,'store'])->name('store');
+            }
+        );
+    }
+);
+
+Route::group(
+    [
+        'prefix' => 'admin/stock/receiving-order',
+        'as' => 'admin.stock.receiving-order.',
+        'middleware' => ['auth']
+    ],
+    function () {
+        Route::group(
+            ['as' => 'view.'],
+            function () {
+                Route::get('/',[ReceivingOrderController::class,'index'])->name('index');
+                Route::get('create',[ReceivingOrderController::class,'indexCreate'])->name('create');
+                Route::get('info/{id}',[ReceivingOrderController::class,'indexInfo'])->name('edit');
+                Route::get('invoice/{id}',[ReceivingOrderController::class,'indexPdf'])->name('invoice');
+            }
+        );
+
+        Route::group(
+            ['prefix' => 'api', 'as' => 'api.'],
+            function () {
+                Route::post('data',[ReceivingOrderController::class,'data'])->name('data');
+                Route::post('po-pending',[ReceivingOrderController::class,'dataPoPending'])->name('po-pending');
+                Route::post('product-list',[ReceivingOrderController::class,'getProductList'])->name('product-list');
+                Route::post('store',[ReceivingOrderController::class,'store'])->name('store');
             }
         );
     }

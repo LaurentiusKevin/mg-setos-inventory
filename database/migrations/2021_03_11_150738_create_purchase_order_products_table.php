@@ -18,6 +18,7 @@ class CreatePurchaseOrderProductsTable extends Migration
             $table->integer('purchase_order_info_id');
             $table->integer('product_id');
             $table->integer('quantity');
+            $table->integer('quantity_received');
             $table->float('price', 12,0);
             $table->float('total_price', 12,0);
             $table->timestamps();
