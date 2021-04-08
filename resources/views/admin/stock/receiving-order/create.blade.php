@@ -189,6 +189,27 @@
             return result;
         }
 
+        function getProduct(purchase_order_info_id) {
+            list_po_produk.clear().draw();
+
+            axios({
+                url: '{{ route('admin.stock.receiving-order.api.po-pending.products') }}',
+                method: 'post',
+                data: {
+                    purchase_order_info_id: purchase_order_info_id
+                }
+            }).then(response => {
+                response.data.forEach((v,i) => {
+                    list_po_produk.row.add(v).draw();
+                })
+            }).catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Terdapat Kesalahan Pada System!'
+                });
+            })
+        }
+
         let data_cleave = {
             purchase_order_info_id: null,
             purchase_order_product_id: [],
@@ -202,13 +223,6 @@
         let list_po_counter = -1;
         const list_po_produk = $('#list_po_produk').DataTable({
             scrollX: true,
-            ajax: {
-                url: '{{ route('admin.stock.receiving-order.api.po-pending.products') }}',
-                method: 'post',
-                data: function (d) {
-                    d.purchase_order_info_id = purchase_order_info_id_val()
-                }
-            },
             columns: [
                 {data: 'product', className: "align-middle font-weight-bold"},
                 {data: 'product'},
@@ -357,8 +371,6 @@
             })
 
             t_list_po_pending_tbody.on('click','button.action-add-po', function (event) {
-                // list_po_produk.clear().draw();
-
                 let data = t_list_po_pending_data($(event.target).parents('tr'));
                 data_cleave.purchase_order_info_id = data.id;
 
@@ -371,10 +383,7 @@
                 info_cp_telp(data.supplier.contact_person_phone)
                 info_catatan(data.supplier.info)
 
-                // data.products.forEach((v,i) => {
-                //     list_po_produk.row.add(v).draw();
-                // })
-                list_po_produk.ajax.reload();
+                getProduct(data.id);
 
                 listPoModal.modal('hide')
             });

@@ -70,12 +70,14 @@ class ReceivingOrderController extends Controller
 
     public function dataPoPendingProducts(Request $request)
     {
-        $purchase_order_info_id = $request->purchase_order_info_id ?? null;
+        $request->validate([
+            'purchase_order_info_id' => 'required'
+        ]);
+
+        $purchase_order_info_id = $request->purchase_order_info_id;
 
         try {
-            return DataTables::of(
-                $this->service->getDataPoPendingProducts($purchase_order_info_id)
-            )->make(true);
+            return $this->service->getDataPoPendingProducts($purchase_order_info_id);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',
