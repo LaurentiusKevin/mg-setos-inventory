@@ -114,6 +114,7 @@ Route::group(
             function () {
                 Route::post('data',[ReceivingOrderController::class,'data'])->name('data');
                 Route::post('po-pending',[ReceivingOrderController::class,'dataPoPending'])->name('po-pending');
+                Route::post('po-pending/products',[ReceivingOrderController::class,'dataPoPendingProducts'])->name('po-pending.products');
                 Route::post('product-list',[ReceivingOrderController::class,'getProductList'])->name('product-list');
                 Route::post('store',[ReceivingOrderController::class,'store'])->name('store');
             }
