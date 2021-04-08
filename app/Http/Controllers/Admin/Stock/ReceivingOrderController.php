@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin\Stock;
 
 use App\Http\Controllers\Controller;
-use App\Models\PurchaseOrderInfo;
 use App\Models\ReceivingOrderInfo;
 use App\Services\Admin\Stock\ReceivingOrderService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use PDF;
 
 class ReceivingOrderController extends Controller
 {
@@ -100,5 +100,24 @@ class ReceivingOrderController extends Controller
         $catatan = $request->get('catatan');
 
         return $this->service->storeData($purchase_order_info_id,$product,$catatan);
+    }
+
+    public function indexInfo($id)
+    {
+        return view('admin.stock.receiving-order.info',$this->service->indexInfoData($id));
+    }
+
+    public function indexPdf($id)
+    {
+        try {
+            $pdf = PDF::loadView('admin.stock.receiving-order.pdf',$this->service->indexInfoData($id))->setPaper('a4','portrait');
+            return $pdf->stream('invoice.pdf');
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'details' => $th
+            ]);
+        }
     }
 }

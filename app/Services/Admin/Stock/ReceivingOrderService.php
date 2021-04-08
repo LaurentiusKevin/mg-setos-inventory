@@ -122,7 +122,7 @@ class ReceivingOrderService
             return response()->json([
                 'status' => 'success',
                 'invoice_number' => $invoiceNumber,
-                'invoice_pdf' => route('admin.stock.purchase-order.view.invoice',[$rcvInfo->id]),
+                'invoice_pdf' => route('admin.stock.receiving-order.view.invoice',[$rcvInfo->id]),
                 'redirect' => route('admin.stock.receiving-order.view.index')
             ]);
         } catch (\Throwable $th) {
@@ -132,5 +132,13 @@ class ReceivingOrderService
                 'details' => $th
             ]);
         }
+    }
+
+    public function indexInfoData($id)
+    {
+        return [
+            'info' => $this->repo->receivingOrderInfo($id)[0],
+            'product' => $this->repo->receivingOrderProduct($id)
+        ];
     }
 }

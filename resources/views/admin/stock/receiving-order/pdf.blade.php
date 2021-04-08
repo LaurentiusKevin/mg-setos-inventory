@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>Purchase Order {{ $data->invoice_number }}</title>
+    <title>Receiving Order {{ $info->invoice_number }}</title>
     <link rel="stylesheet" href="{{ public_path('css/pdf/portrait.css') }}">
 </head>
 <body>
 <header>
     <table style="width: 100%">
         <tr>
-            <td class="header-brt" style="width: 30%">PURCHASE ORDER</td>
+            <td class="header-brt" style="width: 30%">RECEIVING ORDER</td>
             <td style="width: 20%"></td>
             <td rowspan="2" style="width: 50%">
                 <img src="{{ public_path('icons/picture.svg') }}" class="logo" alt="Logo">
@@ -17,7 +17,7 @@
         <tr>
             <td class="invoice-number" style="height: 1cm">
                 NOMOR
-                <br>{{ $data->invoice_number }}
+                <br>{{ $info->invoice_number }}
             </td>
         </tr>
     </table>
@@ -41,12 +41,12 @@
         </tr>
         <tr>
             <td>
-                <span style="font-size: 13px">{{ $data->supplier->name }}</span>
-                <br>{{ $data->supplier->address }}
-                <br>{{ $data->supplier->phone }}
+                <span style="font-size: 13px">{{ $info->supplier_name }}</span>
+                <br>{{ $info->supplier_address }}
+                <br>{{ $info->supplier_phone }}
             </td>
             <td></td>
-            <td style="vertical-align: top">{{ $data->catatan }}</td>
+            <td style="vertical-align: top">{{ $info->catatan }}</td>
         </tr>
     </table>
     <hr>
@@ -61,18 +61,18 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($data->products AS $key => $item)
+        @foreach($product AS $key => $item)
             <tr>
                 <td class="text-center">{{ $key+1 }}</td>
-                <td>{{ $item->product->name }}</td>
-                <td class="text-right">{{ number_format($item->quantity,0,',','.').' '.$item->product->satuan->nama }}</td>
+                <td>{{ $item->name }}</td>
+                <td class="text-right">{{ number_format($item->quantity,0,',','.').' '.$item->satuan }}</td>
                 <td class="text-right">{{ number_format($item->price,0,',','.') }}</td>
                 <td class="text-right">{{ number_format($item->total_price,0,',','.') }}</td>
             </tr>
         @endforeach
         <tr style="background-color: indianred; color: white">
             <th class="text-center" colspan="4">Total</th>
-            <th class="text-right">{{ number_format($data->total_price,0,',','.') }}</th>
+            <th class="text-right">{{ number_format($info->total_price,0,',','.') }}</th>
         </tr>
         </tbody>
     </table>
