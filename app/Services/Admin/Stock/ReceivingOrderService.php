@@ -69,7 +69,7 @@ class ReceivingOrderService
             $poInfo = PurchaseOrderInfo::find($purchase_order_info_id);
             foreach ($product AS $item) {
                 $total_received_item += $item['quantity'];
-                $total_price += $item['price'];
+                $total_price += $item['quantity'] * $item['price'];
 
                 $poProduct = PurchaseOrderProduct::find($item['purchase_order_product_id']);
                 $poProduct->quantity_received += $item['quantity'];
@@ -88,8 +88,6 @@ class ReceivingOrderService
             $rcvInfo->total_price = $total_price;
             $rcvInfo->catatan = $catatan;
             $rcvInfo->save();
-
-            dd($product);
 
             foreach ($product AS $item) {
                 $product = Product::find($item['product_id']);
