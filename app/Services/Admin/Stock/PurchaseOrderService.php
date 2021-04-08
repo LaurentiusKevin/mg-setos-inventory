@@ -79,11 +79,6 @@ class PurchaseOrderService
             $info->save();
 
             foreach ($product AS $item) {
-                $product = Product::find($item['product_id']);
-                $product->last_price = $item['price'];
-                $product->avg_price = $product->avg_price == null ? $item['price'] : (($product->avg_price + $item['price']) / 2);
-                $product->save();
-
                 $poProduct = new PurchaseOrderProduct();
                 $poProduct->purchase_order_info_id = $info->id;
                 $poProduct->product_id = $item['product_id'];

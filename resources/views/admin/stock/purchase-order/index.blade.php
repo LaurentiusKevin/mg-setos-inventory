@@ -73,7 +73,7 @@
             {data: 'supplier', className: 'align-middle'},
             {data: 'total_price', className: 'align-middle'},
             {data: 'created_at', className: 'align-middle'},
-            {data: 'products_sum_quantity', width: '15%', className: 'align-middle'},
+            {data: 'total_item', width: '15%', className: 'align-middle'},
             {data: 'action', width: '5%', className: 'align-middle'},
         ],
         columnDefs: [
@@ -92,7 +92,7 @@
             {
                 targets: 4,
                 render: (data, type, row, meta) => {
-                    let now = 2/data*100;
+                    let now = row.received_item/data*100;
                     return `<div class="progress"><div class="progress-bar progress-bar-striped bg-success" style="width: ${now}%" role="progressbar" aria-valuenow="${now}" aria-valuemin="0" aria-valuemax="${data}">${now}%</div></div>`;
                 }
             },
