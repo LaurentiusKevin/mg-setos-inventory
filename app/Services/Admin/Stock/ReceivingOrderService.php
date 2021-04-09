@@ -70,12 +70,11 @@ class ReceivingOrderService
             foreach ($product AS $item) {
                 $total_received_item += $item['quantity'];
                 $total_price += $item['quantity'] * $item['price'];
+                $poInfo->received_item += $item['quantity'];
 
                 $poProduct = PurchaseOrderProduct::find($item['purchase_order_product_id']);
                 $poProduct->quantity_received += $item['quantity'];
                 $poProduct->save();
-
-                $poInfo->received_item += $item['quantity'];
             }
             if ($poInfo->received_item == $poInfo->total_item) $poInfo->receive_completed_at = now();
             $poInfo->save();
@@ -91,6 +90,7 @@ class ReceivingOrderService
 
             foreach ($product AS $item) {
                 $product = Product::find($item['product_id']);
+                $product->stock += $item['quantity'];
                 $product->last_price = $item['price'];
                 $product->avg_price = ($product->avg_price + $item['price']) / 2;
                 $product->save();
