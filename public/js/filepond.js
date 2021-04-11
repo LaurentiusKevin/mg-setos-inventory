@@ -1,5 +1,5 @@
 /*!
- * FilePondPluginFileValidateType 1.2.5
+ * FilePondPluginFileValidateType 1.2.6
  * Licensed under MIT, https://opensource.org/licenses/MIT/
  * Please visit https://pqina.nl/filepond/ for details.
  */
@@ -240,7 +240,7 @@
 });
 
 /*!
- * FilePondPluginImagePreview 4.6.5
+ * FilePondPluginImagePreview 4.6.6
  * Licensed under MIT, https://opensource.org/licenses/MIT/
  * Please visit https://pqina.nl/filepond/ for details.
  */
@@ -4021,7 +4021,7 @@
 });
 
 /*!
- * FilePondPluginImageResize 2.0.7
+ * FilePondPluginImageResize 2.0.9
  * Licensed under MIT, https://opensource.org/licenses/MIT/
  * Please visit https://pqina.nl/filepond/ for details.
  */
@@ -4029,155 +4029,143 @@
 /* eslint-disable */
 
 (function(global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined'
-    ? (module.exports = factory())
-    : typeof define === 'function' && define.amd
-    ? define(factory)
-    : ((global = global || self),
-      (global.FilePondPluginImageResize = factory()));
+    typeof exports === 'object' && typeof module !== 'undefined'
+        ? (module.exports = factory())
+        : typeof define === 'function' && define.amd
+        ? define(factory)
+        : ((global = global || self), (global.FilePondPluginImageResize = factory()));
 })(this, function() {
-  'use strict';
+    'use strict';
 
-  // test if file is of type image
-  var isImage = function isImage(file) {
-    return /^image/.test(file.type);
-  };
-
-  var getImageSize = function getImageSize(url, cb) {
-    var image = new Image();
-    image.onload = function() {
-      var width = image.naturalWidth;
-      var height = image.naturalHeight;
-      image = null;
-      cb({ width: width, height: height });
+    // test if file is of type image
+    var isImage = function isImage(file) {
+        return /^image/.test(file.type);
     };
-    image.onerror = function() {
-      return cb(null);
+
+    var getImageSize = function getImageSize(url, cb) {
+        var image = new Image();
+        image.onload = function() {
+            var width = image.naturalWidth;
+            var height = image.naturalHeight;
+            image = null;
+            cb({ width: width, height: height });
+        };
+        image.onerror = function() {
+            return cb(null);
+        };
+        image.src = url;
     };
-    image.src = url;
-  };
 
-  /**
-   * Image Auto Resize Plugin
-   */
-  var plugin = function plugin(_ref) {
-    var addFilter = _ref.addFilter,
-      utils = _ref.utils;
-    var Type = utils.Type;
+    /**
+     * Image Auto Resize Plugin
+     */
+    var plugin = function plugin(_ref) {
+        var addFilter = _ref.addFilter,
+            utils = _ref.utils;
+        var Type = utils.Type;
 
-    // subscribe to file load and append required transformations
-    addFilter('DID_LOAD_ITEM', function(item, _ref2) {
-      var query = _ref2.query;
-      return new Promise(function(resolve, reject) {
-        // get file reference
-        var file = item.file;
+        // subscribe to file load and append required transformations
+        addFilter('DID_LOAD_ITEM', function(item, _ref2) {
+            var query = _ref2.query;
+            return new Promise(function(resolve, reject) {
+                // get file reference
+                var file = item.file;
 
-        // if this is not an image we do not have any business cropping it
-        if (!isImage(file) || !query('GET_ALLOW_IMAGE_RESIZE')) {
-          // continue with the unaltered dataset
-          return resolve(item);
-        }
+                // if this is not an image we do not have any business cropping it
+                if (!isImage(file) || !query('GET_ALLOW_IMAGE_RESIZE')) {
+                    // continue with the unaltered dataset
+                    return resolve(item);
+                }
 
-        var mode = query('GET_IMAGE_RESIZE_MODE');
-        var width = query('GET_IMAGE_RESIZE_TARGET_WIDTH');
-        var height = query('GET_IMAGE_RESIZE_TARGET_HEIGHT');
-        var upscale = query('GET_IMAGE_RESIZE_UPSCALE');
+                var mode = query('GET_IMAGE_RESIZE_MODE');
+                var width = query('GET_IMAGE_RESIZE_TARGET_WIDTH');
+                var height = query('GET_IMAGE_RESIZE_TARGET_HEIGHT');
+                var upscale = query('GET_IMAGE_RESIZE_UPSCALE');
 
-        // no resizing to be done
-        if (width === null && height === null) {
-          return resolve(item);
-        }
+                // no resizing to be done
+                if (width === null && height === null) return resolve(item);
 
-        var targetWidth = width === null ? height : width;
-        var targetHeight = height === null ? targetWidth : height;
+                var targetWidth = width === null ? height : width;
+                var targetHeight = height === null ? targetWidth : height;
 
-        // if should not upscale, we need to determine the size of the file
-        var fileURL = URL.createObjectURL(file);
-        getImageSize(fileURL, function(size) {
-          URL.revokeObjectURL(fileURL);
+                // if should not upscale, we need to determine the size of the file
+                var fileURL = URL.createObjectURL(file);
+                getImageSize(fileURL, function(size) {
+                    URL.revokeObjectURL(fileURL);
 
-          // something went wrong
-          if (!size) return resolve(item);
-          var imageWidth = size.width,
-            imageHeight = size.height;
+                    // something went wrong
+                    if (!size) return resolve(item);
+                    var imageWidth = size.width,
+                        imageHeight = size.height;
 
-          // get exif orientation
-          var orientation = (item.getMetadata('exif') || {}).orientation || -1;
+                    // get exif orientation
+                    var orientation = (item.getMetadata('exif') || {}).orientation || -1;
 
-          // swap width and height if orientation needs correcting
-          if (orientation >= 5 && orientation <= 8) {
-            var _ref3 = [imageHeight, imageWidth];
-            imageWidth = _ref3[0];
-            imageHeight = _ref3[1];
-          }
+                    // swap width and height if orientation needs correcting
+                    if (orientation >= 5 && orientation <= 8) {
+                        var _ref3 = [imageHeight, imageWidth];
+                        imageWidth = _ref3[0];
+                        imageHeight = _ref3[1];
+                    }
 
-          // image is already perfect size, no transformations required
-          if (imageWidth === targetWidth && imageHeight === targetHeight) {
-            return resolve(item);
-          }
+                    // image is already perfect size, no transformations required
+                    if (imageWidth === targetWidth && imageHeight === targetHeight)
+                        return resolve(item);
 
-          // image is smaller than target size but no upscaling is allowed
-          if (
-            imageWidth <= targetWidth &&
-            imageHeight <= targetHeight &&
-            !upscale
-          ) {
-            return resolve(item);
-          }
+                    // image is smaller than target size but no upscaling is allowed
+                    if ((imageWidth <= targetWidth || imageHeight <= targetHeight) && !upscale)
+                        return resolve(item);
 
-          // the image needs to be resized
-          item.setMetadata('resize', {
-            mode: mode,
-            upscale: upscale,
-            size: {
-              width: targetWidth,
-              height: targetHeight
-            }
-          });
+                    // the image needs to be resized
+                    item.setMetadata('resize', {
+                        mode: mode,
+                        upscale: upscale,
+                        size: {
+                            width: targetWidth,
+                            height: targetHeight,
+                        },
+                    });
 
-          resolve(item);
+                    resolve(item);
+                });
+            });
         });
-      });
-    });
 
-    // Expose plugin options
-    return {
-      options: {
-        // Enable or disable image resizing
-        allowImageResize: [true, Type.BOOLEAN],
+        // Expose plugin options
+        return {
+            options: {
+                // Enable or disable image resizing
+                allowImageResize: [true, Type.BOOLEAN],
 
-        // the method of rescaling
-        // - force => force set size
-        // - cover => pick biggest dimension
-        // - contain => pick smaller dimension
-        imageResizeMode: ['cover', Type.STRING],
+                // the method of rescaling
+                // - force => force set size
+                // - cover => pick biggest dimension
+                // - contain => pick smaller dimension
+                imageResizeMode: ['cover', Type.STRING],
 
-        // set to false to disable upscaling of image smaller than the target width / height
-        imageResizeUpscale: [true, Type.BOOLEAN],
+                // set to false to disable upscaling of image smaller than the target width / height
+                imageResizeUpscale: [true, Type.BOOLEAN],
 
-        // target width
-        imageResizeTargetWidth: [null, Type.INT],
+                // target width
+                imageResizeTargetWidth: [null, Type.INT],
 
-        // target height
-        imageResizeTargetHeight: [null, Type.INT]
-      }
+                // target height
+                imageResizeTargetHeight: [null, Type.INT],
+            },
+        };
     };
-  };
 
-  // fire pluginloaded event if running in browser, this allows registering the plugin when using async script tags
-  var isBrowser =
-    typeof window !== 'undefined' && typeof window.document !== 'undefined';
-  if (isBrowser) {
-    document.dispatchEvent(
-      new CustomEvent('FilePond:pluginloaded', { detail: plugin })
-    );
-  }
+    // fire pluginloaded event if running in browser, this allows registering the plugin when using async script tags
+    var isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+    if (isBrowser) {
+        document.dispatchEvent(new CustomEvent('FilePond:pluginloaded', { detail: plugin }));
+    }
 
-  return plugin;
+    return plugin;
 });
 
 /*!
- * FilePondPluginImageTransform 3.7.5
+ * FilePondPluginImageTransform 3.7.6
  * Licensed under MIT, https://opensource.org/licenses/MIT/
  * Please visit https://pqina.nl/filepond/ for details.
  */
@@ -8189,7 +8177,7 @@
 });
 
 /*!
- * FilePond 4.25.2
+ * FilePond 4.27.0
  * Licensed under MIT, https://opensource.org/licenses/MIT/
  * Please visit https://pqina.nl/filepond/ for details.
  */
@@ -11967,12 +11955,13 @@
         // Upload related
         instantUpload: [true, Type.BOOLEAN], // Should upload files immediately on drop
         maxParallelUploads: [2, Type.INT], // Maximum files to upload in parallel
+        allowMinimumUploadDuration: [true, Type.BOOLEAN], // if true uploads take at least 750 ms, this ensures the user sees the upload progress giving trust the upload actually happened
 
         // Chunks
         chunkUploads: [false, Type.BOOLEAN], // Enable chunked uploads
         chunkForce: [false, Type.BOOLEAN], // Force use of chunk uploads even for files smaller than chunk size
         chunkSize: [5000000, Type.INT], // Size of chunks (5MB default)
-        chunkRetryDelays: [[500, 1000, 3000], Type.Array], // Amount of times to retry upload of a chunk when it fails
+        chunkRetryDelays: [[500, 1000, 3000], Type.ARRAY], // Amount of times to retry upload of a chunk when it fails
 
         // The server api end points to use for uploading (see docs)
         server: [null, Type.SERVER_API],
@@ -11988,6 +11977,7 @@
             'Drag & Drop your files or <span class="filepond--label-action">Browse</span>',
             Type.STRING,
         ],
+
         labelInvalidField: ['Field contains invalid files', Type.STRING],
         labelFileWaitingForSize: ['Waiting for size', Type.STRING],
         labelFileSizeNotAvailable: ['Size not available', Type.STRING],
@@ -13367,6 +13357,19 @@
                     return null;
                 };
 
+            var headers =
+                typeof action.headers === 'function'
+                    ? action.headers(file, metadata) || {}
+                    : Object.assign(
+                          {},
+
+                          action.headers
+                      );
+
+            var requestParams = Object.assign({}, action, {
+                headers: headers,
+            });
+
             // create formdata object
             var formData = new FormData();
 
@@ -13385,7 +13388,11 @@
             });
 
             // send request object
-            var request = sendRequest(ondata(formData), buildURL(apiUrl, action.url), action);
+            var request = sendRequest(
+                ondata(formData),
+                buildURL(apiUrl, action.url),
+                requestParams
+            );
             request.onload = function(xhr) {
                 load(
                     createResponse(
@@ -13551,7 +13558,7 @@
         };
     };
 
-    var createFileProcessor = function createFileProcessor(processFn) {
+    var createFileProcessor = function createFileProcessor(processFn, options) {
         var state = {
             complete: false,
             perceivedProgress: 0,
@@ -13563,6 +13570,7 @@
             request: null,
             response: null,
         };
+        var allowMinimumUploadDuration = options.allowMinimumUploadDuration;
 
         var process = function process(file, metadata) {
             var progressFn = function progressFn() {
@@ -13603,7 +13611,7 @@
                 },
                 // random delay as in a list of files you start noticing
                 // files uploading at the exact same speed
-                getRandomNumber(750, 1500)
+                allowMinimumUploadDuration ? getRandomNumber(750, 1500) : 0
             );
 
             // remember request so we can abort it later
@@ -14168,13 +14176,11 @@
             // update value
             data[last] = value;
 
-            // don't fire update
-            if (silent) return;
-
             // fire update
             fire('metadata-update', {
                 key: root,
                 value: metadata[root],
+                silent: silent,
             });
         };
 
@@ -14438,7 +14444,6 @@
             if (!item) {
                 failure({
                     error: createResponse('error', 0, 'Item not found'),
-
                     file: null,
                 });
 
@@ -14467,7 +14472,6 @@
             DID_SET_FILES: function DID_SET_FILES(_ref2) {
                 var _ref2$value = _ref2.value,
                     value = _ref2$value === void 0 ? [] : _ref2$value;
-
                 // map values to file objects
                 var files = value.map(function(file) {
                     return {
@@ -14515,7 +14519,10 @@
 
             DID_UPDATE_ITEM_METADATA: function DID_UPDATE_ITEM_METADATA(_ref3) {
                 var id = _ref3.id,
-                    action = _ref3.action;
+                    action = _ref3.action,
+                    change = _ref3.change;
+                // don't do anything
+                if (change.silent) return;
 
                 // if is called multiple times in close succession we combined all calls together to save resources
                 clearTimeout(state.itemUpdateTimeout);
@@ -14529,6 +14536,7 @@
                             item: item,
                             query: query,
                             action: action,
+                            change: change,
                         }).then(function(shouldPrepareOutput) {
                             // plugins determined the output data should be prepared (or not), can be adjusted with beforePrepareOutput hook
                             var beforePrepareFile = query('GET_BEFORE_PREPARE_FILE');
@@ -14546,6 +14554,7 @@
                                         dispatch('DID_PREPARE_OUTPUT', { id: id, file: file });
                                     },
                                 },
+
                                 true
                             );
                         });
@@ -14620,7 +14629,6 @@
                     success = _ref6$success === void 0 ? function() {} : _ref6$success,
                     _ref6$failure = _ref6.failure,
                     failure = _ref6$failure === void 0 ? function() {} : _ref6$failure;
-
                 var currentIndex = index;
 
                 if (index === -1 || typeof index === 'undefined') {
@@ -14671,12 +14679,10 @@
                     failure = _ref7$failure === void 0 ? function() {} : _ref7$failure,
                     _ref7$options = _ref7.options,
                     options = _ref7$options === void 0 ? {} : _ref7$options;
-
                 // if no source supplied
                 if (isEmpty(source)) {
                     failure({
                         error: createResponse('error', 0, 'No source'),
-
                         file: null,
                     });
 
@@ -14924,6 +14930,7 @@
                                             loadComplete();
                                         },
                                     },
+
                                     true
                                 );
 
@@ -15046,11 +15053,9 @@
                     success = _ref9.success,
                     _ref9$failure = _ref9.failure,
                     failure = _ref9$failure === void 0 ? function() {} : _ref9$failure;
-
                 // error response if item archived
                 var err = {
                     error: createResponse('error', 0, 'Item not found'),
-
                     file: null,
                 };
 
@@ -15145,6 +15150,7 @@
                         },
                         failure: failure,
                     },
+
                     true
                 );
             }),
@@ -15290,7 +15296,11 @@
                                 chunkSize: options.chunkSize,
                                 chunkRetryDelays: options.chunkRetryDelays,
                             }
-                        )
+                        ),
+
+                        {
+                            allowMinimumUploadDuration: query('GET_ALLOW_MINIMUM_UPLOAD_DURATION'),
+                        }
                     ),
 
                     // called when the file is about to be processed so it can be piped through the transform filters
@@ -16789,7 +16799,7 @@
     var getItemsPerRow = function(horizontalSpace, itemWidth) {
         // add one pixel leeway, when using percentages for item width total items can be 1.99 per row
 
-        return Math.floor((horizontalSpace + 1) / itemWidth);
+        return Math.max(1, Math.floor((horizontalSpace + 1) / itemWidth));
     };
 
     var getItemIndexByPosition = function getItemIndexByPosition(view, children, positionInView) {
