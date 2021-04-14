@@ -17,7 +17,6 @@ class DepartmentRepository
     {
         return DB::table('departments')
             ->where('code','=',$code)
-            ->whereNull('deleted_at')
             ->get()->count();
     }
 }

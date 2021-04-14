@@ -48,6 +48,19 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="i_department">Department</label>
+                            <select class="form-control" id="i_department" name="name" required>
+                                <option value="">-- Pilih Department --</option>
+                                @foreach($department AS $item)
+                                    <option value="{{ $item->id }}" {{ ($data->department_id == $item->id) ? 'selected' : '' }}>{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="i_supplier_price">Supplier Price</label>
+                            <input id="i_supplier_price" name="name" type="text" class="form-control">
+                        </div>
                     </div>
                     <div class="card-footer bg-gradient-secondary">
                         <div class="row justify-content-between">
@@ -73,6 +86,8 @@
         const id = () => document.getElementById('sys_menu_group_id').value
         const name = () => document.getElementById('i_name').value
         const satuan = () => document.getElementById('i_satuan').value
+        const department = () => document.getElementById('i_department').value
+        const supplier_price = () => document.getElementById('i_supplier_price').value
         const i_image = document.getElementById('i_image');
 
         let image_file_path = null;
@@ -126,6 +141,8 @@
                         id: id(),
                         name: name(),
                         satuan_id: satuan(),
+                        department_id: department(),
+                        price: supplier_price(),
                         image: image_file_path
                     }
                 }).then(response => {

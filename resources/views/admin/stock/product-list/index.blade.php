@@ -31,7 +31,9 @@
                         <thead class="bg-dark">
                         <tr>
                             <th>Product</th>
+                            <th>Department</th>
                             <th>Stock</th>
+                            <th>Supplier Price</th>
                             <th>Last Price</th>
                             <th>Average Price</th>
                             <th>Action</th>
@@ -66,31 +68,34 @@
             method: 'post'
         },
         columns: [
-            {data: 'image', width: '20%'},
+            // {data: 'image', width: '20%'},
+            {data: 'name', className: "align-middle", width: '20%'},
+            {data: 'department', className: "align-middle", width: '20%'},
             {data: 'stock', className: "align-middle"},
-            {data: 'last_price', className: "align-middle"},
-            {data: 'avg_price', className: "align-middle"},
+            {data: 'supplier_price', className: "align-middle text-right"},
+            {data: 'last_price', className: "align-middle text-right"},
+            {data: 'avg_price', className: "align-middle text-right"},
             {data: 'action', width: '5%', className: "align-middle"},
         ],
         columnDefs: [
+            // {
+            //     targets: 0,
+            //     render: (data, type, row, meta) => {
+            //         return `
+            //         <div class="d-flex align-items-center">
+            //             <div class="symbol symbol-50 flex-shrink-0">
+            //                 <a href="${data}" data-fancybox data-caption="${row.name}">
+            //                     <img src="${data}" alt="" style="width: 75px" />
+            //                 </a>
+            //             </div>
+            //             <div class="ml-3">
+            //                 <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">${row.name}</span>
+            //             </div>
+            //         </div>`;
+            //     }
+            // },
             {
-                targets: 0,
-                render: (data, type, row, meta) => {
-                    return `
-                    <div class="d-flex align-items-center">
-                        <div class="symbol symbol-50 flex-shrink-0">
-                            <a href="${data}" data-fancybox data-caption="${row.name}">
-                                <img src="${data}" alt="" style="width: 75px" />
-                            </a>
-                        </div>
-                        <div class="ml-3">
-                            <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">${row.name}</span>
-                        </div>
-                    </div>`;
-                }
-            },
-            {
-                targets: 1,
+                targets: 2,
                 render: (data, type, row, meta) => {
                     return `<span class="text-nowrap">${data} ${row.satuan}</span>`;
                 }

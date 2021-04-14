@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin\Stock;
 
+use App\Models\Department;
 use App\Models\Product;
 use App\Models\Satuan;
 use App\Repositories\Admin\Stock\ProductListRepository;
@@ -18,10 +19,16 @@ class ProductListService
         $this->repository = $repository;
     }
 
+    public function data()
+    {
+        return $this->repository->data();
+    }
+
     public function indexCreateData()
     {
         return [
-            'satuan' => Satuan::all()
+            'satuan' => Satuan::all(),
+            'department' => Department::all()
         ];
     }
 
@@ -44,7 +51,7 @@ class ProductListService
         }
     }
 
-    public function storeData($name,$image,$satuan_id,$price,$id = null)
+    public function storeData($name,$image,$satuan_id,$department_id,$price,$id = null)
     {
         try {
             DB::beginTransaction();
@@ -59,7 +66,9 @@ class ProductListService
                 $data = Product::find($id);
                 $data->image = ($image == null) ? $data->image : $image;
             }
+            $data->supplier_price = $price;
             $data->satuan_id = $satuan_id;
+            $data->department_id = $department_id;
             $data->name = $name;
             $data->save();
 
@@ -82,7 +91,8 @@ class ProductListService
     {
         return [
             'data' => Product::find($id),
-            'satuan' => Satuan::all()
+            'satuan' => Satuan::all(),
+            'department' => Department::all()
         ];
     }
 

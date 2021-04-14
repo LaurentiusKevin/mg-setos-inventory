@@ -28,25 +28,13 @@ class ProductListController extends Controller
     public function data()
     {
         try {
-            $data = Product::join('satuans','products.satuan_id','=','satuans.id')
-                ->select([
-                    'products.id',
-                    'satuans.nama AS satuan',
-                    'products.name',
-                    'products.stock',
-                    'products.last_price',
-                    'products.avg_price',
-                    'products.image',
-                    'products.created_at',
-                    'products.updated_at',
-                ]);
-
-            return DataTables::of($data)
+            return DataTables::of($this->service->data())
                 ->addColumn('action', function ($data) {
                     return view('admin.master-data.satuan-product.action');
                 })
                 ->editColumn('image', '{{ url("admin/stock/product-list/api/get-image/".encrypt($image)) }}')
                 ->editColumn('stock', '{{ number_format($stock) }}')
+                ->editColumn('supplier_price', 'Rp {{ number_format($supplier_price) }}')
                 ->editColumn('last_price', 'Rp {{ number_format($last_price) }}')
                 ->editColumn('avg_price', 'Rp {{ number_format($avg_price) }}')
                 ->editColumn('created_at', '{{ date("d-m-Y, H:i:s",strtotime($created_at)) }}')
@@ -78,16 +66,18 @@ class ProductListController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'satuan_id' => 'required'
+            'satuan_id' => 'required',
+            'department_id' => 'required'
         ]);
 
         $name = $request->get('name');
         $image = $request->get('image');
         $satuan_id = $request->get('satuan_id');
+        $department_id = $request->get('department_id');
         $price = $request->get('price') ?? 0;
         $id = $request->get('id') ?? null;
 
-        return $this->service->storeData($name,$image,$satuan_id,$price,$id);
+        return $this->service->storeData($name,$image,$satuan_id,$department_id,$price,$id);
     }
 
     public function getImage($file_path)

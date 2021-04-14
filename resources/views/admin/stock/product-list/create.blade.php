@@ -41,8 +41,17 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="i_department">Department</label>
+                            <select class="form-control" id="i_department" name="name" required>
+                                <option value="">-- Pilih Department --</option>
+                                @foreach($department AS $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="i_price">Price</label>
-                            <input id="i_price" name="name" type="text" class="form-control">
+                            <input id="i_price" name="price" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="card-footer bg-gradient-secondary">
@@ -66,6 +75,7 @@
     <script type="text/javascript">
         const name = () => document.getElementById('i_name').value
         const satuan = () => document.getElementById('i_satuan').value
+        const department = () => document.getElementById('i_department').value
         const price = () => document.getElementById('i_price').value
         const i_image = document.getElementById('i_image');
 
@@ -124,6 +134,7 @@
                         data: {
                             name: name(),
                             satuan_id: satuan(),
+                            department_id: department(),
                             price: price(),
                             image: image_file_path
                         }
