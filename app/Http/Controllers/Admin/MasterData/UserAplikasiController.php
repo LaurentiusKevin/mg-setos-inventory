@@ -26,20 +26,7 @@ class UserAplikasiController extends Controller
     {
         try {
             return DataTables::of(
-                User::join('roles','users.role_id','=','roles.id')
-                    ->select([
-                        'users.id',
-                        'users.role_id',
-                        'roles.name AS role',
-                        'users.username',
-                        'users.name',
-                        'users.email',
-                        'users.email_verified_at',
-                        'users.password',
-                        'users.remember_token',
-                        'users.created_at',
-                        'users.updated_at',
-                    ])
+                $this->service->data()
             )->addColumn('action', function ($data) {
                 return view('admin.master-data.user-aplikasi.action');
             })->make(true);
@@ -62,13 +49,14 @@ class UserAplikasiController extends Controller
         ]);
 
         $role = $request->get('role');
+        $department = $request->get('department') ?? null;
         $name = $request->get('name');
         $email = $request->get('email');
         $username = $request->get('username');
         $password = $request->get('password');
         $id = $request->get('id');
 
-        return $this->service->storeData($role,$name,$email,$username,$password,$id);
+        return $this->service->storeData($role,$department,$name,$email,$username,$password,$id);
     }
 
     public function indexEdit($id)

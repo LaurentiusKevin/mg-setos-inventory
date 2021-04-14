@@ -30,6 +30,7 @@
                         <thead class="bg-dark">
                         <tr>
                             <th>Nama</th>
+                            <th>Department</th>
                             <th>Role</th>
                             <th>Username</th>
                             <th>e-Mail</th>
@@ -66,16 +67,17 @@
             method: 'post'
         },
         columns: [
-            {data: 'name'},
-            {data: 'role'},
-            {data: 'username'},
-            {data: 'email'},
+            {data: 'name', className: 'align-middle'},
+            {data: 'department', className: 'align-middle'},
+            {data: 'role', className: 'align-middle'},
+            {data: 'username', className: 'align-middle'},
+            {data: 'email', className: 'align-middle'},
             {
                 data: 'created_at',
                 render: (data, type, row, meta) => {
                     return moment(data).format('DD MMMM YYYY, HH:mm:ss')
                 },
-                className: 'text-nowrap',
+                className: 'text-nowrap align-middle',
                 width: '5%'
             },
             {
@@ -83,7 +85,7 @@
                 render: (data, type, row, meta) => {
                     return moment(data).format('DD MMMM YYYY, HH:mm:ss')
                 },
-                className: 'text-nowrap',
+                className: 'text-nowrap align-middle',
                 width: '5%'
             },
             {data: 'action', width: '5%'},

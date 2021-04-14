@@ -22,14 +22,29 @@
                 </div>
                 <form id="formData">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="iRole">Role <span class="text-danger">*</span></label>
-                            <select class="form-control" name="master_roles_id" id="iRole" required>
-                                <option value="">-- Pilih Role --</option>
-                                @foreach($role as $r)
-                                    <option value="{{ $r->id }}">{{ $r->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label for="iRole">Role <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="master_roles_id" id="iRole" required>
+                                        <option value="">-- Pilih Role --</option>
+                                        @foreach($role as $r)
+                                            <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label for="i_department">Department</label>
+                                    <select class="form-control" name="department" id="i_department">
+                                        <option value="">-- Pilih Department --</option>
+                                        @foreach($department as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="iName">Name <span class="text-danger">*</span></label>
@@ -67,6 +82,7 @@
 @section('script')
     <script type="text/javascript">
         const role = () => document.getElementById('iRole').value
+        const department = () => document.getElementById('i_department').value
         const name = () => document.getElementById('iName').value
         const email = () => document.getElementById('iEmail').value
         const username = () => document.getElementById('iUsername').value
@@ -81,6 +97,7 @@
                     method: 'post',
                     data: {
                         role: role(),
+                        department: department(),
                         name: name(),
                         email: email(),
                         username: username(),

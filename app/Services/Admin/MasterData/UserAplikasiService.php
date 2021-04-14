@@ -2,6 +2,7 @@
 
 namespace App\Services\Admin\MasterData;
 
+use App\Models\Department;
 use App\Models\Role;
 use App\Models\User;
 use App\Repositories\Admin\MasterData\UserAplikasiRepository;
@@ -20,11 +21,17 @@ class UserAplikasiService
     public function indexCreateData()
     {
         return [
-            'role' => Role::all()
+            'role' => Role::all(),
+            'department' => Department::all()
         ];
     }
 
-    public function storeData($role,$name,$email,$username,$password,$id = null)
+    public function data()
+    {
+        return $this->repository->users();
+    }
+
+    public function storeData($role,$department,$name,$email,$username,$password,$id = null)
     {
         try {
             $checkUser = DB::table('users')
@@ -47,6 +54,7 @@ class UserAplikasiService
                     if ($password !== null) $data->password = Hash::make($password);
                 }
                 $data->role_id = $role;
+                $data->department_id = $department;
                 $data->name = $name;
                 $data->email = $email;
                 $data->username = $username;
@@ -72,7 +80,8 @@ class UserAplikasiService
     {
         return [
             'role' => Role::all(),
-            'data' => User::find($id)
+            'data' => User::find($id),
+            'department' => Department::all()
         ];
     }
 
