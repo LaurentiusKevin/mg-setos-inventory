@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\MasterData\DepartmentController;
 use App\Http\Controllers\Admin\MasterData\SatuanProductController;
+use App\Http\Controllers\Admin\MasterData\StoreRequisitionVerificatorController;
 use App\Http\Controllers\Admin\MasterData\UserAplikasiController;
 use App\Http\Controllers\Admin\MasterData\UserRoleController;
 use Illuminate\Support\Facades\Route;
@@ -113,6 +114,35 @@ Route::group(
                 Route::post('store',[DepartmentController::class,'store'])->name('store');
                 Route::post('delete',[DepartmentController::class,'delete'])->name('delete');
                 Route::post('reset-password',[DepartmentController::class,'resetPassword'])->name('reset-password');
+            }
+        );
+    }
+);
+
+Route::group(
+    [
+        'prefix' => 'admin/master-data/sr-verificator',
+        'as' => 'admin.master-data.sr-verificator.',
+        'middleware' => ['auth']
+    ],
+    function () {
+        Route::group(
+            ['as' => 'view.'],
+            function () {
+                Route::get('/',[StoreRequisitionVerificatorController::class,'index'])->name('index');
+                Route::post('create',[StoreRequisitionVerificatorController::class,'indexCreate'])->name('create');
+                Route::get('edit/{id}',[StoreRequisitionVerificatorController::class,'indexEdit'])->name('edit');
+            }
+        );
+
+        Route::group(
+            ['prefix' => 'api', 'as' => 'api.'],
+            function () {
+                Route::post('data',[StoreRequisitionVerificatorController::class,'data'])->name('data');
+                Route::post('list-user',[StoreRequisitionVerificatorController::class,'listUser'])->name('list-user');
+                Route::post('store',[StoreRequisitionVerificatorController::class,'store'])->name('store');
+                Route::post('delete',[StoreRequisitionVerificatorController::class,'delete'])->name('delete');
+                Route::post('reset-password',[StoreRequisitionVerificatorController::class,'resetPassword'])->name('reset-password');
             }
         );
     }

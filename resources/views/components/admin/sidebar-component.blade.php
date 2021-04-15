@@ -23,8 +23,8 @@
                 <ul class="c-sidebar-nav-dropdown-items">
                     @foreach($item['menu'] AS $menu)
                         <li class="c-sidebar-nav-item">
-                            <a class="c-sidebar-nav-link" href="{{ url($menu['url']) }}">
-                                <span class="c-sidebar-nav-icon"></span> {{ $menu['name'] }}
+                            <a class="c-sidebar-nav-link" href="{{ url($menu->url) }}">
+                                <span class="c-sidebar-nav-icon"></span> {{ $menu->name }}
                             </a>
                         </li>
                     @endforeach

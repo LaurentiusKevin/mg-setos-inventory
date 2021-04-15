@@ -22,7 +22,7 @@ class DashboardService
             $groupData = SysMenuGroup::hasMenu()->get();
 
             foreach ($groupData AS $item) {
-                $menu[$item->id] = SysMenu::where('sys_menu_group_id','=',$item->id)->get()->toArray();
+                $menu[$item->id] = SysMenu::where('sys_menu_group_id','=',$item->id)->get();
             }
 
             $groupData = $groupData->toArray();
@@ -45,7 +45,13 @@ class DashboardService
 
             foreach ($groupData AS $item) {
                 $id = $item->id;
-                $menu[$id] = SysMenu::where('sys_menu_group_id','=',$id)->get()->toArray();
+                $menu[$id] = DB::table('sys_menus')
+                    ->select('sys_menus.*')
+                    ->join('role_menus','sys_menus.id','=','role_menus.sys_menus_id')
+                    ->where([
+                        ['role_menus.view','=',1],
+                        ['sys_menus.sys_menu_group_id','=',$id]
+                    ])->get()->toArray();
             }
 
             foreach ($groupData AS $key => $item) {
