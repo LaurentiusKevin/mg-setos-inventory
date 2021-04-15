@@ -50,7 +50,7 @@ class StoreRequisitionVerificatorController extends Controller
             return DataTables::of(
                 $this->service->listUser()
             )->addColumn('action', function ($data) {
-                return view('admin.master-data.sr-verificator.action');
+                return view('admin.master-data.sr-verificator.action-add');
             })->make(true);
         } catch (\Throwable $th) {
             return response()->json([

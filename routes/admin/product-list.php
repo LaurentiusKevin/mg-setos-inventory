@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Stock\PenggunaanBarangController;
 use App\Http\Controllers\Admin\Stock\ProductListController;
 use App\Http\Controllers\Admin\Stock\PurchaseOrderController;
 use App\Http\Controllers\Admin\Stock\ReceivingOrderController;
+use App\Http\Controllers\Admin\Stock\StoreRequisitionController;
 use App\Http\Controllers\Admin\Stock\SupplierController;
 use Illuminate\Support\Facades\Route;
 
@@ -148,6 +149,40 @@ Route::group(
                 Route::post('po-pending/products',[PenggunaanBarangController::class,'dataPoPendingProducts'])->name('po-pending.products');
                 Route::post('product-list',[PenggunaanBarangController::class,'getProductList'])->name('product-list');
                 Route::post('store',[PenggunaanBarangController::class,'store'])->name('store');
+            }
+        );
+    }
+);
+
+Route::group(
+    [
+        'prefix' => 'admin/stock/store-requisition',
+        'as' => 'admin.stock.store-requisition.',
+        'middleware' => ['auth']
+    ],
+    function () {
+        Route::group(
+            ['as' => 'view.'],
+            function () {
+                Route::get('/',[StoreRequisitionController::class,'index'])->name('index');
+                Route::get('create',[StoreRequisitionController::class,'indexCreate'])->name('create');
+                Route::get('info/{id}',[StoreRequisitionController::class,'indexInfo'])->name('info');
+                Route::get('verification/{id}',[StoreRequisitionController::class,'indexVerification'])->name('verification');
+                Route::get('invoice/{id}',[StoreRequisitionController::class,'indexPdf'])->name('invoice');
+            }
+        );
+
+        Route::group(
+            ['prefix' => 'api', 'as' => 'api.'],
+            function () {
+                Route::post('data',[StoreRequisitionController::class,'data'])->name('data');
+                Route::post('po-pending',[StoreRequisitionController::class,'dataPoPending'])->name('po-pending');
+                Route::post('po-pending/products',[StoreRequisitionController::class,'dataPoPendingProducts'])->name('po-pending.products');
+                Route::post('product-list',[StoreRequisitionController::class,'getProductList'])->name('product-list');
+                Route::post('store',[StoreRequisitionController::class,'store'])->name('store');
+                Route::post('store-catatan',[StoreRequisitionController::class,'storeCatatan'])->name('store-catatan');
+                Route::post('store-verification',[StoreRequisitionController::class,'storeVerification'])->name('store-verification');
+                Route::post('delete',[StoreRequisitionController::class,'delete'])->name('delete');
             }
         );
     }
