@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\Product;
 use App\Models\Satuan;
 use App\Repositories\Admin\Stock\ProductListRepository;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
@@ -51,33 +52,41 @@ class ProductListService
         }
     }
 
-    public function storeData($name,$image,$satuan_id,$department_id,$price,$id = null)
+    public function storeData($code,$name,$image,$satuan_id,$department_id,$price,$id = null)
     {
         try {
-            DB::beginTransaction();
-
-            if ($id == null) {
-                $data = new Product();
-                $data->stock = 0;
-                $data->avg_price = $price;
-                $data->last_price = $price;
-                $data->image = $image;
+            if ($this->repository->checkCode($code,$id) > 0) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Kode sudah terpakai'
+                ]);
             } else {
-                $data = Product::find($id);
-                $data->image = ($image == null) ? $data->image : $image;
+                DB::beginTransaction();
+
+                if ($id == null) {
+                    $data = new Product();
+                    $data->stock = 0;
+                    $data->avg_price = $price;
+                    $data->last_price = $price;
+                    $data->image = $image;
+                } else {
+                    $data = Product::find($id);
+                    $data->image = ($image == null) ? $data->image : $image;
+                }
+                $data->code = $code;
+                $data->supplier_price = $price;
+                $data->satuan_id = $satuan_id;
+                $data->department_id = $department_id;
+                $data->name = $name;
+                $data->save();
+
+                DB::commit();
+
+                return response()->json([
+                    'status' => 'success',
+                    'redirect' => route('admin.stock.product-list.view.index')
+                ]);
             }
-            $data->supplier_price = $price;
-            $data->satuan_id = $satuan_id;
-            $data->department_id = $department_id;
-            $data->name = $name;
-            $data->save();
-
-            DB::commit();
-
-            return response()->json([
-                'status' => 'success',
-                'redirect' => route('admin.stock.product-list.view.index')
-            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',

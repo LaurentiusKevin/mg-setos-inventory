@@ -14,6 +14,7 @@ class ProductListRepository
             ->select([
                 'products.id',
                 'satuans.nama AS satuan',
+                'products.code',
                 'products.name',
                 'departments.name AS department',
                 'products.stock',
@@ -30,5 +31,16 @@ class ProductListRepository
         if ($department_id !== null) $data->where('department_id','=',$department_id);
 
         return $id == null ? $data : $data->where('id','=',$id);
+    }
+
+    public function checkCode($code,$id = null)
+    {
+        $data = DB::table('products')
+            ->where('code','=',$code)
+            ->whereNull('deleted_at');
+
+        if ($id !== null) $data->where('id','<>',$id);
+
+        return $data->get()->count();
     }
 }

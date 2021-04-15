@@ -25,9 +25,19 @@
                 <form id="formData">
                     <div class="card-body">
                         <input type="hidden" id="sys_menu_group_id" value="{{ $data->id }}">
-                        <div class="form-group">
-                            <label for="i_name">Name</label>
-                            <input id="i_name" name="name" type="text" class="form-control" value="{{ $data->name }}" required>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label for="i_code">Kode</label>
+                                    <input id="i_code" name="code" type="text" class="form-control" value="{{ $data->code }}" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-8 col-lg-8">
+                                <div class="form-group">
+                                    <label for="i_name">Name</label>
+                                    <input id="i_name" name="name" type="text" class="form-control" value="{{ $data->name }}" required>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="i_image">Saved Image</label>
@@ -59,7 +69,7 @@
                         </div>
                         <div class="form-group">
                             <label for="i_supplier_price">Supplier Price</label>
-                            <input id="i_supplier_price" name="name" type="text" class="form-control">
+                            <input id="i_supplier_price" name="name" type="text" class="form-control" value="{{ $data->supplier_price }}">
                         </div>
                     </div>
                     <div class="card-footer bg-gradient-secondary">
@@ -84,6 +94,7 @@
     <script src="{{ asset('js/filepond.js') }}"></script>
     <script type="text/javascript">
         const id = () => document.getElementById('sys_menu_group_id').value
+        const code = () => document.getElementById('i_code').value
         const name = () => document.getElementById('i_name').value
         const satuan = () => document.getElementById('i_satuan').value
         const department = () => document.getElementById('i_department').value
@@ -139,6 +150,7 @@
                     method: 'post',
                     data: {
                         id: id(),
+                        code: code(),
                         name: name(),
                         satuan_id: satuan(),
                         department_id: department(),

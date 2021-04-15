@@ -30,6 +30,7 @@
                     <table id="t_list" class="table table-hover table-bordered" style="width: 100%">
                         <thead class="bg-dark">
                         <tr>
+                            <th>Code</th>
                             <th>Product</th>
                             <th>Department</th>
                             <th>Stock</th>
@@ -69,9 +70,10 @@
         },
         columns: [
             // {data: 'image', width: '20%'},
+            {data: 'code', className: "text-nowrap font-weight-bold align-middle", width: '5%'},
             {data: 'name', className: "align-middle", width: '20%'},
             {data: 'department', className: "align-middle", width: '20%'},
-            {data: 'stock', className: "align-middle"},
+            {data: 'stock', className: "align-middle text-right"},
             {data: 'supplier_price', className: "align-middle text-right"},
             {data: 'last_price', className: "align-middle text-right"},
             {data: 'avg_price', className: "align-middle text-right"},
@@ -95,7 +97,7 @@
             //     }
             // },
             {
-                targets: 2,
+                targets: 3,
                 render: (data, type, row, meta) => {
                     return `<span class="text-nowrap">${data} ${row.satuan}</span>`;
                 }

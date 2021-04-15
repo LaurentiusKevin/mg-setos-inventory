@@ -23,9 +23,19 @@
                 </div>
                 <form id="formData">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="i_name">Name</label>
-                            <input id="i_name" name="name" type="text" class="form-control" required>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label for="i_code">Kode</label>
+                                    <input id="i_code" name="code" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-8 col-lg-8">
+                                <div class="form-group">
+                                    <label for="i_name">Name</label>
+                                    <input id="i_name" name="name" type="text" class="form-control" required>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="i_image">Image</label>
@@ -73,6 +83,7 @@
 @section('script')
     <script src="{{ asset('js/filepond.js') }}"></script>
     <script type="text/javascript">
+        const code = () => document.getElementById('i_code').value
         const name = () => document.getElementById('i_name').value
         const satuan = () => document.getElementById('i_satuan').value
         const department = () => document.getElementById('i_department').value
@@ -132,6 +143,7 @@
                         url: '{{ route('admin.stock.product-list.api.store') }}',
                         method: 'post',
                         data: {
+                            code: code(),
                             name: name(),
                             satuan_id: satuan(),
                             department_id: department(),
@@ -152,7 +164,7 @@
                         } else {
                             Swal.fire({
                                 icon: 'warning',
-                                title: 'Data Gagal Tersimpan'
+                                title: response.data.message
                             });
                         }
                     }).catch(error => {

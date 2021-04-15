@@ -65,11 +65,13 @@ class ProductListController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'code' => 'required',
             'name' => 'required',
             'satuan_id' => 'required',
             'department_id' => 'required'
         ]);
 
+        $code = $request->get('code');
         $name = $request->get('name');
         $image = $request->get('image');
         $satuan_id = $request->get('satuan_id');
@@ -77,7 +79,7 @@ class ProductListController extends Controller
         $price = $request->get('price') ?? 0;
         $id = $request->get('id') ?? null;
 
-        return $this->service->storeData($name,$image,$satuan_id,$department_id,$price,$id);
+        return $this->service->storeData($code,$name,$image,$satuan_id,$department_id,$price,$id);
     }
 
     public function getImage($file_path)
