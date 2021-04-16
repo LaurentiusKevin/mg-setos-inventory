@@ -28,6 +28,7 @@ class StoreRequisitionController extends Controller
             return DataTables::of($this->service->getData())
                 ->addColumn('action', function ($data) {
                     return view('admin.stock.store-requisition.action',[
+                        'data' => $data,
                         'verification' => $this->service->statusVerification($data->id)
                     ]);
                 })
@@ -78,6 +79,22 @@ class StoreRequisitionController extends Controller
     public function indexVerification($id)
     {
         return view('admin.stock.store-requisition.verification',$this->service->indexInfoData($id));
+    }
+
+    public function indexEdit($id)
+    {
+        return view('admin.stock.store-requisition.edit',$this->service->indexEditData($id));
+    }
+
+    public function getStoredProduct(Request $request)
+    {
+        $request->validate([
+            'store_requisition_info_id' => 'required'
+        ]);
+
+        $store_requisition_info_id = $request->get('store_requisition_info_id');
+
+        return $this->service->getStoredProduct($store_requisition_info_id);
     }
 
     public function storeCatatan(Request $request)

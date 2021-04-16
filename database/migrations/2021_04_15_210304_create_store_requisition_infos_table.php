@@ -22,6 +22,7 @@ class CreateStoreRequisitionInfosTable extends Migration
             $table->integer('total_item');
             $table->float('total_price',12,0);
             $table->text('catatan')->nullable();
+            $table->timestamp('verified_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

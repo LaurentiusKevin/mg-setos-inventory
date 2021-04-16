@@ -113,6 +113,11 @@
             window.location = `{{ url('admin/stock/store-requisition/verification') }}/${data.id}`;
         });
 
+        t_list_tbody.on('click','button.action-edit', function (event) {
+            let data = t_list_data($(event.target).parents('tr'));
+            window.location = `{{ url('admin/stock/store-requisition/edit') }}/${data.id}`;
+        });
+
         t_list_tbody.on('click','button.action-info', function (event) {
             let data = t_list_data($(event.target).parents('tr'));
             window.location = `{{ url('admin/stock/store-requisition/info') }}/${data.id}`;

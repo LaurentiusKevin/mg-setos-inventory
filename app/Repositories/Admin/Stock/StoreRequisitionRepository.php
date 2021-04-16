@@ -7,12 +7,22 @@ use Illuminate\Support\Facades\DB;
 
 class StoreRequisitionRepository
 {
+    public function department()
+    {
+        $department = DB::table('departments')
+            ->whereNull('deleted_at');
+
+        $user_department = Auth::user()->department_id;
+
+        return ($user_department !== null) ? $department->where('id','=',$user_department) : $department;
+    }
     public function storeRequisitionInfo($id = null)
     {
         $data = DB::table('store_requisition_infos')
             ->select([
                 'store_requisition_infos.id',
                 'store_requisition_infos.user_id',
+                'store_requisition_infos.department_id',
                 'departments.name AS department',
                 'users.name AS penginput',
                 'store_requisition_infos.invoice_number',
@@ -20,6 +30,7 @@ class StoreRequisitionRepository
                 'store_requisition_infos.total_item',
                 'store_requisition_infos.total_price',
                 'store_requisition_infos.catatan',
+                'store_requisition_infos.verified_at',
                 'store_requisition_infos.created_at',
                 'store_requisition_infos.updated_at',
                 'store_requisition_infos.deleted_at',
@@ -42,6 +53,9 @@ class StoreRequisitionRepository
                 'store_requisition_products.price',
                 'products.code AS product_code',
                 'products.name AS product_name',
+                'products.stock AS product_stock',
+                'products.supplier_price',
+                'products.last_price',
                 'products.avg_price',
                 'satuans.nama AS satuan',
                 'store_requisition_products.created_at',

@@ -26,14 +26,8 @@ class StoreRequisitionService
 
     public function indexData()
     {
-        $department = DB::table('departments')
-            ->whereNull('deleted_at');
-
-        $user_department = Auth::user()->department_id;
-        if ($user_department !== null) $department->where('id','=',$user_department);
-
         return [
-            'department' => $department->get()
+            'department' => $this->repository->department()->get()
         ];
     }
 
@@ -119,6 +113,19 @@ class StoreRequisitionService
                 'details' => $th
             ]);
         }
+    }
+
+    public function indexEditData($store_requisition_info_id)
+    {
+        return [
+            'info' => $this->repository->storeRequisitionInfo($store_requisition_info_id)->first(),
+            'department' => $this->repository->department()->get()
+        ];
+    }
+
+    public function getStoredProduct($store_requisition_info_id)
+    {
+        return $this->repository->storeRequisitionProduct($store_requisition_info_id)->get();
     }
 
     public function indexInfoData($store_requisition_info_id)
