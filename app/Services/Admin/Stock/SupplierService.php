@@ -65,7 +65,7 @@ class SupplierService
 
             return response()->json([
                 'status' => 'success',
-                'redirect' => route('admin.stock.supplier.view.index')
+                'redirect' => route('admin.master-data.supplier.view.index')
             ]);
         } catch (\Throwable $th) {
             return response()->json([

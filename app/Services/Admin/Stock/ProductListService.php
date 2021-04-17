@@ -84,7 +84,7 @@ class ProductListService
 
                 return response()->json([
                     'status' => 'success',
-                    'redirect' => route('admin.stock.product-list.view.index')
+                    'redirect' => route('admin.master-data.product-list.view.index')
                 ]);
             }
         } catch (\Throwable $th) {

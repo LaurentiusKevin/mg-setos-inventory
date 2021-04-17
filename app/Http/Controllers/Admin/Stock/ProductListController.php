@@ -22,7 +22,7 @@ class ProductListController extends Controller
 
     public function index()
     {
-        return view('admin.stock.product-list.index');
+        return view('admin.master-data.product-list.index');
     }
 
     public function data()
@@ -32,7 +32,7 @@ class ProductListController extends Controller
                 ->addColumn('action', function ($data) {
                     return view('admin.master-data.satuan-product.action');
                 })
-                ->editColumn('image', '{{ url("admin/stock/product-list/api/get-image/".encrypt($image)) }}')
+                ->editColumn('image', '{{ url("admin/master-data/product-list/api/get-image/".encrypt($image)) }}')
                 ->editColumn('stock', '{{ number_format($stock) }}')
                 ->editColumn('supplier_price', 'Rp {{ number_format($supplier_price) }}')
                 ->editColumn('last_price', 'Rp {{ number_format($last_price) }}')
@@ -50,7 +50,7 @@ class ProductListController extends Controller
 
     public function indexCreate()
     {
-        return view('admin.stock.product-list.create',$this->service->indexCreateData());
+        return view('admin.master-data.product-list.create',$this->service->indexCreateData());
     }
 
     public function uploadImage(Request $request)
@@ -67,15 +67,14 @@ class ProductListController extends Controller
         $request->validate([
             'code' => 'required',
             'name' => 'required',
-            'satuan_id' => 'required',
-            'department_id' => 'required'
+            'satuan_id' => 'required'
         ]);
 
         $code = $request->get('code');
         $name = $request->get('name');
         $image = $request->get('image');
         $satuan_id = $request->get('satuan_id');
-        $department_id = $request->get('department_id');
+        $department_id = $request->get('department_id') ?? null;
         $price = $request->get('price') ?? 0;
         $id = $request->get('id') ?? null;
 
@@ -91,7 +90,7 @@ class ProductListController extends Controller
 
     public function indexEdit($id)
     {
-        return view('admin.stock.product-list.edit',$this->service->indexEditData($id));
+        return view('admin.master-data.product-list.edit',$this->service->indexEditData($id));
     }
 
     public function delete(Request $request)

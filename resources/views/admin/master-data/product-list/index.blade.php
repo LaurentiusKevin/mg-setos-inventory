@@ -1,12 +1,12 @@
 @extends('admin._layout')
 
-@section('title','Stock - Product List')
+@section('title','Master Data - Product')
 
 @section('description','')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Stock</li>
-    <li class="breadcrumb-item active">Product List</li>
+    <li class="breadcrumb-item">Master Data</li>
+    <li class="breadcrumb-item active">Product</li>
 @endsection
 
 @section('style')
@@ -21,7 +21,7 @@
                 <div class="card-header">
                     <div class="card-header-actions">
                         <div class="card-header-actions">
-                            <a class="btn btn-success btn-block btn-sm" href="{{ route('admin.stock.product-list.view.create') }}">Tambah</a>
+                            <a class="btn btn-success btn-block btn-sm" href="{{ route('admin.master-data.product-list.view.create') }}">Tambah</a>
                         </div>
                     </div>
                     <strong>List Data Product</strong>
@@ -65,7 +65,7 @@
         serverSide: true,
         scrollX: true,
         ajax: {
-            url: '{{ route('admin.stock.product-list.api.data') }}',
+            url: '{{ route('admin.master-data.product-list.api.data') }}',
             method: 'post'
         },
         columns: [
@@ -112,7 +112,7 @@
         t_list_tbody.on('click','button.action-edit', function (event) {
             console.log('coba')
             let data = t_list_data($(event.target).parents('tr'));
-            window.location = `{{ url('admin/stock/product-list/edit') }}/${data.id}`;
+            window.location = `{{ url('admin/master-data/product-list/edit') }}/${data.id}`;
         });
 
         t_list_tbody.on('click','button.action-delete', event => {
@@ -127,7 +127,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios({
-                        url: '{{ route('admin.stock.product-list.api.delete') }}',
+                        url: '{{ route('admin.master-data.product-list.api.delete') }}',
                         method: 'post',
                         data: {
                             id: data.id
