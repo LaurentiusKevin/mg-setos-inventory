@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <td class="invoice-number" style="height: 1cm">
-                NOMOR
+                <span class="text-bold" style="color: indianred; font-size: 10px">Nomor</span>
                 <br>{{ $info->invoice_number }}
             </td>
         </tr>
@@ -35,13 +35,13 @@
 <main>
     <table style="width: 100%">
         <tr>
-            <td class="text-bold" style="width: 40%; color: indianred; font-size: 14px">Supplier</td>
-            <td class="text-bold" style="width: 20%; color: indianred; font-size: 14px"></td>
-            <td class="text-bold" style="width: 40%; color: indianred; font-size: 14px">Catatan</td>
+            <td class="text-bold" style="width: 40%; color: indianred; font-size: 10px">Supplier</td>
+            <td class="text-bold" style="width: 20%; color: indianred; font-size: 10px"></td>
+            <td class="text-bold" style="width: 40%; color: indianred; font-size: 10px">Catatan</td>
         </tr>
         <tr>
             <td>
-                <span style="font-size: 13px">{{ $info->supplier_name }}</span>
+                <span class="text-bold">{{ $info->supplier_name }}</span>
                 <br>{{ $info->supplier_address }}
                 <br>{{ $info->supplier_phone }}
             </td>

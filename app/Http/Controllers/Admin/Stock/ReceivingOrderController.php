@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ReceivingOrderInfo;
 use App\Services\Admin\Stock\ReceivingOrderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use PDF;
 
@@ -25,12 +26,23 @@ class ReceivingOrderController extends Controller
 
     public function data()
     {
-        $data = ReceivingOrderInfo::with([
-            'supplier',
-            'products',
-            'user'
-        ])
-            ->withSum('products','quantity')
+        $data = DB::table('receiving_order_infos')
+            ->select([
+                'receiving_order_infos.id',
+                'receiving_order_infos.user_id',
+                'receiving_order_infos.purchase_order_info_id',
+                'suppliers.name AS supplier_name',
+                'users.name AS penginput',
+                'receiving_order_infos.invoice_number',
+                'receiving_order_infos.supplier_invoice_number',
+                'receiving_order_infos.total_price',
+                'receiving_order_infos.catatan',
+                'receiving_order_infos.created_at',
+                'receiving_order_infos.updated_at',
+            ])
+            ->join('purchase_order_infos','receiving_order_infos.purchase_order_info_id','=','purchase_order_infos.id')
+            ->join('suppliers','purchase_order_infos.supplier_id','=','suppliers.id')
+            ->join('users','receiving_order_infos.user_id','=','users.id')
             ->orderBy('created_at','desc');
 
         try {
@@ -110,8 +122,11 @@ class ReceivingOrderController extends Controller
     public function indexPdf($id)
     {
         try {
-            $pdf = PDF::loadView('admin.stock.receiving-order.pdf',$this->service->indexInfoData($id))->setPaper('a4','portrait');
-            return $pdf->stream('invoice.pdf');
+            $data = $this->service->indexInfoData($id);
+            $invoice_number = str_replace('/','-',$data['invoice_number']);
+
+            $pdf = PDF::loadView('admin.stock.receiving-order.pdf',$data)->setPaper('a4','portrait');
+            return $pdf->stream("receiving_order_{$invoice_number}.pdf");
         } catch (\Throwable $th) {
             return response()->json([
                 'status' => 'error',

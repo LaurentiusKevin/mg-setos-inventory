@@ -138,7 +138,8 @@ class ReceivingOrderService
     {
         return [
             'info' => $this->repo->receivingOrderInfo($id)[0],
-            'product' => $this->repo->receivingOrderProduct($id)
+            'product' => $this->repo->receivingOrderProduct($id),
+            'invoice_number' => $this->repo->receivingOrderInfo($id)[0]->invoice_number
         ];
     }
 }

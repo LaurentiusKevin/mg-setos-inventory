@@ -20,6 +20,11 @@ class PurchaseOrderService
         $this->repository = $repository;
     }
 
+    public function data()
+    {
+        return $this->repository->purchaseOrderInfo();
+    }
+
     public function indexCreateData()
     {
         $supplier = Supplier::all()->toArray();

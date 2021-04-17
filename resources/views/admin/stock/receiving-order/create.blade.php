@@ -1,11 +1,11 @@
 @extends('admin._layout')
 
-@section('title','Stock - Receiving Order - Create')
+@section('title','Purchasing - Receiving Order - Create')
 
 @section('description','')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Stock</li>
+    <li class="breadcrumb-item">Purchasing</li>
     <li class="breadcrumb-item">Receiving Order</li>
     <li class="breadcrumb-item active">Create</li>
 @endsection
@@ -117,7 +117,7 @@
                 <div class="card-footer bg-gradient-secondary">
                     <div class="row justify-content-between">
                         <div class="col-sm-12 col-md-4 col-lg-2">
-                            <a href="{{ route('admin.stock.purchase-order.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>
+                            <a href="{{ route('admin.stock.receiving-order.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>
                         </div>
                         <div class="col-sm-12 col-md-4 col-lg-2 mt-2 mt-lg-0 mt-sm-2">
                             <button type="button" class="btn btn-block btn-success" id="btn-save"><i class="fas fa-check mr-2"></i>Simpan</button>
@@ -339,7 +339,7 @@
             if (value === null) {
                 document.getElementById('info_logo').src = '{{ asset('icons/picture.svg') }}';
             } else {
-                document.getElementById('info_logo').src = `{{ url('admin/stock/supplier/api/get-image/') }}/${value}`;
+                document.getElementById('info_logo').src = `{{ url('admin/master-data/supplier/api/get-image/') }}/${value}`;
             }
         }
         const info_no_po = value => document.getElementById('info_no_po').innerHTML = value ?? '-';

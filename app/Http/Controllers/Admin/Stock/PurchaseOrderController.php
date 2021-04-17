@@ -27,28 +27,8 @@ class PurchaseOrderController extends Controller
 
     public function data()
     {
-//        $data = PurchaseOrderInfo::with(['supplier','products'])
-//            ->withSum('products','quantity')
-//            ->orderBy('created_at','desc');
-        $data = DB::table('purchase_order_infos')
-            ->select([
-                'purchase_order_infos.id',
-                'purchase_order_infos.invoice_number',
-                'purchase_order_infos.supplier_id',
-                'suppliers.name AS supplier_name',
-                'purchase_order_infos.total_item',
-                'purchase_order_infos.received_item',
-                'purchase_order_infos.total_price',
-                'purchase_order_infos.catatan',
-                'purchase_order_infos.created_at',
-                'purchase_order_infos.updated_at',
-                'purchase_order_infos.receive_completed_at',
-                'purchase_order_infos.deleted_at',
-            ])
-            ->join('suppliers','purchase_order_infos.supplier_id','=','suppliers.id')
-            ->orderBy('created_at','desc');
         try {
-            return DataTables::of($data)
+            return DataTables::of($this->service->data())
                 ->addColumn('action', function ($data) {
                     return view('admin.stock.purchase-order.action');
                 })
