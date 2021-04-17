@@ -1,11 +1,11 @@
 @extends('admin._layout')
 
-@section('title','Stock - Supplier - Info')
+@section('title','Purchasing - Supplier - Info')
 
 @section('description','')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Stock</li>
+    <li class="breadcrumb-item">Purchasing</li>
     <li class="breadcrumb-item">Supplier</li>
     <li class="breadcrumb-item active">Info</li>
 @endsection
@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-row bd-highlight">
-                        <div class="p-2 bd-highlight"><img id="info_logo" src="{{ $data->supplier->logo == null ? asset('icons/picture.svg') : url("admin/stock/supplier/api/get-image/{$data->supplier->logo}") }}" alt="image" style="width: 75px"></div>
+                        <div class="p-2 bd-highlight"><img id="info_logo" src="{{ $data->supplier->logo == null ? asset('icons/picture.svg') : url("admin/master-data/supplier/api/get-image/{$data->supplier->logo}") }}" alt="image" style="width: 75px"></div>
                         <div class="p-2 flex-grow-1 bd-highlight">
                             <div class="row">
                                 <div class="col-sm-12 col-md-4 col-lg-3">
@@ -70,10 +70,10 @@
                 <div class="card-footer">
                     <div class="row justify-content-between">
                         <div class="col-sm-12 col-md-4 col-lg-2">
-                            <a href="{{ route('admin.stock.purchase-order.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>
+                            <a href="{{ route('admin.purchasing.purchase-order.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-2">
-                            <a href="{{ route('admin.stock.purchase-order.view.invoice',[$data->id]) }}" target="_blank" class="btn btn-outline-primary btn-block"><i class="fas fa-file-pdf mr-2"></i> PDF</a>
+                            <a href="{{ route('admin.purchasing.purchase-order.view.invoice',[$data->id]) }}" target="_blank" class="btn btn-outline-primary btn-block"><i class="fas fa-file-pdf mr-2"></i> PDF</a>
                         </div>
                     </div>
                 </div>

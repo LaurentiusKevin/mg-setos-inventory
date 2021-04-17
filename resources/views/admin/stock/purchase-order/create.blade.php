@@ -1,11 +1,11 @@
 @extends('admin._layout')
 
-@section('title','Stock - Purchase Order - Create')
+@section('title','Purchasing - Purchase Order - Create')
 
 @section('description','')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Stock</li>
+    <li class="breadcrumb-item">Purchasing</li>
     <li class="breadcrumb-item">Purchase Order</li>
     <li class="breadcrumb-item active">Create</li>
 @endsection
@@ -16,54 +16,56 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-sm-12 col-md-4 col-lg-4">
-            <div class="form-group">
-                <label for="i_supplier">Daftar Supplier</label>
-                <select class="form-control" id="i_supplier" name="supplier" style="width: 100%" required></select>
+    <form id="form-data">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="form-group">
+                    <label for="i_supplier">Supplier</label>
+                    <select class="form-control" id="i_supplier" name="supplier" style="width: 100%" required></select>
+                </div>
             </div>
-        </div>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex flex-row bd-highlight">
-                        <div class="p-2 bd-highlight"><img id="info_logo" src="{{ asset('icons/picture.svg') }}" alt="image" style="width: 75px"></div>
-                        <div class="p-2 flex-grow-1 bd-highlight">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="info_supplier">Nama Supplier</label>
-                                        <br><span class="font-weight-bold" id="info_supplier">-</span>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-row bd-highlight">
+                            <div class="p-2 bd-highlight"><img id="info_logo" src="{{ asset('icons/picture.svg') }}" alt="image" style="width: 75px"></div>
+                            <div class="p-2 flex-grow-1 bd-highlight">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="info_supplier">Nama Supplier</label>
+                                            <br><span class="font-weight-bold" id="info_supplier">-</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="info_telp">Telp.</label>
-                                        <br><span class="font-weight-bold" id="info_telp">-</span>
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="info_telp">Telp.</label>
+                                            <br><span class="font-weight-bold" id="info_telp">-</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="info_alamat">Alamat</label>
-                                        <br><span class="font-weight-bold" id="info_alamat">-</span>
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="info_alamat">Alamat</label>
+                                            <br><span class="font-weight-bold" id="info_alamat">-</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="info_cp_nama">Nama CP</label>
-                                        <br><span class="font-weight-bold" id="info_cp_nama">-</span>
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="info_cp_nama">Nama CP</label>
+                                            <br><span class="font-weight-bold" id="info_cp_nama">-</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="info_cp_telp">Telp CP</label>
-                                        <br><span class="font-weight-bold" id="info_cp_telp">-</span>
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="info_cp_telp">Telp CP</label>
+                                            <br><span class="font-weight-bold" id="info_cp_telp">-</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-md-4 col-lg-3">
-                                    <div class="form-group">
-                                        <label for="info_catatan">Catatan</label>
-                                        <br><span class="font-weight-bold" id="info_catatan">-</span>
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="info_catatan">Catatan</label>
+                                            <br><span class="font-weight-bold" id="info_catatan">-</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -72,19 +74,17 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-header-actions">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
                         <div class="card-header-actions">
-                            <button class="btn btn-success btn-block btn-sm" id="add_product">Tambah Produk</button>
+                            <div class="card-header-actions">
+                                <button type="button" class="btn btn-success btn-block btn-sm" id="add_product">Tambah Produk</button>
+                            </div>
                         </div>
+                        <strong>Produk</strong>
                     </div>
-                    <strong>Produk</strong>
-                </div>
-                <form id="formData">
                     <div class="card-body">
                         <table id="list_po_produk" class="table table-bordered table-hover" style="width: 100%">
                             <thead>
@@ -100,32 +100,32 @@
                             </thead>
                         </table>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="i_info">Catatan Pemesanan</label>
-                        <textarea id="i_info" name="info" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="card-footer bg-gradient-secondary">
-                    <div class="row justify-content-between">
-                        <div class="col-sm-12 col-md-4 col-lg-2">
-                            <a href="{{ route('admin.stock.purchase-order.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>
-                        </div>
-                        <div class="col-sm-12 col-md-4 col-lg-2 mt-2 mt-lg-0 mt-sm-2">
-                            <button type="button" class="btn btn-block btn-success" id="btn-save"><i class="fas fa-check mr-2"></i>Simpan</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="i_info">Catatan Pemesanan</label>
+                            <textarea id="i_info" name="info" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-gradient-secondary">
+                        <div class="row justify-content-between">
+                            <div class="col-sm-12 col-md-4 col-lg-2">
+                                <a href="{{ route('admin.purchasing.purchase-order.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-2 mt-2 mt-lg-0 mt-sm-2">
+                                <button type="submit" class="btn btn-block btn-success"><i class="fas fa-check mr-2"></i>Simpan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     <div class="modal fade" tabindex="-1" id="list_produk">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -147,10 +147,6 @@
                         </tr>
                         </thead>
                     </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Tambahkan</button>
                 </div>
             </div>
         </div>
@@ -281,7 +277,7 @@
             serverSide: true,
             scrollX: true,
             ajax: {
-                url: '{{ route('admin.stock.purchase-order.api.product-list') }}',
+                url: '{{ route('admin.purchasing.purchase-order.api.product-list') }}',
                 method: 'post',
                 data: function (d) {
                     d.selected_product_id = selected_product_id;
@@ -328,7 +324,7 @@
             if (value === null) {
                 document.getElementById('info_logo').src = '{{ asset('icons/picture.svg') }}';
             } else {
-                document.getElementById('info_logo').src = `{{ url('admin/stock/supplier/api/get-image/') }}/${value}`;
+                document.getElementById('info_logo').src = `{{ url('admin/master-data/supplier/api/get-image/') }}/${value}`;
             }
         }
         const info_telp = value => document.getElementById('info_telp').innerHTML = value ?? '-';
@@ -421,12 +417,17 @@
                 $(this).parents('tr').find(`.total-price[data-id="${data_id}"]`).val(numeral(nilaiTotal(quantity,price)).format('0,0'));
             });
 
-            document.getElementById('btn-save').addEventListener('click', event => {
+            document.getElementById('form-data').addEventListener('submit', event => {
                 event.preventDefault()
 
                 let data_product = [];
+                let hasNullValue = 0;
+                let infoError = '';
 
                 data_cleave.product_id.forEach((v,i) => {
+                    let quantity = parseInt(data_cleave.input_quantity[i].getRawValue());
+                    if (quantity === 0 || isNaN(quantity)) hasNullValue += 1;
+
                     data_product.push({
                         product_id: v,
                         quantity: parseInt(data_cleave.input_quantity[i].getRawValue()),
@@ -434,48 +435,61 @@
                     })
                 })
 
-                axios({
-                    url: '{{ route('admin.stock.purchase-order.api.store') }}',
-                    method: 'post',
-                    data: {
-                        supplier_id: supplier().id,
-                        product: data_product,
-                        catatan: info_catatan(),
-                    }
-                }).then(response => {
-                    if (response.data.status === 'success') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Data Tersimpan',
-                            showDenyButton: true,
-                            reverseButtons: true,
-                            confirmButtonText: `Cetak PDF`,
-                            denyButtonText: `Selesai`,
-                            confirmButtonColor: '#2eb85c',
-                            denyButtonColor: '#321fdb',
-                            willClose(popup) {
-                                window.location = response.data.redirect
-                            }
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.open(response.data.invoice_pdf)
-                            } else if (result.isDenied) {
-                                window.location = response.data.redirect
-                            }
-                        })
-                    } else {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Data Gagal Tersimpan'
-                        });
-                    }
-                }).catch(error => {
+                if (data_product.length === 0) infoError += '<br>Produk belum dipilih!'
+
+                if (hasNullValue > 0) infoError += '<br>Quantity Produk tidak boleh kosong atau 0!'
+
+                if (infoError !== '') {
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Terdapat Kesalahan Pada System',
-                        text: error.response.data.message,
+                        icon: 'warning',
+                        title: 'Terdapat kesalahan input',
+                        html: infoError
                     });
-                })
+                } else {
+                    axios({
+                        url: '{{ route('admin.purchasing.purchase-order.api.store') }}',
+                        method: 'post',
+                        data: {
+                            supplier_id: supplier().id,
+                            product: data_product,
+                            catatan: info_catatan(),
+                        }
+                    }).then(response => {
+                        if (response.data.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Data Tersimpan',
+                                showDenyButton: true,
+                                reverseButtons: true,
+                                confirmButtonText: `Cetak PDF`,
+                                denyButtonText: `Selesai`,
+                                confirmButtonColor: '#2eb85c',
+                                denyButtonColor: '#321fdb',
+                                willClose(popup) {
+                                    window.location = response.data.redirect
+                                }
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.open(response.data.invoice_pdf)
+                                } else if (result.isDenied) {
+                                    window.location = response.data.redirect
+                                }
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Data Gagal Tersimpan'
+                            });
+                        }
+                    }).catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Terdapat Kesalahan Pada System',
+                            text: error.response.data.message,
+                        });
+                    })
+                }
+
             });
         });
     </script>

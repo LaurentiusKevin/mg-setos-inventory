@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'prefix' => 'admin/stock/purchase-order',
-        'as' => 'admin.stock.purchase-order.',
+        'prefix' => 'admin/purchasing/purchase-order',
+        'as' => 'admin.purchasing.purchase-order.',
         'middleware' => ['auth']
     ],
     function () {

@@ -93,8 +93,8 @@ class PurchaseOrderService
             return response()->json([
                 'status' => 'success',
                 'invoice_number' => $invoiceNumber,
-                'invoice_pdf' => route('admin.stock.purchase-order.view.invoice',[$info->id]),
-                'redirect' => route('admin.stock.purchase-order.view.index')
+                'invoice_pdf' => route('admin.purchasing.purchase-order.view.invoice',[$info->id]),
+                'redirect' => route('admin.purchasing.purchase-order.view.index')
             ]);
         } catch (\Throwable $th) {
             return response()->json([
@@ -107,22 +107,24 @@ class PurchaseOrderService
 
     public function indexEditData($id)
     {
+        $data = PurchaseOrderInfo::with(
+            [
+                'supplier',
+                'products' => function($query)
+                {
+                    $query->with([
+                        'product' => function ($querySatuan) {
+                            $querySatuan->with('satuan');
+                        },
+                    ]);
+                },
+            ])
+            ->withSum('products','quantity')
+            ->where('id','=',$id)
+            ->first();
         return [
-            'data' => PurchaseOrderInfo::with(
-                [
-                    'supplier',
-                    'products' => function($query)
-                    {
-                        $query->with([
-                            'product' => function ($querySatuan) {
-                                $querySatuan->with('satuan');
-                            },
-                        ]);
-                    },
-                ])
-                ->withSum('products','quantity')
-                ->where('id','=',$id)
-                ->first()
+            'data' => $data,
+            'invoice_number' => $data->invoice_number
         ];
     }
 

@@ -1,11 +1,11 @@
 @extends('admin._layout')
 
-@section('title','Stock - Purchase Order')
+@section('title','Purchasing - Purchase Order')
 
 @section('description','')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">Stock</li>
+    <li class="breadcrumb-item">Purchasing</li>
     <li class="breadcrumb-item active">Purchase Order</li>
 @endsection
 
@@ -21,7 +21,7 @@
                 <div class="card-header">
                     <div class="card-header-actions">
                         <div class="card-header-actions">
-                            <a class="btn btn-success btn-block btn-sm" href="{{ route('admin.stock.purchase-order.view.create') }}">Tambah PO</a>
+                            <a class="btn btn-success btn-block btn-sm" href="{{ route('admin.purchasing.purchase-order.view.create') }}">Tambah PO</a>
                         </div>
                     </div>
                     <strong>History Purchase Order</strong>
@@ -63,26 +63,22 @@
         processing: true,
         serverSide: true,
         scrollX: true,
-        ordering: false,
+        order: [
+            [ 0, 'desc' ]
+        ],
         ajax: {
-            url: '{{ route('admin.stock.purchase-order.api.data') }}',
+            url: '{{ route('admin.purchasing.purchase-order.api.data') }}',
             method: 'post'
         },
         columns: [
-            {data: 'invoice_number', className: 'align-middle'},
-            {data: 'supplier', className: 'align-middle'},
-            {data: 'total_price', className: 'align-middle'},
-            {data: 'created_at', className: 'align-middle'},
-            {data: 'total_item', width: '15%', className: 'align-middle'},
-            {data: 'action', width: '5%', className: 'align-middle'},
+            {data: 'invoice_number', name: 'purchase_order_infos.invoice_number', className: 'align-middle'},
+            {data: 'supplier_name', name: 'suppliers.name', className: 'align-middle'},
+            {data: 'total_price', name: 'purchase_order_infos.total_price', className: 'align-middle'},
+            {data: 'created_at', name: 'purchase_order_infos.created_at', className: 'align-middle'},
+            {data: 'total_item', name: 'purchase_order_infos.total_item', width: '15%', className: 'align-middle'},
+            {data: 'action', searchable: false, orderable: false, width: '5%', className: 'align-middle'},
         ],
         columnDefs: [
-            {
-                targets: 1,
-                render: (data, type, row, meta) => {
-                    return data.name;
-                }
-            },
             {
                 targets: 2,
                 render: (data, type, row, meta) => {
@@ -93,7 +89,11 @@
                 targets: 4,
                 render: (data, type, row, meta) => {
                     let now = row.received_item/data*100;
-                    return `<div class="progress"><div class="progress-bar progress-bar-striped bg-success" style="width: ${now}%" role="progressbar" aria-valuenow="${now}" aria-valuemin="0" aria-valuemax="${data}">${now}%</div></div>`;
+                    if (now < 100) {
+                        return `<div class="progress"><div class="progress-bar progress-bar-striped bg-info" style="width: ${now}%" role="progressbar" aria-valuenow="${now}" aria-valuemin="0" aria-valuemax="${data}">${now}%</div></div>`;
+                    } else {
+                        return `<span class="badge badge-success">Completed</span>`;
+                    }
                 }
             },
         ],
@@ -106,53 +106,7 @@
 
         t_list_tbody.on('click','button.action-info', function (event) {
             let data = t_list_data($(event.target).parents('tr'));
-            window.location = `{{ url('admin/stock/purchase-order/info') }}/${data.id}`;
-        });
-
-        t_list_tbody.on('click','button.action-delete', event => {
-            let data = t_list_data($(event.target).parents('tr'));
-
-            Swal.fire({
-                title: 'Hapus supplier ini?',
-                icon: 'warning',
-                showCancelButton: true,
-                reverseButtons: true,
-                confirmButtonText: 'Hapus!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axios({
-                        url: '{{ route('admin.stock.supplier.api.delete') }}',
-                        method: 'post',
-                        data: {
-                            id: data.id
-                        }
-                    }).then(response => {
-                        if (response.data.status === 'success') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Terhapus',
-                                timer: 1200,
-                                showConfirmButton: false,
-                                willClose(popup) {
-                                    t_list.ajax.reload();
-                                }
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Gagal',
-                                text: 'Silahkan coba lagi'
-                            });
-                        }
-                    }).catch(error => {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Terdapat Kesalahan Pada System',
-                            text: error.response.data.message
-                        });
-                    })
-                }
-            });
+            window.location = `{{ url('admin/purchasing/purchase-order/info') }}/${data.id}`;
         });
     });
 </script>
