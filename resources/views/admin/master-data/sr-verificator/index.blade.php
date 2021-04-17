@@ -83,10 +83,10 @@
             method: 'post'
         },
         columns: [
-            {data: 'name', className: 'align-middle'},
-            {data: 'department', className: 'align-middle'},
-            {data: 'email', className: 'align-middle', width: '15%'},
-            {data: 'action', className: 'text-center', width: '5%'},
+            {data: 'name', name: 'users.name', className: 'align-middle'},
+            {data: 'department', name: 'departments.name', className: 'align-middle'},
+            {data: 'email', name: 'users.email', className: 'align-middle', width: '15%'},
+            {data: 'action', searchable: false, orderable: false, className: 'text-center', width: '5%'},
         ]
     });
 

@@ -19,7 +19,7 @@ class SupplierController extends Controller
 
     public function index()
     {
-        return view('admin.stock.supplier.index');
+        return view('admin.master-data.supplier.index');
     }
 
     public function data()
@@ -27,13 +27,13 @@ class SupplierController extends Controller
         try {
             return DataTables::of(Supplier::all())
                 ->editColumn('logo', function ($data) {
-                    return ($data->logo == null) ? url('icons/picture.svg') : url("admin/stock/supplier/api/get-image/{$data->logo}");
+                    return ($data->logo == null) ? url('icons/picture.svg') : url("admin/master-data/supplier/api/get-image/{$data->logo}");
                 })
                 ->editColumn('phone', function ($data) {
                     return ($data->phone == null) ? '-' : $data->phone;
                 })
                 ->addColumn('action', function ($data) {
-                    return view('admin.stock.supplier.action');
+                    return view('admin.master-data.supplier.action');
                 })
                 ->make(true);
         } catch (\Throwable $th) {
@@ -47,7 +47,7 @@ class SupplierController extends Controller
 
     public function indexCreate()
     {
-        return view('admin.stock.supplier.create');
+        return view('admin.master-data.supplier.create');
     }
 
     public function uploadImage(Request $request)
@@ -90,7 +90,7 @@ class SupplierController extends Controller
 
     public function indexEdit($id)
     {
-        return view('admin.stock.supplier.edit',$this->service->indexEditData($id));
+        return view('admin.master-data.supplier.edit',$this->service->indexEditData($id));
     }
 
     public function delete(Request $request)

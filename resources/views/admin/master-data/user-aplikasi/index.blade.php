@@ -67,13 +67,14 @@
             method: 'post'
         },
         columns: [
-            {data: 'name', className: 'align-middle'},
-            {data: 'department', className: 'align-middle'},
-            {data: 'role', className: 'align-middle'},
-            {data: 'username', className: 'align-middle'},
-            {data: 'email', className: 'align-middle'},
+            {data: 'name', name: 'users.name', className: 'align-middle'},
+            {data: 'department', name: 'departments.name', className: 'align-middle'},
+            {data: 'role', name: 'roles.name', className: 'align-middle'},
+            {data: 'username', name: 'users.username', className: 'align-middle'},
+            {data: 'email', name: 'users.email', className: 'align-middle'},
             {
                 data: 'created_at',
+                name: 'users.created_at',
                 render: (data, type, row, meta) => {
                     return moment(data).format('DD MMMM YYYY, HH:mm:ss')
                 },
@@ -82,13 +83,14 @@
             },
             {
                 data: 'updated_at',
+                name: 'users.updated_at',
                 render: (data, type, row, meta) => {
                     return moment(data).format('DD MMMM YYYY, HH:mm:ss')
                 },
                 className: 'text-nowrap align-middle',
                 width: '5%'
             },
-            {data: 'action', width: '5%'},
+            {data: 'action', orderable: false, searchable: false, width: '5%'},
         ],
         columnDefs: [
             // {

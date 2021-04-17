@@ -5,37 +5,7 @@ use App\Http\Controllers\Admin\Stock\ProductListController;
 use App\Http\Controllers\Admin\Stock\PurchaseOrderController;
 use App\Http\Controllers\Admin\Stock\ReceivingOrderController;
 use App\Http\Controllers\Admin\Stock\StoreRequisitionController;
-use App\Http\Controllers\Admin\Stock\SupplierController;
 use Illuminate\Support\Facades\Route;
-
-Route::group(
-    [
-        'prefix' => 'admin/stock/supplier',
-        'as' => 'admin.stock.supplier.',
-        'middleware' => ['auth']
-    ],
-    function () {
-        Route::group(
-            ['as' => 'view.'],
-            function () {
-                Route::get('/',[SupplierController::class,'index'])->name('index');
-                Route::get('create',[SupplierController::class,'indexCreate'])->name('create');
-                Route::get('edit/{id}',[SupplierController::class,'indexEdit'])->name('edit');
-            }
-        );
-
-        Route::group(
-            ['prefix' => 'api', 'as' => 'api.'],
-            function () {
-                Route::post('data',[SupplierController::class,'data'])->name('data');
-                Route::post('upload-image',[SupplierController::class,'uploadImage'])->name('upload-image');
-                Route::get('get-image/{file_path}',[SupplierController::class,'getImage'])->name('get-image');
-                Route::post('store',[SupplierController::class,'store'])->name('store');
-                Route::post('delete',[SupplierController::class,'delete'])->name('delete');
-            }
-        );
-    }
-);
 
 Route::group(
     [
