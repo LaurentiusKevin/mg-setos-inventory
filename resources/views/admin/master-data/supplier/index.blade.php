@@ -66,11 +66,11 @@
             method: 'post'
         },
         columns: [
-            {data: 'logo', width: '20%'},
-            {data: 'address', className: "align-middle"},
-            {data: 'contact_person_name', width: '20%', className: "align-middle"},
-            {data: 'info', className: "align-middle"},
-            {data: 'action', width: '5%', className: "align-middle"},
+            {data: 'logo', name: 'name', width: '20%'},
+            {data: 'address', name: 'address', className: "align-middle"},
+            {data: 'contact_person_name', name: 'contact_person_name', width: '20%', className: "align-middle"},
+            {data: 'info', name: 'info', className: "align-middle"},
+            {data: 'action', searchable: false, orderable: false, width: '5%', className: "align-middle"},
         ],
         columnDefs: [
             {
