@@ -139,6 +139,7 @@
                     <table class="table table-bordered table-hover" id="t_list_product" style="width: 100%">
                         <thead>
                         <tr>
+                            <th>Code</th>
                             <th>Produk</th>
                             <th>Stok</th>
                             <th>Last Price (Rp)</th>
@@ -284,23 +285,18 @@
                 }
             },
             columns: [
-                {data: 'name', className: "align-middle text-dark font-weight-bold"},
-                {data: 'stock', className: "align-middle"},
-                {data: 'last_price', className: "align-middle text-right"},
-                {data: 'avg_price', className: "align-middle text-right"},
-                {data: 'action', width: '5%', className: "align-middle"},
+                {data: 'code', name: 'products.code', width: '5%', className: "align-middle text-dark font-weight-bold"},
+                {data: 'name', name: 'products.name', className: "align-middle"},
+                {data: 'stock', name: 'products.stock', className: "align-middle text-right"},
+                {data: 'last_price', name: 'products.last_price', className: "align-middle text-right"},
+                {data: 'avg_price', name: 'products.avg_price', className: "align-middle text-right"},
+                {data: 'action', searchable: false, orderable: false, width: '5%', className: "align-middle"},
             ],
             columnDefs: [
                 {
-                    targets: 1,
-                    render: (data, type, row, meta) => {
-                        return `<span class="text-nowrap">${numeral(data).format('0,0')} ${row.satuan.nama}</span>`;
-                    }
-                },
-                {
                     targets: 2,
                     render: (data, type, row, meta) => {
-                        return numeral(data).format('0,0');
+                        return `<span class="text-nowrap">${numeral(data).format('0,0')} ${row.satuan}</span>`;
                     }
                 },
                 {
@@ -311,6 +307,12 @@
                 },
                 {
                     targets: 4,
+                    render: (data, type, row, meta) => {
+                        return numeral(data).format('0,0');
+                    }
+                },
+                {
+                    targets: 5,
                     render: (data, type, row, meta) => {
                         return `<button class="btn btn-ghost-success action-add-product"><i class="fas fa-plus"></i></button>`;
                     }
