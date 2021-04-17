@@ -189,3 +189,39 @@ Route::group(
         );
     }
 );
+
+Route::group(
+    [
+        'prefix' => 'admin/stock/invoicing',
+        'as' => 'admin.stock.invoicing.',
+        'middleware' => ['auth']
+    ],
+    function () {
+        Route::group(
+            ['as' => 'view.'],
+            function () {
+                Route::get('/',[StoreRequisitionController::class,'index'])->name('index');
+                Route::get('create',[StoreRequisitionController::class,'indexCreate'])->name('create');
+                Route::get('info/{id}',[StoreRequisitionController::class,'indexInfo'])->name('info');
+                Route::get('edit/{id}',[StoreRequisitionController::class,'indexEdit'])->name('edit');
+                Route::get('verification/{id}',[StoreRequisitionController::class,'indexVerification'])->name('verification');
+                Route::get('invoice/{id}',[StoreRequisitionController::class,'indexPdf'])->name('invoice');
+            }
+        );
+
+        Route::group(
+            ['prefix' => 'api', 'as' => 'api.'],
+            function () {
+                Route::post('data',[StoreRequisitionController::class,'data'])->name('data');
+                Route::post('po-pending',[StoreRequisitionController::class,'dataPoPending'])->name('po-pending');
+                Route::post('po-pending/products',[StoreRequisitionController::class,'dataPoPendingProducts'])->name('po-pending.products');
+                Route::post('product-list',[StoreRequisitionController::class,'getProductList'])->name('product-list');
+                Route::post('stored-product',[StoreRequisitionController::class,'getStoredProduct'])->name('stored-product');
+                Route::post('store',[StoreRequisitionController::class,'store'])->name('store');
+                Route::post('store-catatan',[StoreRequisitionController::class,'storeCatatan'])->name('store-catatan');
+                Route::post('store-verification',[StoreRequisitionController::class,'storeVerification'])->name('store-verification');
+                Route::post('delete',[StoreRequisitionController::class,'delete'])->name('delete');
+            }
+        );
+    }
+);

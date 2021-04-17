@@ -22,7 +22,9 @@ class DashboardService
             $groupData = SysMenuGroup::hasMenu()->get();
 
             foreach ($groupData AS $item) {
-                $menu[$item->id] = SysMenu::where('sys_menu_group_id','=',$item->id)->get();
+                $menu[$item->id] = SysMenu::where('sys_menu_group_id','=',$item->id)
+                    ->orderBy('ord')
+                    ->get();
             }
 
             $groupData = $groupData->toArray();
@@ -31,12 +33,10 @@ class DashboardService
                 SELECT
                     DISTINCT
                     smg.*
-                FROM
-                    role_menus rm
-                        JOIN sys_menus sm on rm.sys_menus_id = sm.id
-                        JOIN sys_menu_groups smg on sm.sys_menu_group_id = smg.id
-                WHERE
-                      rm.view = 1
+                FROM role_menus rm
+                    JOIN sys_menus sm on rm.sys_menus_id = sm.id
+                    JOIN sys_menu_groups smg on sm.sys_menu_group_id = smg.id
+                WHERE rm.view = 1
                   AND rm.roles_id = ?
                 ORDER BY
                     smg.id,
@@ -50,8 +50,11 @@ class DashboardService
                     ->join('role_menus','sys_menus.id','=','role_menus.sys_menus_id')
                     ->where([
                         ['role_menus.view','=',1],
+                        ['role_menus.roles_id','=',$role_id],
                         ['sys_menus.sys_menu_group_id','=',$id]
-                    ])->get()->toArray();
+                    ])
+                    ->orderBy('ord')
+                    ->get()->toArray();
             }
 
             foreach ($groupData AS $key => $item) {

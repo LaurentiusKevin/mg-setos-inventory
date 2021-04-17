@@ -23,7 +23,7 @@ class UserRoleService
         if ($id == null) {
             return Role::all();
         } else {
-            return Role::where('id','=',$id)->first();
+            return Role::where('id','=',$id);
         }
     }
 
@@ -100,15 +100,77 @@ class UserRoleService
     public function masterRoleData($id)
     {
         $menu = [];
-        $group = SysMenuGroup::hasMenu()->get();
+        $group = SysMenuGroup::hasMenu()->where('is_private','=',0)->get();
 
         foreach ($group AS $item) {
-            if ($item->is_private == 0) {
-                $menu[$item->id] = [
-                    'name' => $item->name,
-                    'menu' => SysMenu::withRoles($item->id, $id)->where('sys_menu_group_id','=',$item->id)->get()->toArray()
-                ];
-            }
+//            $list_menu = DB::table('sys_menus')
+//                ->leftJoin('role_menus','sys_menus.id','=','role_menus.sys_menus_id')
+//                ->addSelect(
+//                    'sys_menus.id',
+//                    'sys_menus.sys_menu_group_id',
+//                    'sys_menus.name',
+//                    'role_menus.id AS role_menus_id',
+//                    'role_menus.roles_id',
+//                    'role_menus.sys_menus_id',
+//                    DB::raw('CASE WHEN role_menus.view IS NULL THEN 0 ELSE role_menus.view END AS view'),
+//                    DB::raw('CASE WHEN role_menus.create IS NULL THEN 0 ELSE role_menus.create END AS `create`'),
+//                    DB::raw('CASE WHEN role_menus.edit IS NULL THEN 0 ELSE role_menus.edit END AS edit'),
+//                    DB::raw('CASE WHEN role_menus.`delete` IS NULL THEN 0 ELSE role_menus.delete END AS `delete`')
+//                )
+//                ->where([
+//                    ['sys_menu_group_id','=',$item->id],
+//                    ['sys_menus.is_private','=',0]
+//                ])
+//                ->orderBy('sys_menus.ord')
+//                ->groupBy('sys_menus.id')
+//                ->get()->toArray();
+
+            $list_menu = DB::select("
+                WITH menu AS (
+                    SELECT sys_menu_group_id,
+                           id AS sys_menus_id,
+                           name,
+                           segment_name,
+                           url,
+                           ord
+                    FROM sys_menus
+                    WHERE is_private = 0 AND sys_menu_group_id = ?
+                    ORDER BY ord
+                )
+                , role AS (
+                    SELECT rm.id AS role_menu_id,
+                           roles_id,
+                           sys_menus_id,
+                           r.name AS role_name,
+                           view,
+                           `create`,
+                           edit,
+                           `delete`
+                    FROM role_menus rm
+                        JOIN roles r on rm.roles_id = r.id
+                        WHERE roles_id = ?
+                )
+                SELECT sys_menu_group_id,
+                       menu.sys_menus_id,
+                       roles_id,
+                       role_menu_id,
+                       name,
+                       role_name,
+                       segment_name,
+                       url,
+                       ord,
+                       view,
+                       `create`,
+                       edit,
+                       `delete`
+                FROM menu
+                    LEFT JOIN role ON menu.sys_menus_id = role.sys_menus_id
+            ",[$item->id,$id]);
+
+            $menu[$item->id] = [
+                'name' => $item->name,
+                'menu' => $list_menu
+            ];
         }
 
         return $menu;

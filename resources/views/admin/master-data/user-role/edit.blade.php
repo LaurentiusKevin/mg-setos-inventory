@@ -48,29 +48,29 @@
                                 </tr>
                                 @foreach($group['menu'] AS $m)
                                     <tr>
-                                        <th>&nbsp;&nbsp;{{ $m['name'] }}</th>
-                                        <td class="text-center">
+                                        <th>&nbsp;&nbsp;{{ $m->name }}</th>
+                                        <td class="text-center" onclick="$(this).find('input').prop('checked') == false ? $(this).find('input').prop('checked',true) : $(this).find('input').prop('checked',false)">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="view[]" value="{{ $m['id'] }}" id="view-{{ $m['id'] }}" {{ ($m['view']) ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="view-{{ $m['id'] }}"></label>
+                                                <input class="form-check-input" type="checkbox" name="view[]" value="{{ $m->sys_menus_id }}" id="view-{{ $m->sys_menus_id }}" {{ ($m->view) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="view-{{ $m->sys_menus_id }}"></label>
                                             </div>
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center" onclick="$(this).find('input').prop('checked') == false ? $(this).find('input').prop('checked',true) : $(this).find('input').prop('checked',false)">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="create[]" value="{{ $m['id'] }}" id="create-{{ $m['id'] }}" {{ ($m['create']) ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="create-{{ $m['id'] }}"></label>
+                                                <input class="form-check-input" type="checkbox" name="create[]" value="{{ $m->sys_menus_id }}" id="create-{{ $m->sys_menus_id }}" {{ ($m->create) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="create-{{ $m->sys_menus_id }}"></label>
                                             </div>
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center" onclick="$(this).find('input').prop('checked') == false ? $(this).find('input').prop('checked',true) : $(this).find('input').prop('checked',false)">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="edit[]" value="{{ $m['id'] }}" id="edit-{{ $m['id'] }}" {{ ($m['edit']) ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="edit-{{ $m['id'] }}"></label>
+                                                <input class="form-check-input" type="checkbox" name="edit[]" value="{{ $m->sys_menus_id }}" id="edit-{{ $m->sys_menus_id }}" {{ ($m->edit) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="edit-{{ $m->sys_menus_id }}"></label>
                                             </div>
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center" onclick="$(this).find('input').prop('checked') == false ? $(this).find('input').prop('checked',true) : $(this).find('input').prop('checked',false)">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="delete[]" value="{{ $m['id'] }}" id="delete-{{ $m['id'] }}" {{ ($m['delete']) ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="delete-{{ $m['id'] }}"></label>
+                                                <input class="form-check-input" type="checkbox" name="delete[]" value="{{ $m->sys_menus_id }}" id="delete-{{ $m->sys_menus_id }}" {{ ($m->delete) ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="delete-{{ $m->sys_menus_id }}"></label>
                                             </div>
                                         </td>
                                     </tr>

@@ -70,14 +70,14 @@
         },
         columns: [
             // {data: 'image', width: '20%'},
-            {data: 'code', className: "text-nowrap font-weight-bold align-middle", width: '5%'},
-            {data: 'name', className: "align-middle", width: '20%'},
-            {data: 'department', className: "align-middle", width: '20%'},
-            {data: 'stock', className: "align-middle text-right"},
-            {data: 'supplier_price', className: "align-middle text-right"},
-            {data: 'last_price', className: "align-middle text-right"},
-            {data: 'avg_price', className: "align-middle text-right"},
-            {data: 'action', width: '5%', className: "align-middle"},
+            {data: 'code', name: 'code', className: "text-nowrap font-weight-bold align-middle", width: '5%'},
+            {data: 'name', name: 'name', className: "align-middle", width: '20%'},
+            {data: 'department', name: 'departments.name', className: "align-middle", width: '20%'},
+            {data: 'stock', name: 'stock', className: "align-middle text-right"},
+            {data: 'supplier_price', name: 'supplier_price', className: "align-middle text-right"},
+            {data: 'last_price', name: 'last_price', className: "align-middle text-right"},
+            {data: 'avg_price', name: 'avg_price', className: "align-middle text-right"},
+            {data: 'action', sorting: 'false', searchable: 'false', width: '5%', className: "align-middle"},
         ],
         columnDefs: [
             // {

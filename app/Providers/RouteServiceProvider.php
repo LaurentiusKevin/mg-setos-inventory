@@ -61,7 +61,7 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/admin/master-data.php'));
 
         Route::middleware('web')
-            ->group(base_path('routes/admin/product-list.php'));
+            ->group(base_path('routes/admin/purchasing.php'));
     }
 
     /**
