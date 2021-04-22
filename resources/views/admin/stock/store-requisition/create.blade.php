@@ -260,13 +260,13 @@
                 }
             },
             columns: [
-                {data: 'code', className: "align-middle text-dark font-weight-bold"},
-                {data: 'name', className: "align-middle text-dark font-weight-bold"},
-                {data: 'stock', className: "align-middle text-right"},
-                {data: 'supplier_price', className: "align-middle text-right"},
-                {data: 'last_price', className: "align-middle text-right"},
-                {data: 'avg_price', className: "align-middle text-right"},
-                {data: 'action', width: '5%', className: "align-middle text-center"},
+                {data: 'code', name: 'products.code', className: "align-middle text-dark font-weight-bold"},
+                {data: 'name', name: 'products.name', className: "align-middle"},
+                {data: 'stock', name: 'products.stock', className: "align-middle text-right"},
+                {data: 'supplier_price', name: 'products.supplier_price', className: "align-middle text-right"},
+                {data: 'last_price', name: 'products.last_price', className: "align-middle text-right"},
+                {data: 'avg_price', name: 'products.avg_price', className: "align-middle text-right"},
+                {data: 'action', searchable: false, orderable: false, width: '5%', className: "align-middle text-center"},
             ],
             columnDefs: [
                 {

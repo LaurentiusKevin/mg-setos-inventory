@@ -64,35 +64,35 @@ Route::group(
     }
 );
 
-Route::group(
-    [
-        'prefix' => 'admin/stock/penggunaan-barang',
-        'as' => 'admin.stock.penggunaan-barang.',
-        'middleware' => ['auth']
-    ],
-    function () {
-        Route::group(
-            ['as' => 'view.'],
-            function () {
-                Route::get('/',[PenggunaanBarangController::class,'index'])->name('index');
-                Route::get('create',[PenggunaanBarangController::class,'indexCreate'])->name('create');
-                Route::get('info/{id}',[PenggunaanBarangController::class,'indexInfo'])->name('edit');
-                Route::get('invoice/{id}',[PenggunaanBarangController::class,'indexPdf'])->name('invoice');
-            }
-        );
-
-        Route::group(
-            ['prefix' => 'api', 'as' => 'api.'],
-            function () {
-                Route::post('data',[PenggunaanBarangController::class,'data'])->name('data');
-                Route::post('po-pending',[PenggunaanBarangController::class,'dataPoPending'])->name('po-pending');
-                Route::post('po-pending/products',[PenggunaanBarangController::class,'dataPoPendingProducts'])->name('po-pending.products');
-                Route::post('product-list',[PenggunaanBarangController::class,'getProductList'])->name('product-list');
-                Route::post('store',[PenggunaanBarangController::class,'store'])->name('store');
-            }
-        );
-    }
-);
+//Route::group(
+//    [
+//        'prefix' => 'admin/stock/penggunaan-barang',
+//        'as' => 'admin.stock.penggunaan-barang.',
+//        'middleware' => ['auth']
+//    ],
+//    function () {
+//        Route::group(
+//            ['as' => 'view.'],
+//            function () {
+//                Route::get('/',[PenggunaanBarangController::class,'index'])->name('index');
+//                Route::get('create',[PenggunaanBarangController::class,'indexCreate'])->name('create');
+//                Route::get('info/{id}',[PenggunaanBarangController::class,'indexInfo'])->name('edit');
+//                Route::get('invoice/{id}',[PenggunaanBarangController::class,'indexPdf'])->name('invoice');
+//            }
+//        );
+//
+//        Route::group(
+//            ['prefix' => 'api', 'as' => 'api.'],
+//            function () {
+//                Route::post('data',[PenggunaanBarangController::class,'data'])->name('data');
+//                Route::post('po-pending',[PenggunaanBarangController::class,'dataPoPending'])->name('po-pending');
+//                Route::post('po-pending/products',[PenggunaanBarangController::class,'dataPoPendingProducts'])->name('po-pending.products');
+//                Route::post('product-list',[PenggunaanBarangController::class,'getProductList'])->name('product-list');
+//                Route::post('store',[PenggunaanBarangController::class,'store'])->name('store');
+//            }
+//        );
+//    }
+//);
 
 Route::group(
     [

@@ -73,14 +73,14 @@
             method: 'post'
         },
         columns: [
-            {data: 'invoice_number', width: '10%', className: 'align-middle font-weight-bold text-nowrap'},
-            {data: 'info_penggunaan', className: 'align-middle'},
-            {data: 'catatan', className: 'align-middle'},
-            {data: 'total_item', width: '5%', className: 'align-middle text-right'},
-            {data: 'total_price', width: '10%', className: 'align-middle text-right text-nowrap'},
-            {data: 'penginput', width: '10%', className: 'align-middle'},
-            {data: 'created_at', width: '10%', className: 'align-middle text-nowrap'},
-            {data: 'action', width: '5%', className: 'align-middle text-center'},
+            {data: 'invoice_number', name: 'store_requisition_infos.invoice_number', width: '10%', className: 'align-middle font-weight-bold text-nowrap'},
+            {data: 'info_penggunaan', name: 'store_requisition_infos.info_penggunaan', className: 'align-middle'},
+            {data: 'catatan', name: 'store_requisition_infos.catatan', className: 'align-middle'},
+            {data: 'total_item', name: 'store_requisition_infos.total_item', width: '5%', className: 'align-middle text-right'},
+            {data: 'total_price', name: 'store_requisition_infos.total_price', width: '10%', className: 'align-middle text-right text-nowrap'},
+            {data: 'penginput', name: 'users.name', width: '10%', className: 'align-middle'},
+            {data: 'created_at', name: 'store_requisition_infos.created_at', width: '10%', className: 'align-middle text-nowrap'},
+            {data: 'action', searchable: false, orderable: false, width: '5%', className: 'align-middle text-center'},
         ],
         columnDefs: [
             {
