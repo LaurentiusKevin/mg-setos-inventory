@@ -45,7 +45,7 @@ class StoreRequisitionController extends Controller
 
     public function getProductList(Request $request)
     {
-        $selected_product_id = $request->selected_product_id;
+        $selected_product_id = $request->get('selected_product_id');
 
         try {
             return DataTables::of($this->service->getProductList($selected_product_id))
@@ -71,6 +71,24 @@ class StoreRequisitionController extends Controller
         return $this->service->store($department_id,$product,$info_penggunaan,$catatan);
     }
 
+    public function storeEdit(Request $request)
+    {
+        $request->validate([
+            'store_requisition_info_id' => 'required',
+            'department' => 'required',
+            'product' => 'required',
+            'info_penggunaan' => 'required',
+        ]);
+
+        $store_requisition_info_id = $request->get('store_requisition_info_id');
+        $department_id = $request->get('department');
+        $product = $request->get('product');
+        $info_penggunaan = $request->get('info_penggunaan');
+        $catatan = $request->get('catatan') ?? null;
+
+        return $this->service->storeEdit($store_requisition_info_id,$department_id,$product,$info_penggunaan,$catatan);
+    }
+
     public function indexInfo($id)
     {
         return view('admin.stock.store-requisition.info',$this->service->indexInfoData($id));
@@ -93,8 +111,9 @@ class StoreRequisitionController extends Controller
         ]);
 
         $store_requisition_info_id = $request->get('store_requisition_info_id');
+        $edit_process = $request->get('edit_process') ?? false;
 
-        return $this->service->getStoredProduct($store_requisition_info_id);
+        return $this->service->getStoredProduct($store_requisition_info_id,$edit_process);
     }
 
     public function storeCatatan(Request $request)

@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Admin\Stock;
 
+use App\Models\StoreRequisitionProducts;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +17,7 @@ class StoreRequisitionRepository
 
         return ($user_department !== null) ? $department->where('id','=',$user_department) : $department;
     }
+
     public function storeRequisitionInfo($id = null)
     {
         $data = DB::table('store_requisition_infos')
@@ -42,9 +44,9 @@ class StoreRequisitionRepository
         return ($id !== null) ? $data->where('store_requisition_infos.id','=',$id) : $data;
     }
 
-    public function storeRequisitionProduct($store_requisition_info_id)
+    public function storeRequisitionProduct($store_requisition_info_id,$edit_process = false)
     {
-        return DB::table('store_requisition_products')
+        $data = DB::table('store_requisition_products')
             ->select([
                 'store_requisition_products.id',
                 'store_requisition_products.store_requisition_info_id',
@@ -66,6 +68,10 @@ class StoreRequisitionRepository
             ->leftJoin('satuans','products.satuan_id','=','satuans.id')
             ->whereNull('store_requisition_products.deleted_at')
             ->where('store_requisition_info_id','=',$store_requisition_info_id);
+
+        if ($edit_process == true) $data->addSelect(DB::raw("'true' AS status_store"));
+
+        return $data;
     }
 
     public function productList($selected_product_id = null)
@@ -96,6 +102,29 @@ class StoreRequisitionRepository
         return $data;
     }
 
+    public function setDeletedProductNotIn($store_requisition_info_id, array $store_requisition_product_id)
+    {
+        try {
+            DB::table('store_requisition_products')
+                ->where('store_requisition_info_id','=',$store_requisition_info_id)
+                ->whereNotIn('id',$store_requisition_product_id)
+                ->update([
+                    'deleted_at' => now()
+                ]);
+
+            return true;
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'details' => [
+                    $th->getFile(),
+                    $th->getLine()
+                ]
+            ],500);
+        }
+    }
+
     public function verificator($department_id)
     {
         return DB::table('store_requisition_verificators')
@@ -119,7 +148,7 @@ class StoreRequisitionRepository
             ->get();
     }
 
-    public function statusVerification($store_requisition_info_id)
+    public function unVerified($store_requisition_info_id)
     {
         return DB::table('store_requisition_verifications')
             ->whereNull('verified_at')
@@ -127,6 +156,23 @@ class StoreRequisitionRepository
                 ['store_requisition_info_id','=',$store_requisition_info_id],
                 ['user_id','=',Auth::id()],
             ])->get();
+    }
+
+    public function verified($store_requisition_info_id)
+    {
+        return DB::table('store_requisition_verifications')
+            ->select([
+                'store_requisition_verifications.user_id',
+                'store_requisition_verifications.verified_at',
+                'store_requisition_verifications.created_at',
+                'users.username',
+                'users.name AS verificator'
+            ])
+            ->join('users','store_requisition_verifications.user_id','=','users.id')
+            ->where([
+                ['store_requisition_info_id','=',$store_requisition_info_id]
+            ])
+            ->get();
     }
 
     public function catatan($store_requisition_info_id)

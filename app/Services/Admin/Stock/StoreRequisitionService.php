@@ -43,7 +43,7 @@ class StoreRequisitionService
 
     public function statusVerification($store_requisition_info_id)
     {
-        return $this->repository->statusVerification($store_requisition_info_id)->count();
+        return $this->repository->unVerified($store_requisition_info_id)->count();
     }
 
     public function store($department_id,$product,$info_penggunaan,$catatan)
@@ -73,7 +73,6 @@ class StoreRequisitionService
                 $info = new StoreRequisitionInfo();
                 $info->user_id = Auth::id();
                 $info->department_id = $department_id;
-                $info->invoice_number = $invoice_number;
                 $info->info_penggunaan = $info_penggunaan;
                 $info->total_price = $total_price;
                 $info->total_item = $total_item;
@@ -110,7 +109,88 @@ class StoreRequisitionService
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-                'details' => $th
+                'details' => [
+                    $th->getFile(),
+                    $th->getLine()
+                ]
+            ]);
+        }
+    }
+
+    public function storeEdit($store_requisition_info_id,$department_id,$product,$info_penggunaan,$catatan)
+    {
+        try {
+            DB::beginTransaction();
+
+            $total_item = 0;
+            $total_price = 0;
+            $nullValue = 0;
+            $listID = [];
+
+            foreach ($product AS $item) {
+                array_push($listID,$item['store_requisition_product_id']);
+
+                $total_item += $item['quantity'];
+                $total_price += $item['quantity'] * $item['price'];
+
+                if ($item['quantity'] == null || $item['quantity'] < 1) $nullValue += 1;
+                if ($item['price'] == null || $item['price'] < 1) $nullValue += 1;
+            }
+
+            if ($nullValue > 0) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Harga dan Quantity wajib diisi!'
+                ]);
+            }
+
+            if ($this->repository->setDeletedProductNotIn($store_requisition_info_id,$listID) !== true) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Gagal menghapus produk'
+                ]);
+            }
+
+            $info = StoreRequisitionInfo::find($store_requisition_info_id);
+            $info->user_id = Auth::id();
+            $info->department_id = $department_id;
+            $info->info_penggunaan = $info_penggunaan;
+            $info->total_price = $total_price;
+            $info->total_item = $total_item;
+            $info->catatan = $catatan;
+            $info->save();
+
+            foreach ($product AS $item) {
+                if ($item['store_requisition_product_id'] !== null) {
+                    $sr_product = StoreRequisitionProducts::find($item['store_requisition_product_id']);
+                } else {
+                    $sr_product = new StoreRequisitionProducts();
+                }
+                $sr_product->store_requisition_info_id = $info->id;
+                $sr_product->product_id = $item['product_id'];
+                $sr_product->quantity = $item['quantity'];
+                $sr_product->price = $item['price'];
+                $sr_product->user_id = 2;
+
+                if ($sr_product->isDirty()) $sr_product->save();
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+                'invoice_number' => $info->invoice_number,
+                'invoice_pdf' => route('admin.stock.store-requisition.view.invoice',[$info->id]),
+                'redirect' => route('admin.stock.store-requisition.view.index')
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'details' => [
+                    $th->getFile(),
+                    $th->getLine()
+                ]
             ]);
         }
     }
@@ -123,9 +203,9 @@ class StoreRequisitionService
         ];
     }
 
-    public function getStoredProduct($store_requisition_info_id)
+    public function getStoredProduct($store_requisition_info_id,$edit_process = false)
     {
-        return $this->repository->storeRequisitionProduct($store_requisition_info_id)->get();
+        return $this->repository->storeRequisitionProduct($store_requisition_info_id,$edit_process)->get();
     }
 
     public function indexInfoData($store_requisition_info_id)
@@ -133,7 +213,8 @@ class StoreRequisitionService
         return [
             'info' => $this->repository->storeRequisitionInfo($store_requisition_info_id)->first(),
             'product' => $this->repository->storeRequisitionProduct($store_requisition_info_id)->get(),
-            'catatan' => $this->repository->catatan($store_requisition_info_id)
+            'catatan' => $this->repository->catatan($store_requisition_info_id),
+            'verificator' => $this->repository->verified($store_requisition_info_id)
         ];
     }
 

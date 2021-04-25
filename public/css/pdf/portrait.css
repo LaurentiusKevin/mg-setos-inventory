@@ -30,7 +30,7 @@ body {
 /** Define the footer rules **/
 footer {
     position: fixed;
-    bottom: .5cm;
+    bottom: 3cm;
 
     /** Extra personal styles **/
     /*background-color: #03a9f4;*/

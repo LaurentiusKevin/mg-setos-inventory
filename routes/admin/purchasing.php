@@ -122,6 +122,7 @@ Route::group(
                 Route::post('product-list',[StoreRequisitionController::class,'getProductList'])->name('product-list');
                 Route::post('stored-product',[StoreRequisitionController::class,'getStoredProduct'])->name('stored-product');
                 Route::post('store',[StoreRequisitionController::class,'store'])->name('store');
+                Route::post('store-edit',[StoreRequisitionController::class,'storeEdit'])->name('store-edit');
                 Route::post('store-catatan',[StoreRequisitionController::class,'storeCatatan'])->name('store-catatan');
                 Route::post('store-verification',[StoreRequisitionController::class,'storeVerification'])->name('store-verification');
                 Route::post('delete',[StoreRequisitionController::class,'delete'])->name('delete');

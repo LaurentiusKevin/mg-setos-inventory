@@ -27,6 +27,24 @@
 <footer>
     <table style="width: 100%">
         <tr>
+            <td style="width: 40%">
+                Tertanda Tangan Secara Digital
+                <br>Pada: {{ date('d-m-Y, H:i:s',strtotime($info->updated_at)) }}
+                <br>
+                <br><strong style="font-size: 13px">{{ $info->penginput }}</strong>
+            </td>
+            @foreach($verificator AS $item)
+                <td style="width: 30%">
+                    {{ ($item->verified_at == null) ? ' ' : 'Tertanda Tangan Secara Digital' }}
+                    <br>{{ ($item->verified_at == null) ? ' ' : 'Pada: '.date('d-m-Y, H:i:s',strtotime($item->verified_at)) }}
+                    <br>
+                    <br><strong style="font-size: 13px">{{ ucfirst($item->verificator) }}</strong>
+                </td>
+            @endforeach
+        </tr>
+    </table>
+    <table style="width: 100%; margin-top: 1cm">
+        <tr>
             <td>Dicetak oleh {{ auth()->user()->name }} ({{ date('d F Y - H:i:s') }})</td>
         </tr>
     </table>
@@ -35,13 +53,13 @@
 <main>
     <table style="width: 100%">
         <tr>
+            <td class="text-bold" style="width: 30%; color: indianred; font-size: 10px">Department</td>
             <td class="text-bold" style="width: 40%; color: indianred; font-size: 10px">Digunakan Untuk</td>
-            <td class="text-bold" style="width: 30%; color: indianred; font-size: 10px">Dibuat Oleh</td>
             <td class="text-bold" style="width: 30%; color: indianred; font-size: 10px">Catatan</td>
         </tr>
         <tr>
+            <td style="font-size: 14px; vertical-align: top">{{ $info->department ?? '-' }}</td>
             <td style="font-size: 14px">{{ $info->info_penggunaan }}</td>
-            <td style="font-size: 14px; vertical-align: top">{{ $info->penginput ?? '-' }}</td>
             <td style="font-size: 14px; vertical-align: top">{{ $info->catatan ?? '-' }}</td>
         </tr>
     </table>
