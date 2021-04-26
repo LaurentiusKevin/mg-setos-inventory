@@ -58,6 +58,32 @@
                 </div>
             </div>
         </div>
+
+        @if(count($catatan) > 0)
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Catatan</strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group mb-3">
+                                @foreach($catatan AS $key => $item)
+                                    <div class="list-group-item">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">{{ $item->penginput }}</h5>
+                                            <small class="text-muted">{{ date('d-m-Y, H:i:s', strtotime($item->created_at)) }}</small>
+                                        </div>
+                                        <p class="mt-1 mb-1">{{ $item->catatan }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="row">
             <div class="col">
                 <div class="card">

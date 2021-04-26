@@ -90,14 +90,20 @@
                 <div class="card-body">
                     <input type="hidden" id="store_requisition_info_id" value="{{ $info->id }}">
                     @if(count($catatan) > 0)
-                        <ol>
+                        <div class="list-group mb-3">
                             @foreach($catatan AS $key => $item)
-                                <li>{{ $item->catatan }}</li>
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ $item->penginput }}</h5>
+                                        <small class="text-muted">{{ date('d-m-Y, H:i:s', strtotime($item->created_at)) }}</small>
+                                    </div>
+                                    <p class="mt-1 mb-1">{{ $item->catatan }}</p>
+                                </div>
                             @endforeach
-                        </ol>
+                        </div>
                     @endif
                     <div class="form-group">
-                        <label for="i_catatan" class="font-weight-bold">Catatan</label>
+                        <label for="i_catatan" class="font-weight-bold">Input Catatan</label>
                         <textarea id="i_catatan" name="info" class="form-control"></textarea>
                     </div>
                 </div>

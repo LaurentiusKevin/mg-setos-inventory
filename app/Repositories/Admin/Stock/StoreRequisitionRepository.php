@@ -178,6 +178,12 @@ class StoreRequisitionRepository
     public function catatan($store_requisition_info_id)
     {
         return DB::table('store_requisition_notes')
+            ->select([
+                'store_requisition_notes.catatan',
+                'store_requisition_notes.created_at',
+                'users.name AS penginput'
+            ])
+            ->join('users','store_requisition_notes.user_id','=','users.id')
             ->where('store_requisition_info_id','=',$store_requisition_info_id)
             ->get();
     }

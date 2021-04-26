@@ -199,6 +199,7 @@ class StoreRequisitionService
     {
         return [
             'info' => $this->repository->storeRequisitionInfo($store_requisition_info_id)->first(),
+            'catatan' => $this->repository->catatan($store_requisition_info_id),
             'department' => $this->repository->department()->get()
         ];
     }
@@ -229,6 +230,18 @@ class StoreRequisitionService
             ])->first();
             $data->verified_at = now();
             $data->save();
+
+            $checkVerification = StoreRequisitionVerification::query()
+                ->where('store_requisition_info_id','=',$store_requisition_info_id)
+                ->whereNull('verified_at')
+                ->get();
+
+            if ($checkVerification->count() == 0) {
+                StoreRequisitionInfo::query()
+                    ->update([
+                        'verified_at' => now()
+                    ]);
+            }
 
             DB::commit();
 
