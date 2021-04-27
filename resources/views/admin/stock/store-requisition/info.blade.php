@@ -48,6 +48,39 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
+                    <strong>Penanda Tangan</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card card-accent-success">
+                                <div class="card-body">
+                                    <h5 class="mb-1">{{ ucfirst($info->penginput) }}</h5>
+                                    <p class="mb-1">Tertanda Tangan Secara Digital</p>
+                                    <p class="mb-1 font-italic">Tanggal: {{ date('d-m-Y, H:i:s',strtotime($info->updated_at)) }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        @foreach($verificator AS $item)
+                            <div class="col">
+                                <div class="card {{ ($item->verified_at == null) ? 'card-accent-warning' : 'card-accent-success' }}">
+                                    <div class="card-body">
+                                        <h5 class="mb-1">{{ ucfirst($item->verificator) }}</h5>
+                                        <p class="mb-1">{{ ($item->verified_at == null) ? ' ' : 'Tertanda Tangan Secara Digital' }}</p>
+                                        <p class="mb-1 font-italic">{{ ($item->verified_at == null) ? ' ' : 'Tanggal: '.date('d-m-Y, H:i:s',strtotime($item->verified_at)) }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
                     <strong>Produk</strong>
                 </div>
                 <div class="card-body">
