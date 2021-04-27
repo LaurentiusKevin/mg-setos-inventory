@@ -15,7 +15,14 @@ class CreateInvoicingInfosTable extends Migration
     {
         Schema::create('invoicing_infos', function (Blueprint $table) {
             $table->id();
+            $table->string('store_requisition_info_id');
+            $table->integer('user_id');
+            $table->string('invoice_number');
+            $table->text('info_penggunaan');
+            $table->integer('total_item');
+            $table->text('catatan')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
