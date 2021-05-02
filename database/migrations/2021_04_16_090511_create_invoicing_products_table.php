@@ -15,7 +15,7 @@ class CreateInvoicingProductsTable extends Migration
     {
         Schema::create('invoicing_products', function (Blueprint $table) {
             $table->id();
-            $table->integer('penggunaan_barang_info_id');
+            $table->integer('invoicing_info_id');
             $table->integer('store_requisition_product_id');
             $table->integer('product_id');
             $table->integer('quantity');

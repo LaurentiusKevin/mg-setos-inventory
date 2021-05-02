@@ -3,6 +3,7 @@
 namespace App\Repositories\Admin\Stock;
 
 use App\Models\StoreRequisitionProducts;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -158,7 +159,7 @@ class StoreRequisitionRepository
             ])->get();
     }
 
-    public function verified($store_requisition_info_id)
+    public function verified($store_requisition_info_id): Collection
     {
         return DB::table('store_requisition_verifications')
             ->select([

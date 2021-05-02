@@ -143,10 +143,10 @@ Route::group(
             ['as' => 'view.'],
             function () {
                 Route::get('/',[InvoicingController::class,'index'])->name('index');
-                Route::get('create',[InvoicingController::class,'indexCreate'])->name('create');
-                Route::get('info/{id}',[InvoicingController::class,'indexInfo'])->name('info');
-                Route::get('edit/{id}',[InvoicingController::class,'indexEdit'])->name('edit');
-                Route::get('verification/{id}',[InvoicingController::class,'indexVerification'])->name('verification');
+                Route::get('detail/{id}',[InvoicingController::class,'indexDetail'])->name('detail');
+                Route::get('process/{id}',[InvoicingController::class,'indexInvoicingProcess'])->name('info');
+//                Route::get('edit/{id}',[InvoicingController::class,'indexEdit'])->name('edit');
+//                Route::get('verification/{id}',[InvoicingController::class,'indexVerification'])->name('verification');
                 Route::get('invoice/{id}',[InvoicingController::class,'indexPdf'])->name('invoice');
             }
         );
@@ -155,13 +155,14 @@ Route::group(
             ['prefix' => 'api', 'as' => 'api.'],
             function () {
                 Route::post('data',[InvoicingController::class,'data'])->name('data');
-                Route::post('po-pending',[InvoicingController::class,'dataPoPending'])->name('po-pending');
-                Route::post('po-pending/products',[InvoicingController::class,'dataPoPendingProducts'])->name('po-pending.products');
-                Route::post('product-list',[InvoicingController::class,'getProductList'])->name('product-list');
-                Route::post('stored-product',[InvoicingController::class,'getStoredProduct'])->name('stored-product');
+                Route::post('products',[InvoicingController::class,'getProducts'])->name('products');
+//                Route::post('po-pending',[InvoicingController::class,'dataPoPending'])->name('po-pending');
+//                Route::post('po-pending/products',[InvoicingController::class,'dataPoPendingProducts'])->name('po-pending.products');
+//                Route::post('product-list',[InvoicingController::class,'getProductList'])->name('product-list');
+//                Route::post('stored-product',[InvoicingController::class,'getStoredProduct'])->name('stored-product');
                 Route::post('store',[InvoicingController::class,'store'])->name('store');
-                Route::post('store-catatan',[InvoicingController::class,'storeCatatan'])->name('store-catatan');
-                Route::post('store-verification',[InvoicingController::class,'storeVerification'])->name('store-verification');
+//                Route::post('store-catatan',[InvoicingController::class,'storeCatatan'])->name('store-catatan');
+//                Route::post('store-verification',[InvoicingController::class,'storeVerification'])->name('store-verification');
                 Route::post('delete',[InvoicingController::class,'delete'])->name('delete');
             }
         );

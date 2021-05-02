@@ -3,6 +3,8 @@
 namespace App\Services\Admin\Stock;
 
 use App\Helpers\CounterHelper;
+use App\Models\InvoicingInfo;
+use App\Models\InvoicingProduct;
 use App\Models\PenggunaanBarangProduct;
 use App\Models\Product;
 use App\Models\ProductTransaction;
@@ -12,6 +14,7 @@ use App\Models\StoreRequisitionProducts;
 use App\Models\StoreRequisitionVerification;
 use App\Repositories\Admin\Stock\StoreRequisitionRepository;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -44,6 +47,11 @@ class StoreRequisitionService
     public function statusVerification($store_requisition_info_id)
     {
         return $this->repository->unVerified($store_requisition_info_id)->count();
+    }
+
+    public function getVerificationInfo($store_requisition_info_id): Collection
+    {
+        return $this->repository->verified($store_requisition_info_id);
     }
 
     public function store($department_id,$product,$info_penggunaan,$catatan)
@@ -195,10 +203,15 @@ class StoreRequisitionService
         }
     }
 
+    public function storeRequisitionInfo($store_requisition_info_id)
+    {
+        return $this->repository->storeRequisitionInfo($store_requisition_info_id)->first();
+    }
+
     public function indexEditData($store_requisition_info_id)
     {
         return [
-            'info' => $this->repository->storeRequisitionInfo($store_requisition_info_id)->first(),
+            'info' => $this->storeRequisitionInfo($store_requisition_info_id),
             'catatan' => $this->repository->catatan($store_requisition_info_id),
             'department' => $this->repository->department()->get()
         ];
@@ -241,6 +254,17 @@ class StoreRequisitionService
                     ->update([
                         'verified_at' => now()
                     ]);
+
+                $sr_info = StoreRequisitionInfo::find($store_requisition_info_id);
+
+                $invoicing_info = new InvoicingInfo();
+                $invoicing_info->store_requisition_info_id = $store_requisition_info_id;
+                $invoicing_info->user_id = $sr_info->user_id;
+                $invoicing_info->info_penggunaan = $sr_info->info_penggunaan;
+                $invoicing_info->total_item = $sr_info->total_item;
+                $invoicing_info->total_price = $sr_info->total_price;
+                $invoicing_info->catatan = $sr_info->catatan;
+                $invoicing_info->save();
             }
 
             DB::commit();
