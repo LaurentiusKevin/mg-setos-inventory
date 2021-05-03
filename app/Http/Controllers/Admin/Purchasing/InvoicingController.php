@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Admin\Purchasing\InvoicingService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use PDF;
 
 class InvoicingController extends Controller
 {
@@ -72,5 +73,33 @@ class InvoicingController extends Controller
     public function indexDetail($id)
     {
         return view('admin.purchasing.invoicing.info',$this->service->indexDetailData($id));
+    }
+
+    public function indexDetailPdf($id)
+    {
+        try {
+            $pdf = PDF::loadView('admin.purchasing.invoicing.details-pdf',$this->service->indexDetailData($id))->setPaper('a4','portrait');
+            return $pdf->stream('invoicing-details.pdf');
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'details' => $th
+            ]);
+        }
+    }
+
+    public function indexSummaryPdf($id)
+    {
+        try {
+            $pdf = PDF::loadView('admin.purchasing.invoicing.summary-pdf',$this->service->indexDetailData($id,true))->setPaper('a4','portrait');
+            return $pdf->stream('invoicing-details.pdf');
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'details' => $th
+            ]);
+        }
     }
 }

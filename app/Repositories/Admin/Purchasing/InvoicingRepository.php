@@ -35,13 +35,15 @@ class InvoicingRepository
             ->leftJoin(DB::raw('users u'),'ii.user_id','=','u.id')
             ->leftJoin(DB::raw('users u2'),'sri.user_id','=','u2.id');
 
-        if ($f_status_selesai == 0) {
-            $data->whereNull('ii.completed_at');
-        } else {
-            $data->whereNotNull('ii.completed_at');
+        if ($f_status_selesai !== null) {
+            if ($f_status_selesai == 0) {
+                $data->whereNull('ii.completed_at');
+            } else {
+                $data->whereNotNull('ii.completed_at');
+            }
         }
 
-        if ($id !== null) $data->where('id','=',$id);
+        if ($id !== null) $data->where('ii.id','=',$id);
 
         return $data;
     }

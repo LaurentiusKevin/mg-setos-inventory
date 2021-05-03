@@ -100,11 +100,12 @@ class InvoicingService
         }
     }
 
-    public function indexDetailData($invoicing_info_id)
+    public function indexDetailData($invoicing_info_id, $group = false)
     {
+//        dd($this->repository->invoicingInfo(null,$invoicing_info_id)->first());
         return [
-            'info' => InvoicingInfo::find($invoicing_info_id),
-            'product' => $this->getInvoicingProducts($invoicing_info_id, false)
+            'info' => $this->repository->invoicingInfo(null,$invoicing_info_id)->first(),
+            'product' => $this->getInvoicingProducts($invoicing_info_id, $group)
         ];
     }
 }

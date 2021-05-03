@@ -19,6 +19,9 @@
                 </div>
                 <div class="card-body">
                     <dl class="row">
+                        <dt class="col-sm-2">Nomor Invoice</dt>
+                        <dd class="col-sm-10 font-weight-bold">{{ $info->invoice_number_invoicing }}</dd>
+
                         <dt class="col-sm-2">Info Penggunaan</dt>
                         <dd class="col-sm-10">{{ $info->info_penggunaan }}</dd>
 
@@ -27,14 +30,28 @@
                     </dl>
                 </div>
                 <div class="card-footer">
-                    <div class="row justify-content-between">
-                        <div class="col-sm-12 col-md-4 col-lg-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="p-2 bd-highlight">
                             <a href="{{ route('admin.purchasing.invoicing.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>
                         </div>
-                        <div class="col-sm-12 col-md-3 col-lg-2">
-                            <a href="{{ route('admin.purchasing.invoicing.view.invoice',[$info->id]) }}" target="_blank" class="btn btn-outline-primary btn-block"><i class="fas fa-file-pdf mr-2"></i> PDF</a>
+                        <div class="p-2 bd-highlight">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a href="{{ route('admin.purchasing.invoicing.view.invoice-details',[$info->id]) }}" target="_blank" class="btn btn-outline-primary"><i class="fas fa-file-pdf mr-2"></i> Detail</a>
+                                <a href="{{ route('admin.purchasing.invoicing.view.invoice-summary',[$info->id]) }}" target="_blank" class="btn btn-outline-primary"><i class="fas fa-file-pdf mr-2"></i> Summary</a>
+                            </div>
                         </div>
                     </div>
+{{--                    <div class="row justify-content-between">--}}
+{{--                        <div class="col-sm-12 col-md-4 col-lg-2">--}}
+{{--                            <a href="{{ route('admin.purchasing.invoicing.view.index') }}" class="btn btn-block btn-outline-primary"><i class="fas fa-arrow-left mr-2"></i>Kembali</a>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-sm-12 col-md-3 col-lg-2">--}}
+{{--                            <div class="btn-group" role="group" aria-label="Basic example">--}}
+{{--                                <a href="{{ route('admin.purchasing.invoicing.view.invoice',[$info->id]) }}" target="_blank" class="btn btn-outline-primary btn-block"><i class="fas fa-file-pdf mr-2"></i> Details</a>--}}
+{{--                                <a href="{{ route('admin.purchasing.invoicing.view.invoice',[$info->id]) }}" target="_blank" class="btn btn-outline-primary btn-block"><i class="fas fa-file-pdf mr-2"></i> Summary</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </div>

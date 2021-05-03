@@ -147,7 +147,8 @@ Route::group(
                 Route::get('process/{id}',[InvoicingController::class,'indexInvoicingProcess'])->name('info');
 //                Route::get('edit/{id}',[InvoicingController::class,'indexEdit'])->name('edit');
 //                Route::get('verification/{id}',[InvoicingController::class,'indexVerification'])->name('verification');
-                Route::get('invoice/{id}',[InvoicingController::class,'indexPdf'])->name('invoice');
+                Route::get('invoice/details/{id}',[InvoicingController::class,'indexDetailPdf'])->name('invoice-details');
+                Route::get('invoice/summary/{id}',[InvoicingController::class,'indexSummaryPdf'])->name('invoice-summary');
             }
         );
 
