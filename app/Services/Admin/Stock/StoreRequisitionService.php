@@ -82,7 +82,6 @@ class StoreRequisitionService
 
                 $info = new StoreRequisitionInfo();
                 $info->user_id = Auth::id();
-//                $info->invoice_number = CounterHelper::getNewCode('SR');
                 $info->invoice_number = $invoice_number;
                 $info->department_id = $department_id;
                 $info->info_penggunaan = $info_penggunaan;
