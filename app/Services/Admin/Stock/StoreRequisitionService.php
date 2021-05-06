@@ -21,10 +21,12 @@ use Illuminate\Support\Facades\DB;
 class StoreRequisitionService
 {
     private $repository;
+    private $counter;
 
-    public function __construct(StoreRequisitionRepository $repository)
+    public function __construct(StoreRequisitionRepository $repository, CounterHelper $counter)
     {
         $this->repository = $repository;
+        $this->counter = $counter;
     }
 
     public function indexData()
@@ -76,10 +78,12 @@ class StoreRequisitionService
             } else {
                 DB::beginTransaction();
 
-                $invoice_number = CounterHelper::getNewCode('SR');
+                $invoice_number = $this->counter->newCode('SR');
 
                 $info = new StoreRequisitionInfo();
                 $info->user_id = Auth::id();
+//                $info->invoice_number = CounterHelper::getNewCode('SR');
+                $info->invoice_number = $invoice_number;
                 $info->department_id = $department_id;
                 $info->info_penggunaan = $info_penggunaan;
                 $info->total_price = $total_price;

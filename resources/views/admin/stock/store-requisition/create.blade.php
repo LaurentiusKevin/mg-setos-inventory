@@ -178,6 +178,7 @@
         let list_penggunaan_counter = 0;
         const list_penggunaan_produk = $('#list_penggunaan_produk').DataTable({
             scrollX: true,
+            ordering: false,
             columns: [
                 {data: 'code', width: '5%', className: "align-middle font-weight-bold text-nowrap"},
                 {data: 'name', className: "align-middle font-weight-bold"},
@@ -198,13 +199,13 @@
                 {
                     targets: 3,
                     render: (data, type, row, meta) => {
-                        return 'Rp '+numeral(data).format('0,0');
+                        return `<div class="d-flex justify-content-between"><div class="p-2 bd-highlight">Rp </div><div class="p-2 bd-highlight">${numeral(data).format('0,0')}</div></div>`;
                     }
                 },
                 {
                     targets: 4,
                     render: (data, type, row, meta) => {
-                        return 'Rp '+numeral(data).format('0,0');
+                        return `<div class="d-flex justify-content-between"><div class="p-2 bd-highlight">Rp </div><div class="p-2 bd-highlight">${numeral(data).format('0,0')}</div></div>`;
                     }
                 },
                 {
