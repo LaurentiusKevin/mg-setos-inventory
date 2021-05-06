@@ -71,7 +71,7 @@
             method: 'post'
         },
         columns: [
-            {data: 'invoice_number', name: 'purchase_order_infos.invoice_number', className: 'align-middle'},
+            {data: 'invoice_number', name: 'purchase_order_infos.invoice_number', className: 'align-middle font-weight-bold'},
             {data: 'supplier_name', name: 'suppliers.name', className: 'align-middle'},
             {data: 'total_price', name: 'purchase_order_infos.total_price', className: 'align-middle'},
             {data: 'created_at', name: 'purchase_order_infos.created_at', className: 'align-middle'},
@@ -82,7 +82,7 @@
             {
                 targets: 2,
                 render: (data, type, row, meta) => {
-                    return "Rp "+numeral(data).format('0,0');
+                    return `<div class="d-flex justify-content-between"><div class="p-2 bd-highlight">Rp </div><div class="p-2 bd-highlight">${numeral(data).format('0,0')}</div></div>`
                 }
             },
             {

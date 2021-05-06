@@ -37,7 +37,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card-group">
-                <div class="card p-4">
+                <div class="card p-4 text-white" style="background-color: #6C3D94">
                     <div class="card-body">
                         <h1>Login</h1>
                         <p class="text-muted">Sign In to your account</p>
@@ -63,24 +63,27 @@
 {{--                                <input type="checkbox" class="custom-control-input" id="lihatPassword">--}}
 {{--                                <label class="custom-control-label" for="lihatPassword">Lihat Password</label>--}}
 {{--                            </div>--}}
-
-                            <div class="row justify-content-end mt-5">
-                                <div class="col-6 text-right">
-                                    <button class="btn btn-primary px-4" type="submit">Login</button>
+                            <div class="d-flex flex-row-reverse bd-highlight">
+                                <div class="p-2 bd-highlight">
+                                    <button class="btn btn-outline-light px-4" type="submit" id="btn-submit">Login</button>
                                 </div>
                             </div>
+
+{{--                            <div class="row justify-content-end mt-5">--}}
+{{--                                <div class="col-6 text-right">--}}
+{{--                                    <button class="btn btn-primary px-4" type="submit" id="btn-submit">Login</button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </form>
                     </div>
                 </div>
-{{--                <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">--}}
-{{--                    <div class="card-body text-center">--}}
-{{--                        <div>--}}
-{{--                            <h2>Sign up</h2>--}}
-{{--                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>--}}
-{{--                            <button class="btn btn-lg btn-outline-light mt-3" type="button">Register Now!</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                <div class="card text-white bg-white py-5 d-md-down-none" style="width:44%">
+                    <div class="d-flex align-content-center flex-wrap" style="height: 100%">
+                        <div class="p-2 bd-highlight">
+                            <img class="img-fluid" alt="logo" src="{{ asset('icons/logo-mg-setos-hotel.png') }}" style="top: 50%">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -105,17 +108,28 @@
     })
 
     const Loader = {
-        button: function (btn, classData, text = null) {
+        button: function (btnSelector, classData, text = null) {
+            let btn = document.querySelector(btnSelector);
+
             if (text !== null) {
-                btn.html(text);
+                btn.innerHTML = text;
             }
 
-            if (btn.hasClass(classData)) {
-                btn.removeClass(classData);
-                btn.prop("disabled", false);
+            let nodes = () => {
+                let li = document.createElement('span');
+                li.id = 'btn-loader';
+                li.className = classData;
+                li.setAttribute('role','status');
+                li.setAttribute('aria-hidden','true');
+                return li;
+            };
+
+            if (document.getElementById('btn-loader')) {
+                document.getElementById('btn-loader').remove();
+                btn.removeAttribute('disabled')
             } else {
-                btn.addClass(classData);
-                btn.prop("disabled", true);
+                btn.prepend(nodes());
+                btn.setAttribute('disabled',true)
             }
         },
         label: function (label, classData) {
@@ -132,7 +146,7 @@
 
     document.getElementById('formData').addEventListener('submit', event => {
         event.preventDefault();
-        Loader.button($(event.target), 'spinner spinner-white spinner-left');
+        Loader.button('#btn-submit', 'spinner-border spinner-border-sm mr-2');
 
         axios
             .post('{{ route('admin.api.submit') }}', {
@@ -140,7 +154,7 @@
                 password: passwordVal()
             })
             .then(function (response) {
-                Loader.button($(event.target), 'spinner spinner-white spinner-left');
+                Loader.button('#btn-submit', 'spinner-border spinner-border-sm mr-2');
                 if (response.data.status === 'success') {
                     location.reload();
                 } else {
@@ -152,7 +166,7 @@
                 }
             })
             .catch(function (error) {
-                Loader.button($(event.target), 'spinner spinner-white spinner-left');
+                Loader.button('#btn-submit', 'spinner-border spinner-border-sm mr-2');
                 Swal.fire({
                     icon: 'warning',
                     title: 'Gagal Login'

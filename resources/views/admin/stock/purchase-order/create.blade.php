@@ -90,7 +90,7 @@
                             <thead>
                             <tr>
                                 <th>Produk</th>
-                                <th>Satuan</th>
+                                <th>Stock</th>
                                 <th>Last Price</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
@@ -206,8 +206,8 @@
             scrollX: true,
             columns: [
                 {data: 'name', className: "align-middle font-weight-bold"},
-                {data: 'satuan'},
-                {data: 'last_price', width: '15%'},
+                {data: 'stock', className: "align-middle text-right"},
+                {data: 'last_price', width: '15%', className: "align-middle text-right"},
                 {data: null, width: '15%'},
                 {data: null, width: '15%'},
                 {data: null, width: '15%'},
@@ -217,13 +217,13 @@
                 {
                     targets: 1,
                     render: (data, type, row, meta) => {
-                        return data.nama;
+                        return data + ' ' + row.satuan;
                     }
                 },
                 {
                     targets: 2,
                     render: (data, type, row, meta) => {
-                        return `<input type="text" class="form-control text-right text-white border-primary font-weight-bold bg-gradient-primary" value="${numeral(data).format('0,0')}" readonly>`;
+                        return `<div class="d-flex justify-content-between"><div class="p-2 bd-highlight">Rp </div><div class="p-2 bd-highlight">${numeral(data).format('0,0')}</div></div>`;
                     }
                 },
                 {
@@ -373,13 +373,7 @@
 
             t_list_product_tbody.on('click','button.action-add-product', function (event) {
                 let data = t_list_product_data($(event.target).parents('tr'));
-                list_po_produk.row.add( {
-                    id: data.id,
-                    name: data.name,
-                    satuan: data.satuan,
-                    quantity: '',
-                    last_price: data.last_price,
-                } ).draw();
+                list_po_produk.row.add( data ).draw();
                 listProductModal.modal('hide')
             });
 

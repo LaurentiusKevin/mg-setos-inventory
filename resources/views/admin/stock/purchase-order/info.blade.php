@@ -100,7 +100,9 @@
                             <tr>
                                 <td>{{ $item->product->name }}</td>
                                 <td class="text-right">{{ number_format($item->quantity,0,',','.').' '.$item->product->satuan->nama }}</td>
-                                <td class="text-right">{{ number_format($item->price,0,',','.') }}</td>
+                                <td class="text-right">
+                                    <div class="d-flex justify-content-between"><div class="p-2 bd-highlight">Rp </div><div class="p-2 bd-highlight">{{ number_format($item->price,0,',','.') }}</div></div>
+                                </td>
                                 <td class="text-right">{{ number_format($item->total_price,0,',','.') }}</td>
                             </tr>
                         @endforeach

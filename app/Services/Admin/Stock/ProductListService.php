@@ -20,9 +20,9 @@ class ProductListService
         $this->repository = $repository;
     }
 
-    public function data()
+    public function data($id = null, $idNotIn = null)
     {
-        return $this->repository->data();
+        return $this->repository->data($id,$idNotIn);
     }
 
     public function indexCreateData()

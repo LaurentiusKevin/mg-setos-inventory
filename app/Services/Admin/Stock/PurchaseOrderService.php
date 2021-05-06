@@ -14,15 +14,22 @@ use Illuminate\Support\Facades\Storage;
 class PurchaseOrderService
 {
     private $repository;
+    private $products;
 
-    public function __construct(PurchaseOrderRepository $repository)
+    public function __construct(PurchaseOrderRepository $repository, ProductListService $products)
     {
         $this->repository = $repository;
+        $this->products = $products;
     }
 
     public function data()
     {
         return $this->repository->purchaseOrderInfo();
+    }
+
+    public function getProduct($idNotIn = null)
+    {
+        return $this->products->data(null,$idNotIn);
     }
 
     public function indexCreateData()

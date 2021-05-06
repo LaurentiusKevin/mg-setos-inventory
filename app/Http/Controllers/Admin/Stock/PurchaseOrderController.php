@@ -51,30 +51,31 @@ class PurchaseOrderController extends Controller
     {
         $selected_product = $request->selected_product_id ?? [];
 
-        $data = Product::with('satuan')
-            ->whereNotIn('id',$selected_product);
+//        $data = Product::with('satuan')
+//            ->whereNotIn('id',$selected_product);
 
-        $data = DB::table('products')
-            ->select([
-                'products.id',
-                'products.satuan_id',
-                'products.department_id',
-                'products.code',
-                'products.name',
-                'products.stock',
-                'satuans.nama AS satuan',
-                'products.supplier_price',
-                'products.last_price',
-                'products.avg_price',
-                'products.image',
-                'products.created_at',
-                'products.updated_at',
-                'products.deleted_at',
-            ])
-            ->leftJoin('satuans','products.satuan_id','=','satuans.id');
+//        $data = DB::table('products')
+//            ->select([
+//                'products.id',
+//                'products.satuan_id',
+//                'products.department_id',
+//                'products.code',
+//                'products.name',
+//                'products.stock',
+//                'satuans.nama AS satuan',
+//                'products.supplier_price',
+//                'products.last_price',
+//                'products.avg_price',
+//                'products.image',
+//                'products.created_at',
+//                'products.updated_at',
+//                'products.deleted_at',
+//            ])
+//            ->leftJoin('satuans','products.satuan_id','=','satuans.id')
+//            ->whereNotIn('id',$selected_product);
 
         try {
-            return DataTables::of($data)
+            return DataTables::of($this->service->getProduct($selected_product))
                 ->make(true);
         } catch (\Throwable $th) {
             return response()->json([
