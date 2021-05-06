@@ -1,11 +1,11 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand d-lg-down-none">
-{{--        <svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">--}}
-{{--            <use xlink:href="assets/brand/coreui.svg#full"></use>--}}
-{{--        </svg>--}}
-{{--        <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">--}}
-{{--            <use xlink:href="assets/brand/coreui.svg#signet"></use>--}}
-{{--        </svg>--}}
+        <div class="c-sidebar-brand-full">
+            <img class="img-fluid" src="{{ asset('icons/logo-mg-setos-hotel.webp') }}" alt="logo-mg-setos" style="width: 118px">
+        </div>
+        <div class="c-sidebar-brand-minimized">
+            <img class="img-fluid" src="{{ asset('icons/logo-mg-setos-hotel.webp') }}" alt="logo-mg-setos" style="width: 46px">
+        </div>
     </div>
     <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item">
