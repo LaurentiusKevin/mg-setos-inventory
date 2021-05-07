@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <td class="invoice-number" style="height: 1cm">
-                <span class="text-bold" style="font-size: 10px; color: indianred;">Nomor</span>
+                <span class="text-bold text-setos" style="font-size: 10px;">Nomor</span>
                 <br>{{ $info->invoice_number }}
             </td>
         </tr>
@@ -53,9 +53,9 @@
 <main>
     <table style="width: 100%">
         <tr>
-            <td class="text-bold" style="width: 30%; color: indianred; font-size: 10px">Department</td>
-            <td class="text-bold" style="width: 40%; color: indianred; font-size: 10px">Digunakan Untuk</td>
-            <td class="text-bold" style="width: 30%; color: indianred; font-size: 10px">Catatan</td>
+            <td class="text-bold text-setos" style="width: 30%; font-size: 10px">Department</td>
+            <td class="text-bold text-setos" style="width: 40%; font-size: 10px">Digunakan Untuk</td>
+            <td class="text-bold text-setos" style="width: 30%; font-size: 10px">Catatan</td>
         </tr>
         <tr>
             <td style="font-size: 14px; vertical-align: top">{{ $info->department ?? '-' }}</td>
@@ -67,11 +67,11 @@
     <table class="table-transaksi">
         <thead style="background-color: indianred; color: white">
         <tr class="text-center">
-            <th class="text-center" style="width: 8%">No</th>
-            <th style="width: 40%">Produk</th>
-            <th style="width: 20%">Quantity</th>
-            <th style="width: 20%">Harga</th>
-            <th style="width: 20%">Total</th>
+            <th class="bg-setos text-center" style="width: 8%">No</th>
+            <th class="bg-setos" style="width: 40%">Produk</th>
+            <th class="bg-setos" style="width: 20%">Quantity</th>
+            <th class="bg-setos" style="width: 20%">Harga</th>
+            <th class="bg-setos" style="width: 20%">Total</th>
         </tr>
         </thead>
         <tbody>

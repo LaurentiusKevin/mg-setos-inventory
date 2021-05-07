@@ -30,7 +30,7 @@ body {
 /** Define the footer rules **/
 footer {
     position: fixed;
-    bottom: .5cm;
+    bottom: 2cm;
 
     /** Extra personal styles **/
     /*background-color: #03a9f4;*/
@@ -44,7 +44,7 @@ footer {
 }
 
 hr {
-    border: 2px solid indianred;
+    border: 2px solid #6C3D94;
 }
 
 .logo {
@@ -62,9 +62,17 @@ header td, header th {
     text-align: center;
 }
 
+.bg-setos {
+    background-color: #6C3D94;
+}
+
+.text-setos {
+    color: #6C3D94;
+}
+
 .header-brt {
     height: 1cm;
-    background-color: indianred;
+    background-color: #6C3D94;
     color: white;
     font-size: 15px;
     font-weight: bold;
