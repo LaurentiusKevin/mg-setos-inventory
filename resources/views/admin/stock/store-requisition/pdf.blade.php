@@ -11,7 +11,7 @@
             <td class="header-brt" style="width: 30%">STORE REQUISITION</td>
             <td style="width: 20%"></td>
             <td rowspan="2" style="width: 50%">
-                <img src="{{ public_path('icons/picture.svg') }}" class="logo" alt="Logo">
+                <img src="{{ public_path('icons/logo-mg-setos-hotel.png') }}" class="logo" alt="Logo" style="width: 60%">
             </td>
         </tr>
         <tr>
@@ -24,7 +24,7 @@
     <hr>
 </header>
 
-<footer>
+<footer-tdd>
     <table style="width: 100%">
         <tr>
             <td style="width: 40%">
@@ -48,7 +48,7 @@
             <td>Dicetak oleh {{ auth()->user()->name }} ({{ date('d F Y - H:i:s') }})</td>
         </tr>
     </table>
-</footer>
+</footer-tdd>
 
 <main>
     <table style="width: 100%">
@@ -65,13 +65,13 @@
     </table>
     <hr>
     <table class="table-transaksi">
-        <thead style="background-color: indianred; color: white">
+        <thead>
         <tr class="text-center">
-            <th class="bg-setos text-center" style="width: 8%">No</th>
-            <th class="bg-setos" style="width: 40%">Produk</th>
-            <th class="bg-setos" style="width: 20%">Quantity</th>
-            <th class="bg-setos" style="width: 20%">Harga</th>
-            <th class="bg-setos" style="width: 20%">Total</th>
+            <th class="bg-setos" style="color: white; width: 8%">No</th>
+            <th class="bg-setos" style="color: white; width: 40%">Produk</th>
+            <th class="bg-setos" style="color: white; width: 20%">Quantity</th>
+            <th class="bg-setos" style="color: white; width: 20%">Harga (Rp)</th>
+            <th class="bg-setos" style="color: white; width: 20%">Total (Rp)</th>
         </tr>
         </thead>
         <tbody>

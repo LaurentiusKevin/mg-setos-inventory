@@ -12,7 +12,7 @@ can be of the full height and width !
 header {
     position: fixed;
     width: 100%;
-    height: 3.3cm;
+    height: 2.5cm;
 
     /** Extra personal styles **/
     /*background-color: #03a9f4;*/
@@ -22,7 +22,7 @@ header {
 
 /** Define now the real margins of every page in the PDF **/
 body {
-    margin-top: 3.5cm;
+    margin-top: 3cm;
     margin-bottom: 1cm;
     /*background-color: #0c5460;*/
 }
@@ -30,7 +30,17 @@ body {
 /** Define the footer rules **/
 footer {
     position: fixed;
-    bottom: 2cm;
+    bottom: 1cm;
+
+    /** Extra personal styles **/
+    /*background-color: #03a9f4;*/
+    color: black;
+    text-align: center;
+    font-size: 10px;
+}
+footer-tdd {
+    position: fixed;
+    bottom: 3cm;
 
     /** Extra personal styles **/
     /*background-color: #03a9f4;*/
@@ -44,7 +54,7 @@ footer {
 }
 
 hr {
-    border: 2px solid #6C3D94;
+    border: 1px solid #6C3D94;
 }
 
 .logo {

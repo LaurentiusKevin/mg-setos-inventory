@@ -11,12 +11,12 @@
             <td class="header-brt" style="width: 30%">PURCHASE ORDER</td>
             <td style="width: 20%"></td>
             <td rowspan="2" style="width: 50%">
-                <img src="{{ public_path('icons/picture.svg') }}" class="logo" alt="Logo">
+                <img src="{{ public_path('icons/logo-mg-setos-hotel.png') }}" class="logo" alt="Logo" style="width: 60%">
             </td>
         </tr>
         <tr>
             <td class="invoice-number" style="height: 1cm">
-                NOMOR
+                <span class="text-bold text-setos" style="font-size: 10px;">Nomor</span>
                 <br>{{ $data->invoice_number }}
             </td>
         </tr>
@@ -35,9 +35,9 @@
 <main>
     <table style="width: 100%">
         <tr>
-            <td class="text-bold" style="width: 40%; color: indianred; font-size: 14px">Supplier</td>
-            <td class="text-bold" style="width: 20%; color: indianred; font-size: 14px"></td>
-            <td class="text-bold" style="width: 40%; color: indianred; font-size: 14px">Catatan</td>
+            <td class="text-bold text-setos" style="width: 40%; font-size: 10px">Supplier</td>
+            <td class="text-bold text-setos" style="width: 20%; font-size: 10px"></td>
+            <td class="text-bold text-setos" style="width: 40%; font-size: 10px">Catatan</td>
         </tr>
         <tr>
             <td>
@@ -51,13 +51,13 @@
     </table>
     <hr>
     <table class="table-transaksi">
-        <thead style="background-color: indianred; color: white">
+        <thead class="bg-setos" style="color: white">
         <tr class="text-center">
-            <th class="text-center" style="width: 8%">No</th>
+            <th style="width: 8%">No</th>
             <th style="width: 40%">Produk</th>
             <th style="width: 20%">Qty</th>
-            <th style="width: 20%">Price</th>
-            <th style="width: 20%">Amount</th>
+            <th style="width: 20%">Price (Rp)</th>
+            <th style="width: 20%">Amount (Rp)</th>
         </tr>
         </thead>
         <tbody>
@@ -70,8 +70,8 @@
                 <td class="text-right">{{ number_format($item->total_price,0,',','.') }}</td>
             </tr>
         @endforeach
-        <tr style="background-color: indianred; color: white">
-            <th class="text-center" colspan="4">Total</th>
+        <tr>
+            <th class="text-right" colspan="4">Total</th>
             <th class="text-right">{{ number_format($data->total_price,0,',','.') }}</th>
         </tr>
         </tbody>
