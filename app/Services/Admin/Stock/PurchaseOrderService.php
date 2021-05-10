@@ -9,6 +9,7 @@ use App\Models\PurchaseOrderProduct;
 use App\Models\Supplier;
 use App\Repositories\Admin\Stock\PurchaseOrderRepository;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class PurchaseOrderService
@@ -119,25 +120,32 @@ class PurchaseOrderService
 
     public function indexEditData($id)
     {
-        $data = PurchaseOrderInfo::with(
-            [
-                'supplier',
-                'products' => function($query)
-                {
-                    $query->with([
-                        'product' => function ($querySatuan) {
-                            $querySatuan->with('satuan');
-                        },
-                    ]);
-                },
-            ])
-            ->withSum('products','quantity')
-            ->where('id','=',$id)
-            ->first();
-        return [
-            'data' => $data,
-            'invoice_number' => $data->invoice_number
-        ];
+        try {
+            $data = PurchaseOrderInfo::with(
+                [
+                    'supplier',
+                    'products' => function($query)
+                    {
+                        $query->with([
+                            'product' => function ($querySatuan) {
+                                $querySatuan->with('satuan');
+                            },
+                        ]);
+                    },
+                ])
+                ->withSum('products','quantity')
+                ->where('id','=',$id)
+                ->first();
+            return [
+                'data' => $data,
+                'invoice_number' => $data->invoice_number
+            ];
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage()
+            ]);
+        }
     }
 
     public function deleteData($id)

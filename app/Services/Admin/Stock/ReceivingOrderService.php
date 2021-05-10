@@ -60,6 +60,7 @@ class ReceivingOrderService
 
     public function storeData($purchase_order_info_id,$product,$catatan)
     {
+//        dd($purchase_order_info_id,$product,$catatan);
         $invoiceNumber = CounterHelper::getNewCode('RCV');
         $total_received_item = 0;
         $total_price = 0;

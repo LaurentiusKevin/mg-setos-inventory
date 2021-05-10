@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class ProductListRepository
 {
-    public function data($id = null, $idNotIn = null)
+    public function data($id = null, $idNotIn = [])
     {
-        $department_id = Auth::user()->department_id;
+        if ($idNotIn == null) $idNotIn = [];
+//        $department_id = Auth::user()->department_id;
         $data = DB::table('products')
             ->select([
                 'products.id',
@@ -32,9 +33,9 @@ class ProductListRepository
             ->leftJoin('satuans','products.satuan_id','=','satuans.id')
             ->whereNull('products.deleted_at');
 
-        if ($department_id !== null) $data->where('department_id','=',$department_id);
+//        if ($department_id !== null) $data->where('department_id','=',$department_id);
 
-        if ($idNotIn !== null) $data->whereNotIn('products.id',$idNotIn);
+        if (count($idNotIn) > 0) $data->whereNotIn('products.id',$idNotIn);
 
         return $id == null ? $data : $data->where('id','=',$id);
     }

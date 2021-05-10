@@ -110,7 +110,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="i_info">Catatan Pemesanan</label>
+                        <label for="i_info">Catatan Receiving</label>
                         <textarea id="i_info" name="info" class="form-control"></textarea>
                     </div>
                 </div>
@@ -223,6 +223,7 @@
         let list_po_counter = -1;
         const list_po_produk = $('#list_po_produk').DataTable({
             scrollX: true,
+            ordering: false,
             columns: [
                 {data: 'product', className: "align-middle font-weight-bold"},
                 {data: 'product'},

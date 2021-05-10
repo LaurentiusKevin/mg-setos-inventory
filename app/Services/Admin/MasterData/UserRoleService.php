@@ -126,46 +126,26 @@ class UserRoleService
 //                ->get()->toArray();
 
             $list_menu = DB::select("
-                WITH menu AS (
-                    SELECT sys_menu_group_id,
-                           id AS sys_menus_id,
-                           name,
-                           segment_name,
-                           url,
-                           ord
-                    FROM sys_menus
-                    WHERE is_private = 0 AND sys_menu_group_id = ?
-                    ORDER BY ord
-                )
-                , role AS (
-                    SELECT rm.id AS role_menu_id,
-                           roles_id,
-                           sys_menus_id,
-                           r.name AS role_name,
-                           view,
-                           `create`,
-                           edit,
-                           `delete`
-                    FROM role_menus rm
-                        JOIN roles r on rm.roles_id = r.id
-                        WHERE roles_id = ?
-                )
-                SELECT sys_menu_group_id,
-                       menu.sys_menus_id,
-                       roles_id,
-                       role_menu_id,
-                       name,
-                       role_name,
-                       segment_name,
-                       url,
-                       ord,
-                       view,
-                       `create`,
-                       edit,
-                       `delete`
-                FROM menu
-                    LEFT JOIN role ON menu.sys_menus_id = role.sys_menus_id
-            ",[$item->id,$id]);
+                SELECT sys_menus.id AS sys_menus_id,
+                       rm.id AS role_menu_id,
+                       r.id AS roles_id,
+                       sys_menus.sys_menu_group_id,
+                       r.name AS role_name,
+                       sys_menus.name,
+                       sys_menus.segment_name,
+                       sys_menus.url,
+                       sys_menus.ord,
+                       rm.view,
+                       rm.`create`,
+                       rm.edit,
+                       rm.`delete`
+                FROM sys_menus
+                    LEFT JOIN role_menus rm on sys_menus.id = rm.sys_menus_id AND rm.roles_id = ?
+                    LEFT JOIN roles r on rm.roles_id = r.id
+                WHERE is_private = 0
+                  AND sys_menu_group_id = ?
+                ORDER BY ord
+            ",[$id,$item->id]);
 
             $menu[$item->id] = [
                 'name' => $item->name,

@@ -43,7 +43,10 @@ class ProductListController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-                'details' => $th
+                'details' => [
+                    $th->getFile(),
+                    $th->getLine()
+                ]
             ],500);
         }
     }

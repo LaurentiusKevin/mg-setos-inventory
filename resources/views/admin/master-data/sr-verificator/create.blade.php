@@ -23,10 +23,10 @@
                 method: 'post'
             },
             columns: [
-                {data: 'name', className: 'align-middle'},
-                {data: 'department', className: 'align-middle'},
-                {data: 'email', className: 'align-middle', width: '15%'},
-                {data: 'action', width: '5%'},
+                {data: 'name', name: 'users.name', className: 'align-middle'},
+                {data: 'department', name: 'departments.name', className: 'align-middle'},
+                {data: 'email', name: 'users.email', className: 'align-middle', width: '15%'},
+                {data: 'action', searchable: false, width: '5%'},
             ]
         });
 

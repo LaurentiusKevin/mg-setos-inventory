@@ -75,6 +75,9 @@
                                             <small class="text-muted">{{ date('d-m-Y, H:i:s', strtotime($item->created_at)) }}</small>
                                         </div>
                                         <p class="mt-1 mb-1">{{ $item->catatan }}</p>
+                                        @if(auth()->user()->id == $info->user_id)
+                                            <button class="btn btn-success"><i class="fas fa-check"></i></button>
+                                        @endif
                                     </div>
                                 @endforeach
                             </div>

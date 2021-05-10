@@ -8,8 +8,10 @@ use App\Models\PurchaseOrderInfo;
 use App\Services\Admin\Stock\PurchaseOrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 use PDF;
+use function Sentry\captureException;
 
 class PurchaseOrderController extends Controller
 {
@@ -51,29 +53,6 @@ class PurchaseOrderController extends Controller
     {
         $selected_product = $request->selected_product_id ?? [];
 
-//        $data = Product::with('satuan')
-//            ->whereNotIn('id',$selected_product);
-
-//        $data = DB::table('products')
-//            ->select([
-//                'products.id',
-//                'products.satuan_id',
-//                'products.department_id',
-//                'products.code',
-//                'products.name',
-//                'products.stock',
-//                'satuans.nama AS satuan',
-//                'products.supplier_price',
-//                'products.last_price',
-//                'products.avg_price',
-//                'products.image',
-//                'products.created_at',
-//                'products.updated_at',
-//                'products.deleted_at',
-//            ])
-//            ->leftJoin('satuans','products.satuan_id','=','satuans.id')
-//            ->whereNotIn('id',$selected_product);
-
         try {
             return DataTables::of($this->service->getProduct($selected_product))
                 ->make(true);
@@ -111,7 +90,7 @@ class PurchaseOrderController extends Controller
             $data = $this->service->indexEditData($id);
             $no_invoice = str_replace('/','-',$data['invoice_number']);
 
-            $pdf = PDF::loadView('admin.stock.purchase-order.pdf',$data)->setPaper('a4','portrait');
+            $pdf = PDF::loadView('admin.stock.purchase-order.pdfs',$data)->setPaper('a4','portrait');
             return $pdf->stream("purchase_order_{$no_invoice}.pdf");
         } catch (\Throwable $th) {
             return response()->json([
