@@ -11,8 +11,8 @@
         <i class="fas fa-bars c-icon c-icon-lg"></i>
     </button>
     <ul class="c-header-nav d-md-down-none">
-        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Dashboard</a></li>
-        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Profile</a></li>
+        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="{{ route('admin.view.index') }}">Dashboard</a></li>
+        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="{{ route('admin.profile.view.index') }}">Profile</a></li>
     </ul>
     <ul class="c-header-nav ml-auto mr-4">
 {{--            <li class="c-header-nav-item d-md-down-none mx-2">--}}
@@ -39,7 +39,7 @@
             <div class="dropdown-menu dropdown-menu-right pt-0">
                 <div class="dropdown-header bg-info py-2"><strong class="text-white">{{ auth()->user()['name'] }}</strong></div>
                 <div class="dropdown-header bg-light py-2"><strong>Settings</strong></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ route('admin.profile.view.index') }}">
                     <i class="fas fa-user c-icon mr-2"></i>
                     Profile
                 </a>

@@ -149,6 +149,7 @@
       <path value="$PROJECT_DIR$/vendor/nyholm/psr7" />
       <path value="$PROJECT_DIR$/vendor/sentry/sentry" />
       <path value="$PROJECT_DIR$/vendor/sentry/sentry-laravel" />
+      <path value="$PROJECT_DIR$/vendor/laravel-notification-channels/telegram" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

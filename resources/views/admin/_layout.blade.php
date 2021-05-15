@@ -91,17 +91,28 @@
     })
 
     const Loader = {
-        button: function (btn, classData, text = null) {
+        button: function (btnSelector, classData, text = null) {
+            let btn = document.querySelector(btnSelector);
+
             if (text !== null) {
-                btn.html(text);
+                btn.innerHTML = text;
             }
 
-            if (btn.hasClass(classData)) {
-                btn.removeClass(classData);
-                btn.prop("disabled", false);
+            let nodes = () => {
+                let li = document.createElement('span');
+                li.id = 'btn-loader';
+                li.className = classData;
+                li.setAttribute('role','status');
+                li.setAttribute('aria-hidden','true');
+                return li;
+            };
+
+            if (document.getElementById('btn-loader')) {
+                document.getElementById('btn-loader').remove();
+                btn.removeAttribute('disabled')
             } else {
-                btn.addClass(classData);
-                btn.prop("disabled", true);
+                btn.prepend(nodes());
+                btn.setAttribute('disabled',true)
             }
         },
         label: function (label, classData) {
