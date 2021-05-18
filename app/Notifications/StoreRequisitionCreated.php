@@ -47,7 +47,7 @@ class StoreRequisitionCreated extends Notification
         return TelegramMessage::create()
             // Optional recipient user id.
 //            ->to('-1001304860362')
-            ->to('setos_purchasing_program_bot')
+            ->to('955422866')
             // Markdown supported.
             ->content("Hello there!\nYour invoice has been *PAID*")
 

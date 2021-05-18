@@ -22,7 +22,12 @@ Route::group(
             function () {
                 Route::post('store-profile',[ProfileController::class,'storeProfile'])->name('store-profile');
                 Route::post('store-password',[ProfileController::class,'storePassword'])->name('store-password');
+
+                Route::post('telegram-test-message',[ProfileController::class,'sendTestMessage'])->name('telegram-test-message');
             }
         );
     }
 );
+
+Route::post('admin/profile/api/generate-telegram',[ProfileController::class,'generateTelegram'])->name('admin.profile.api.generate-telegram');
+Route::get('admin/profile/api/generate-telegram',[ProfileController::class,'generateTelegram'])->name('admin.profile.api.generate-telegram');

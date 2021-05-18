@@ -36,6 +36,12 @@
                     <h5 class="h6 card-title">Terdaftar Pada</h5>
                     {{ date('d F Y (H:i:s)',strtotime($user_info->created_at)) }}
                 </div>
+                <div class="card-body bg-gradient-light">
+                    <h5 class="h6 card-title">Notifikasi Telegram</h5>
+                    @if($profile->telegram_chat_id !== null)
+                        <span class="text-success font-weight-bold">Aktif</span>
+                    @endif
+                </div>
             </div>
         </div>
         <div class="col-sm-12 col-md-7 col-lg-8">
@@ -97,6 +103,41 @@
                             <button type="submit" id="f-e-password-submit" class="btn btn-success">Simpan</button>
                         </div>
                     </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <strong>Notifikasi Telegram</strong>
+                    @if($profile->telegram_chat_id !== null)
+                        <span class="badge badge-success float-right">Notifikasi Aktif</span>
+                    @else
+                        <span class="badge badge-warning float-right">Belum Terdaftar</span>
+                    @endif
+                </div>
+                <div class="card-body">
+                    Berikut adalah langkah-langkah untuk menambahkan notifikasi telegram:
+                    <ol>
+                        <li>Klik tombol <u class="text-success font-weight-bold">Tambahkan Notifikasi Telegram</u> atau <u class="text-success font-weight-bold">Tambahkan Ulang</u> untuk mulai mendaftarkan Notifikasi melalui Telegram</li>
+                        <li>Anda akan diarahkan ke chat aplikasi Telegram (Web/Program/Mobile) dengan nama user Setos Purchasing Program</li>
+                        <li>Klik tombol start dibagian bawah untuk mulai mengaktifkan telegram</li>
+                        <li>Silahkan refresh halaman ini untuk memastikan notifikasi Telegram sudah dapat digunakan oleh sistem</li>
+                    </ol>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            @if($profile->telegram_chat_id !== null)
+                                <button type="button" class="btn btn-info" id="telegram-test">
+                                    <i class="fab fa-telegram-plane mr-2"></i> Kirim Pesan Test
+                                </button>
+                            @endif
+                        </div>
+                        <a href="{{ url('https://t.me/setos_purchasing_program_bot?start='.$profile_id) }}" target="_blank" class="btn btn-success">
+                            @if($profile->telegram_chat_id == null)
+                                Tambahkan Notifikasi Telegram
+                            @else
+                                Tambahkan Ulang
+                            @endif
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -234,6 +275,39 @@
             input_password.setAttribute('type','password')
             input_repeat_password.setAttribute('type','password')
         }
+    });
+
+    document.getElementById('telegram-test').addEventListener('click', async event => {
+        event.preventDefault();
+        Loader.button('#telegram-test', 'spinner-border spinner-border-sm mr-2');
+
+        await axios({
+            url: '{{ route('admin.profile.api.telegram-test-message') }}',
+            method: 'post'
+        }).then(response => {
+            if (response.data.status === 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Terkirim!',
+                    timer: 1200,
+                    showConfirmButton: false
+                })
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Pesan Gagal Terkirim!',
+                    text: response.data.message
+                })
+            }
+        }).catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Terdapat kesalahan pada sistem!',
+                text: error.response.data.message
+            })
+        })
+
+        Loader.button('#telegram-test', 'spinner-border spinner-border-sm mr-2');
     });
 </script>
 @endsection
