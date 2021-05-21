@@ -260,8 +260,11 @@ class StoreRequisitionService
 
                 $sr_info = StoreRequisitionInfo::find($store_requisition_info_id);
 
+                $invoice_number = CounterHelper::getNewCode('Inv');
+
                 $invoicing_info = new InvoicingInfo();
                 $invoicing_info->store_requisition_info_id = $store_requisition_info_id;
+                $invoicing_info->invoice_number = $invoice_number;
                 $invoicing_info->user_id = $sr_info->user_id;
                 $invoicing_info->info_penggunaan = $sr_info->info_penggunaan;
                 $invoicing_info->total_item = $sr_info->total_item;

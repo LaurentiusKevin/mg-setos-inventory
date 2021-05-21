@@ -68,7 +68,7 @@ class InvoicingService
                 }
             }
 
-            $savedProducts = $this->getInvoicingProducts($invoicing_info_id);
+            $savedProducts = $this->getInvoicingProducts($store_requisition_info_id);
             $totalLeft = 0;
             foreach ($savedProducts AS $item) {
                 $totalLeft += $item->quantity_max - $item->quantity_sent;
@@ -77,7 +77,7 @@ class InvoicingService
             if ($totalLeft == 0) {
                 $info = InvoicingInfo::find($invoicing_info_id);
                 $info->user_id = Auth::id();
-                $info->invoice_number = CounterHelper::getNewCode('Invoicing');
+                $info->invoice_number = CounterHelper::getNewCode('Inv');
                 $info->completed_at = now();
                 $info->save();
             }

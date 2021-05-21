@@ -249,6 +249,7 @@
                 let quantity_left = data.quantity_max - data.quantity_sent;
                 quantity_left = (data.product_stock > quantity_left) ? quantity_left : data.product_stock;
 
+                console.log(quantity,quantity_left);
                 if (quantity > quantity_left) {
                     data_cleave.input_quantity[data_id].setRawValue(quantity_left)
                 }

@@ -70,22 +70,20 @@
                     </div>
                     <div class="card-body">
                         <form id="formData">
-                            <div class="card-body">
-                                <table id="list_penggunaan_produk" class="table table-bordered table-hover" style="width: 100%">
-                                    <thead>
-                                    <tr>
-                                        <th>Kode</th>
-                                        <th>Item</th>
-                                        <th>Stock</th>
-                                        <th>Last Price</th>
-                                        <th>Avg Price</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
+                            <table id="list_penggunaan_produk" class="table table-bordered table-hover" style="width: 100%">
+                                <thead>
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>Item</th>
+                                    <th>Stock</th>
+                                    <th>Last Price</th>
+                                    <th>Avg Price</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </form>
                     </div>
                     <div class="card-footer bg-gradient-secondary">

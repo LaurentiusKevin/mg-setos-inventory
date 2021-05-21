@@ -75,6 +75,8 @@ class InvoicingRepository
             ->leftJoin(DB::raw('users u'),'srp.user_id','=','u.id')
             ->whereNull('ip.deleted_at')
             ->where('store_requisition_info_id','=',$store_requisition_info_id)
+            ->groupBy('srp.id')
+            ->groupBy('srp.created_at')
             ->groupBy('srp.product_id');
 
         if ($group == false) $data->groupBy('ip.id');

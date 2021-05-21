@@ -90,7 +90,7 @@ class PurchaseOrderController extends Controller
             $data = $this->service->indexEditData($id);
             $no_invoice = str_replace('/','-',$data['invoice_number']);
 
-            $pdf = PDF::loadView('admin.stock.purchase-order.pdfs',$data)->setPaper('a4','portrait');
+            $pdf = PDF::loadView('admin.stock.purchase-order.pdf',$data)->setPaper('a4','portrait');
             return $pdf->stream("purchase_order_{$no_invoice}.pdf");
         } catch (\Throwable $th) {
             return response()->json([

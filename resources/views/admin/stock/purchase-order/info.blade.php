@@ -20,7 +20,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <strong>Info</strong>
+                    <strong>Info Supplier</strong>
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-row bd-highlight">
