@@ -35,7 +35,7 @@
 
         t_list_user_tbody.on('click','button.action-add', function (event) {
             let data = t_list_user_data($(event.target).parents('tr'));
-            Loader.button($(event.target), 'spinner spinner-white spinner-left');
+            LoaderV2.button(this, 'spinner-border spinner-border-sm mr-2');
 
             axios({
                 url: '{{ route('admin.master-data.sr-verificator.api.store') }}',
@@ -44,7 +44,7 @@
                     user_id: data.id,
                 }
             }).then(response => {
-                Loader.button($(event.target), 'spinner spinner-white spinner-left');
+                LoaderV2.button(this, 'spinner spinner-white spinner-left');
                 if (response.data.status === 'success') {
                     Swal.fire({
                         icon: 'success',
@@ -63,7 +63,7 @@
                     });
                 }
             }).catch(error => {
-                Loader.button($(event.target), 'spinner spinner-white spinner-left');
+                LoaderV2.button(this, 'spinner spinner-white spinner-left');
                 Swal.fire({
                     icon: 'error',
                     title: 'Terdapat Kesalahan Pada System',

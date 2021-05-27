@@ -299,7 +299,7 @@
                 {data: 'supplier_price', className: "align-middle text-right"},
                 {data: 'last_price', className: "align-middle text-right"},
                 {data: 'avg_price', className: "align-middle text-right"},
-                {data: 'action', width: '5%', className: "align-middle text-center"},
+                {data: 'action', width: '5%', className: "align-middle text-center", searchable: false},
             ],
             columnDefs: [
                 {

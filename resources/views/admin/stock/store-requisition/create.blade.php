@@ -209,7 +209,7 @@
                 {
                     targets: 5,
                     render: (data, type, row, meta) => {
-                        return `<input type="text" class="form-control text-right border-primary input-price" data-id="${list_penggunaan_counter}" name="price[]" value="${data}">`;
+                        return `<input type="text" class="form-control text-right border-primary input-price" data-id="${list_penggunaan_counter}" name="price[]" value="${row.last_price}">`;
                     }
                 },
                 {

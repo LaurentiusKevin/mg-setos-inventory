@@ -5,9 +5,11 @@
             <i class="fas fa-check"></i>
         </button>
         @endif
-        <button class="btn btn-ghost-warning action-edit" title="Edit SR">
-            <i class="fas fa-edit"></i>
-        </button>
+        @if($data->user_id == auth()->id())
+            <button class="btn btn-ghost-warning action-edit" title="Edit SR">
+                <i class="fas fa-edit"></i>
+            </button>
+        @endif
     @endif
     <button class="btn btn-ghost-info action-info" title="Info">
         <i class="fas fa-info"></i>

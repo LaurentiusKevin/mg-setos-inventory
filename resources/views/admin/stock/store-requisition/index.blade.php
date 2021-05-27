@@ -21,9 +21,11 @@
                 <div class="card-header">
                     <div class="card-header-actions">
                         <div class="card-header-actions">
-                            <a class="btn btn-success btn-block btn-sm" href="{{ route('admin.stock.store-requisition.view.create') }}">
-                                <i class="fas fa-plus mr-2"></i> Create SR
-                            </a>
+                            @if($role->edit == 1)
+                                <a class="btn btn-success btn-block btn-sm" href="{{ route('admin.stock.store-requisition.view.create') }}">
+                                    <i class="fas fa-plus mr-2"></i> Create SR
+                                </a>
+                            @endif
                         </div>
                     </div>
                     <strong>History Store Requisition</strong>
@@ -33,6 +35,7 @@
                         <thead class="bg-dark">
                         <tr>
                             <th>Kode</th>
+                            <th>Department</th>
                             <th>Info Penggunaan</th>
                             <th>Catatan</th>
                             <th>Total Barang</th>
@@ -74,6 +77,7 @@
         },
         columns: [
             {data: 'invoice_number', name: 'store_requisition_infos.invoice_number', width: '10%', className: 'align-middle font-weight-bold text-nowrap'},
+            {data: 'department', name: 'store_requisition_infos.department', className: 'align-middle'},
             {data: 'info_penggunaan', name: 'store_requisition_infos.info_penggunaan', className: 'align-middle'},
             {data: 'catatan', name: 'store_requisition_infos.catatan', className: 'align-middle'},
             {data: 'total_item', name: 'store_requisition_infos.total_item', width: '5%', className: 'align-middle text-right'},
@@ -84,19 +88,19 @@
         ],
         columnDefs: [
             {
-                targets: 3,
+                targets: 4,
                 render: (data, type, row, meta) => {
                     return numeral(data).format('0,0');
                 }
             },
             {
-                targets: 4,
+                targets: 5,
                 render: (data, type, row, meta) => {
                     return 'Rp '+numeral(data).format('0,0');
                 }
             },
             {
-                targets: 6,
+                targets: 7,
                 render: (data, type, row, meta) => {
                     return moment(data).format('DD-MM-YYYY, HH:mm:ss')
                 }

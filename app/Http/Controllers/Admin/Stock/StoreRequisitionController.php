@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Stock;
 
+use App\Helpers\MenuHelper;
 use App\Http\Controllers\Controller;
 use App\Services\Admin\Stock\StoreRequisitionService;
 use Illuminate\Http\Request;
@@ -19,7 +20,9 @@ class StoreRequisitionController extends Controller
 
     public function index()
     {
-        return view('admin.stock.store-requisition.index');
+        return view('admin.stock.store-requisition.index',[
+            'role' => MenuHelper::getRole()
+        ]);
     }
 
     public function data()

@@ -123,6 +123,40 @@
             }
         }
     }
+
+    const LoaderV2 = {
+        button: function (btnSelector, classData, text = null) {
+            // let btn = document.querySelector(btnSelector);
+
+            if (text !== null) {
+                btnSelector.innerHTML = text;
+            }
+
+            let nodes = () => {
+                let li = document.createElement('span');
+                li.id = 'btn-loader';
+                li.className = classData;
+                li.setAttribute('role','status');
+                li.setAttribute('aria-hidden','true');
+                return li;
+            };
+
+            if (document.getElementById('btn-loader')) {
+                document.getElementById('btn-loader').remove();
+                btnSelector.removeAttribute('disabled')
+            } else {
+                btnSelector.prepend(nodes());
+                btnSelector.setAttribute('disabled',true)
+            }
+        },
+        label: function (label, classData) {
+            if (label.hasClass(classData)) {
+                label.removeClass(classData);
+            } else {
+                label.addClass(classData);
+            }
+        }
+    }
 </script>
 @yield('script')
 </body>

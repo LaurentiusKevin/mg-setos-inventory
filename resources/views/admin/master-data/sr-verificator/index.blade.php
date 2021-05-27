@@ -95,10 +95,12 @@
         const t_list_data = row => t_list.row( row ).data();
 
         document.getElementById('add_verificator').addEventListener('click', event => {
+            Loader.button('#add_verificator', 'spinner-border spinner-border-sm mr-2');
             axios({
                 url: '{{ route('admin.master-data.sr-verificator.view.create') }}',
                 method: 'post'
             }).then(response => {
+                Loader.button('#add_verificator', 'spinner-border spinner-border-sm mr-2');
                 $.fancybox.open(response.data);
             })
         });
