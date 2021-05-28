@@ -21,7 +21,7 @@
                 <div class="card-header">
                     <div class="card-header-actions">
                         <div class="card-header-actions">
-                            @if($role->edit == 1)
+                            @if($role->create == 1)
                                 <a class="btn btn-success btn-block btn-sm" href="{{ route('admin.stock.store-requisition.view.create') }}">
                                     <i class="fas fa-plus mr-2"></i> Create SR
                                 </a>
