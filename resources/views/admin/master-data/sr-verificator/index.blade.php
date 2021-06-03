@@ -51,6 +51,7 @@
                             <th>Name</th>
                             <th>Department</th>
                             <th>e-Mail</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -86,6 +87,7 @@
             {data: 'name', name: 'users.name', className: 'align-middle'},
             {data: 'department', name: 'departments.name', className: 'align-middle'},
             {data: 'email', name: 'users.email', className: 'align-middle', width: '15%'},
+            {data: 'status', name: 'store_requisition_verificators.primary', className: 'align-middle text-nowrap', width: '5%'},
             {data: 'action', searchable: false, orderable: false, className: 'text-center', width: '5%'},
         ]
     });
@@ -106,9 +108,54 @@
         });
 
         t_list_tbody.on('click','button.action-edit', function (event) {
-            console.log('coba')
             let data = t_list_data($(event.target).parents('tr'));
             window.location = `{{ url('admin/master-data/department/edit') }}/${data.id}`;
+        });
+
+        t_list_tbody.on('click','button.action-primary', function (event) {
+            let data = t_list_data($(event.target).parents('tr'));
+
+            Swal.fire({
+                title: 'Atur sebagai penanda tangan utama?',
+                icon: 'warning',
+                showCancelButton: true,
+                reverseButtons: true,
+                confirmButtonText: 'Atur Utama!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios({
+                        url: '{{ route('admin.master-data.sr-verificator.api.set-primary') }}',
+                        method: 'post',
+                        data: {
+                            id: data.id
+                        }
+                    }).then(response => {
+                        if (response.data.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Tersimpan!',
+                                timer: 1200,
+                                showConfirmButton: false,
+                                willClose(popup) {
+                                    t_list.ajax.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Gagal',
+                                text: 'Silahkan coba lagi'
+                            });
+                        }
+                    }).catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Terdapat Kesalahan Pada System',
+                            text: error.response.data.message
+                        });
+                    })
+                }
+            });
         });
 
         t_list_tbody.on('click','button.action-delete', event => {

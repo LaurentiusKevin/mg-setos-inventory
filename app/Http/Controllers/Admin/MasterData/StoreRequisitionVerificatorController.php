@@ -28,7 +28,9 @@ class StoreRequisitionVerificatorController extends Controller
             return DataTables::of(
                 $this->service->data()
             )->addColumn('action', function ($data) {
-                return view('admin.master-data.sr-verificator.action');
+                return view('admin.master-data.sr-verificator.action',[
+                    'data' => $data
+                ]);
             })->make(true);
         } catch (\Throwable $th) {
             return response()->json([
@@ -86,5 +88,16 @@ class StoreRequisitionVerificatorController extends Controller
         $id = $request->get('id');
 
         return $this->service->delete($id);
+    }
+
+    public function setPrimary(Request $request)
+    {
+        $request->validate([
+            'id' => 'required'
+        ]);
+
+        $id = $request->get('id');
+
+        return $this->service->setPrimary($id);
     }
 }

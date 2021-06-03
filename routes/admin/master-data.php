@@ -144,6 +144,7 @@ Route::group(
                 Route::post('list-user',[StoreRequisitionVerificatorController::class,'listUser'])->name('list-user');
                 Route::post('store',[StoreRequisitionVerificatorController::class,'store'])->name('store');
                 Route::post('delete',[StoreRequisitionVerificatorController::class,'delete'])->name('delete');
+                Route::post('set-primary',[StoreRequisitionVerificatorController::class,'setPrimary'])->name('set-primary');
                 Route::post('reset-password',[StoreRequisitionVerificatorController::class,'resetPassword'])->name('reset-password');
             }
         );

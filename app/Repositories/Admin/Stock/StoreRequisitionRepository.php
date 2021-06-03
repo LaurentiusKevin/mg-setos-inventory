@@ -40,7 +40,8 @@ class StoreRequisitionRepository
             ])
             ->leftJoin('departments','store_requisition_infos.department_id','=','departments.id')
             ->leftJoin('users','store_requisition_infos.user_id','=','users.id')
-            ->whereNull('store_requisition_infos.deleted_at');
+            ->whereNull('store_requisition_infos.deleted_at')
+            ->whereNull('store_requisition_infos.verified_at');
 
         return ($id !== null) ? $data->where('store_requisition_infos.id','=',$id) : $data;
     }
@@ -144,6 +145,7 @@ class StoreRequisitionRepository
                 'users.deleted_at',
             ])
             ->leftJoin('users','store_requisition_verificators.user_id','=','users.id')
+            ->where('store_requisition_verificators.primary','=',0)
             ->whereNull('users.department_id')
             ->orWhere('users.department_id','=',$department_id)
             ->get();

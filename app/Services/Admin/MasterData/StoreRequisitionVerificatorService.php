@@ -18,7 +18,7 @@ class StoreRequisitionVerificatorService
 
     public function data()
     {
-        return $this->repository->department();
+        return $this->repository->verificator();
     }
 
     public function listUser()
@@ -62,6 +62,35 @@ class StoreRequisitionVerificatorService
             DB::beginTransaction();
 
             StoreRequisitionVerificator::find($id)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success'
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $th->getMessage(),
+                'details' => $th
+            ]);
+        }
+    }
+
+    public function setPrimary($id)
+    {
+        try {
+            DB::beginTransaction();
+
+            StoreRequisitionVerificator::query()
+                ->where('primary','=',1)
+                ->update([
+                    'primary' => 0
+                ]);
+
+            $data = StoreRequisitionVerificator::find($id);
+            $data->primary = 1;
+            $data->save();
 
             DB::commit();
 

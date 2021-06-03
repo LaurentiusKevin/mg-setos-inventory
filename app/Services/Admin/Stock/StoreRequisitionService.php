@@ -12,6 +12,7 @@ use App\Models\StoreRequisitionInfo;
 use App\Models\StoreRequisitionNotes;
 use App\Models\StoreRequisitionProducts;
 use App\Models\StoreRequisitionVerification;
+use App\Models\StoreRequisitionVerificator;
 use App\Repositories\Admin\Stock\StoreRequisitionRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -106,6 +107,13 @@ class StoreRequisitionService
                     $verification->user_id = $item->id;
                     $verification->save();
                 }
+
+                $primaryVerificator = StoreRequisitionVerificator::query()
+                    ->where('primary','=',1)->first();
+                $verificationPrimary = new StoreRequisitionVerification();
+                $verificationPrimary->store_requisition_info_id = $info->id;
+                $verificationPrimary->user_id = $primaryVerificator->user_id;
+                $verificationPrimary->save();
 
                 DB::commit();
 

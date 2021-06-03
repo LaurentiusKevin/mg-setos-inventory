@@ -5279,357 +5279,367 @@
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1222" parent="363" name="created_at">
+    <column id="1222" parent="363" name="primary">
       <Position>3</Position>
-      <DataType>timestamp|0s</DataType>
+      <DataType>smallint(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="1223" parent="363" name="updated_at">
+    <column id="1223" parent="363" name="created_at">
       <Position>4</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <key id="1224" parent="363" name="PRIMARY">
+    <column id="1224" parent="363" name="updated_at">
+      <Position>5</Position>
+      <DataType>timestamp|0s</DataType>
+    </column>
+    <key id="1225" parent="363" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1225" parent="364" name="id">
+    <column id="1226" parent="364" name="id">
       <Position>1</Position>
       <DataType>bigint(20) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1226" parent="364" name="name">
+    <column id="1227" parent="364" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1227" parent="364" name="logo">
+    <column id="1228" parent="364" name="logo">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="1228" parent="364" name="phone">
+    <column id="1229" parent="364" name="phone">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="1229" parent="364" name="address">
+    <column id="1230" parent="364" name="address">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="1230" parent="364" name="contact_person_name">
+    <column id="1231" parent="364" name="contact_person_name">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="1231" parent="364" name="contact_person_phone">
+    <column id="1232" parent="364" name="contact_person_phone">
       <Position>7</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="1232" parent="364" name="info">
+    <column id="1233" parent="364" name="info">
       <Position>8</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="1233" parent="364" name="created_at">
+    <column id="1234" parent="364" name="created_at">
       <Position>9</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <column id="1234" parent="364" name="updated_at">
+    <column id="1235" parent="364" name="updated_at">
       <Position>10</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <column id="1235" parent="364" name="deleted_at">
+    <column id="1236" parent="364" name="deleted_at">
       <Position>11</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <key id="1236" parent="364" name="PRIMARY">
+    <key id="1237" parent="364" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1237" parent="365" name="id">
+    <column id="1238" parent="365" name="id">
       <Position>1</Position>
       <DataType>bigint(20) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1238" parent="365" name="name">
+    <column id="1239" parent="365" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1239" parent="365" name="segment_name">
+    <column id="1240" parent="365" name="segment_name">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1240" parent="365" name="icon">
+    <column id="1241" parent="365" name="icon">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1241" parent="365" name="ord">
+    <column id="1242" parent="365" name="ord">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1242" parent="365" name="is_private">
+    <column id="1243" parent="365" name="is_private">
       <Position>6</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="1243" parent="365" name="created_at">
+    <column id="1244" parent="365" name="created_at">
       <Position>7</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <column id="1244" parent="365" name="updated_at">
+    <column id="1245" parent="365" name="updated_at">
       <Position>8</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <key id="1245" parent="365" name="PRIMARY">
+    <key id="1246" parent="365" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1246" parent="366" name="id">
+    <column id="1247" parent="366" name="id">
       <Position>1</Position>
       <DataType>bigint(20) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1247" parent="366" name="sys_menu_group_id">
+    <column id="1248" parent="366" name="sys_menu_group_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1248" parent="366" name="name">
+    <column id="1249" parent="366" name="name">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1249" parent="366" name="segment_name">
+    <column id="1250" parent="366" name="segment_name">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1250" parent="366" name="url">
+    <column id="1251" parent="366" name="url">
       <Position>5</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1251" parent="366" name="ord">
+    <column id="1252" parent="366" name="ord">
       <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1252" parent="366" name="is_private">
+    <column id="1253" parent="366" name="is_private">
       <Position>7</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="1253" parent="366" name="created_at">
+    <column id="1254" parent="366" name="created_at">
       <Position>8</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <column id="1254" parent="366" name="updated_at">
+    <column id="1255" parent="366" name="updated_at">
       <Position>9</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <key id="1255" parent="366" name="PRIMARY">
+    <key id="1256" parent="366" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1256" parent="367" name="sequence">
+    <column id="1257" parent="367" name="sequence">
       <Position>1</Position>
       <DataType>bigint(20) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1257" parent="367" name="uuid">
+    <column id="1258" parent="367" name="uuid">
       <Position>2</Position>
       <DataType>char(36)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1258" parent="367" name="batch_id">
+    <column id="1259" parent="367" name="batch_id">
       <Position>3</Position>
       <DataType>char(36)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1259" parent="367" name="family_hash">
+    <column id="1260" parent="367" name="family_hash">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="1260" parent="367" name="should_display_on_index">
+    <column id="1261" parent="367" name="should_display_on_index">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>1</DefaultExpression>
     </column>
-    <column id="1261" parent="367" name="type">
+    <column id="1262" parent="367" name="type">
       <Position>6</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1262" parent="367" name="content">
+    <column id="1263" parent="367" name="content">
       <Position>7</Position>
       <DataType>longtext|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1263" parent="367" name="created_at">
+    <column id="1264" parent="367" name="created_at">
       <Position>8</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <index id="1264" parent="367" name="telescope_entries_uuid_unique">
+    <index id="1265" parent="367" name="telescope_entries_uuid_unique">
       <ColNames>uuid</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="1265" parent="367" name="telescope_entries_batch_id_index">
+    <index id="1266" parent="367" name="telescope_entries_batch_id_index">
       <ColNames>batch_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="1266" parent="367" name="telescope_entries_family_hash_index">
+    <index id="1267" parent="367" name="telescope_entries_family_hash_index">
       <ColNames>family_hash</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="1267" parent="367" name="telescope_entries_type_should_display_on_index_index">
+    <index id="1268" parent="367" name="telescope_entries_type_should_display_on_index_index">
       <ColNames>type
 should_display_on_index</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="1268" parent="367" name="telescope_entries_created_at_index">
+    <index id="1269" parent="367" name="telescope_entries_created_at_index">
       <ColNames>created_at</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="1269" parent="367" name="PRIMARY">
+    <key id="1270" parent="367" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>sequence</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="1270" parent="367" name="telescope_entries_uuid_unique">
+    <key id="1271" parent="367" name="telescope_entries_uuid_unique">
       <ColNames>uuid</ColNames>
       <UnderlyingIndexName>telescope_entries_uuid_unique</UnderlyingIndexName>
     </key>
-    <column id="1271" parent="368" name="entry_uuid">
+    <column id="1272" parent="368" name="entry_uuid">
       <Position>1</Position>
       <DataType>char(36)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1272" parent="368" name="tag">
+    <column id="1273" parent="368" name="tag">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="1273" parent="368" name="telescope_entries_tags_entry_uuid_tag_index">
+    <index id="1274" parent="368" name="telescope_entries_tags_entry_uuid_tag_index">
       <ColNames>entry_uuid
 tag</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="1274" parent="368" name="telescope_entries_tags_tag_index">
+    <index id="1275" parent="368" name="telescope_entries_tags_tag_index">
       <ColNames>tag</ColNames>
       <Type>btree</Type>
     </index>
-    <foreign-key id="1275" parent="368" name="telescope_entries_tags_entry_uuid_foreign">
+    <foreign-key id="1276" parent="368" name="telescope_entries_tags_entry_uuid_foreign">
       <ColNames>entry_uuid</ColNames>
       <RefTableName>telescope_entries</RefTableName>
       <RefColNames>uuid</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="1276" parent="369" name="tag">
+    <column id="1277" parent="369" name="tag">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1277" parent="370" name="id">
+    <column id="1278" parent="370" name="id">
       <Position>1</Position>
       <DataType>bigint(20) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1278" parent="370" name="user_id">
+    <column id="1279" parent="370" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1279" parent="370" name="jabatan">
+    <column id="1280" parent="370" name="jabatan">
       <Position>3</Position>
       <DataType>varchar(240)|0s</DataType>
     </column>
-    <column id="1280" parent="370" name="telegram_user_id">
+    <column id="1281" parent="370" name="telegram_user_id">
       <Position>4</Position>
       <DataType>varchar(240)|0s</DataType>
     </column>
-    <column id="1281" parent="370" name="telegram_response">
+    <column id="1282" parent="370" name="telegram_chat_id">
       <Position>5</Position>
       <DataType>varchar(240)|0s</DataType>
     </column>
-    <column id="1282" parent="370" name="created_at">
+    <column id="1283" parent="370" name="telegram_response">
       <Position>6</Position>
-      <DataType>timestamp|0s</DataType>
+      <DataType>varchar(240)|0s</DataType>
     </column>
-    <column id="1283" parent="370" name="updated_at">
+    <column id="1284" parent="370" name="created_at">
       <Position>7</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <key id="1284" parent="370" name="PRIMARY">
+    <column id="1285" parent="370" name="updated_at">
+      <Position>8</Position>
+      <DataType>timestamp|0s</DataType>
+    </column>
+    <key id="1286" parent="370" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="1285" parent="371" name="id">
+    <column id="1287" parent="371" name="id">
       <Position>1</Position>
       <DataType>bigint(20) unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="1286" parent="371" name="username">
+    <column id="1288" parent="371" name="username">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1287" parent="371" name="role_id">
+    <column id="1289" parent="371" name="role_id">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="1288" parent="371" name="name">
+    <column id="1290" parent="371" name="name">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1289" parent="371" name="email">
+    <column id="1291" parent="371" name="email">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="1290" parent="371" name="email_verified_at">
+    <column id="1292" parent="371" name="email_verified_at">
       <Position>6</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <column id="1291" parent="371" name="password">
+    <column id="1293" parent="371" name="password">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="1292" parent="371" name="department_id">
+    <column id="1294" parent="371" name="department_id">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="1293" parent="371" name="remember_token">
+    <column id="1295" parent="371" name="remember_token">
       <Position>9</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="1294" parent="371" name="created_at">
+    <column id="1296" parent="371" name="created_at">
       <Position>10</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <column id="1295" parent="371" name="updated_at">
+    <column id="1297" parent="371" name="updated_at">
       <Position>11</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <column id="1296" parent="371" name="deleted_at">
+    <column id="1298" parent="371" name="deleted_at">
       <Position>12</Position>
       <DataType>timestamp|0s</DataType>
     </column>
-    <key id="1297" parent="371" name="PRIMARY">
+    <key id="1299" parent="371" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

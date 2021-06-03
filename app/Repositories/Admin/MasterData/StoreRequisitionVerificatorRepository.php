@@ -6,11 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 class StoreRequisitionVerificatorRepository
 {
-    public function department($id = null)
+    public function verificator($id = null)
     {
         $data = DB::table('store_requisition_verificators')
             ->select([
                 'store_requisition_verificators.id',
+                DB::raw("case when store_requisition_verificators.primary = 1 then 'Primary' end as status"),
                 'users.username',
                 'users.role_id',
                 'users.name',
