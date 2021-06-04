@@ -35,7 +35,7 @@
                         <dt class="col-sm-2">Digunakan Untuk</dt>
                         <dd class="col-sm-10">{{ $info->info_penggunaan }}</dd>
 
-                        <dt class="col-sm-2">Catatan</dt>
+                        <dt class="col-sm-2">Catatan Tambahan</dt>
                         <dd class="col-sm-10">{{ $info->catatan ?? '-' }}</dd>
                     </dl>
                 </div>
@@ -85,7 +85,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <strong>Catatan</strong>
+                    <strong>Catatan dari Verifikator</strong>
                 </div>
                 <div class="card-body">
                     <input type="hidden" id="store_requisition_info_id" value="{{ $info->id }}">

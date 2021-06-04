@@ -64,7 +64,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Catatan</strong>
+                            <strong>Catatan dari Verifikator</strong>
                         </div>
                         <div class="card-body">
                             <div class="list-group mb-3">
