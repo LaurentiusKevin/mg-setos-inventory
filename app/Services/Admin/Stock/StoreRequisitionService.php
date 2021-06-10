@@ -59,6 +59,8 @@ class StoreRequisitionService
 
     public function store($department_id,$product,$info_penggunaan,$catatan)
     {
+        $department_id_new = ($department_id == 12) ? 11 : $department_id;
+
         try {
             $total_item = 0;
             $total_price = 0;
@@ -101,7 +103,7 @@ class StoreRequisitionService
                     $sr_product->save();
                 }
 
-                foreach ($this->repository->verificator($department_id) AS $item) {
+                foreach ($this->repository->verificator($department_id_new) AS $item) {
                     $verification = new StoreRequisitionVerification();
                     $verification->store_requisition_info_id = $info->id;
                     $verification->user_id = $item->id;
