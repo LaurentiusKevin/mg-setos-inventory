@@ -177,6 +177,8 @@
         const list_penggunaan_produk = $('#list_penggunaan_produk').DataTable({
             scrollX: true,
             ordering: false,
+            paging: false,
+            info: false,
             columns: [
                 {data: 'code', width: '5%', className: "align-middle font-weight-bold text-nowrap"},
                 {data: 'name', className: "align-middle font-weight-bold"},

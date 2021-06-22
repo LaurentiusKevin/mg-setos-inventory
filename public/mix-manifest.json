@@ -145,5 +145,7 @@
     "/js/filepond.js": "/js/filepond.js",
     "/css/fancybox.css": "/css/fancybox.css",
     "/js/fancybox.js": "/js/fancybox.js",
-    "/js/numeral.js": "/js/numeral.js"
+    "/js/numeral.js": "/js/numeral.js",
+    "/css/winbox.css": "/css/winbox.css",
+    "/js/winbox.js": "/js/winbox.js"
 }
