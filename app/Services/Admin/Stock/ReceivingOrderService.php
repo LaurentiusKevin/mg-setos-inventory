@@ -60,7 +60,6 @@ class ReceivingOrderService
 
     public function storeData($purchase_order_info_id,$product,$catatan)
     {
-//        dd($purchase_order_info_id,$product,$catatan);
         $invoiceNumber = CounterHelper::getNewCode('RCV');
         $total_received_item = 0;
         $total_price = 0;
@@ -108,13 +107,26 @@ class ReceivingOrderService
                 $rcvProduct->total_price = $item['quantity'] * $item['price'];
                 $rcvProduct->save();
 
+                $querySaldo = DB::table('product_transactions')
+                    ->select([
+                        'product_id',
+                        DB::raw('(sum(`in`) - sum(`out`)) AS saldo')
+                    ])
+                    ->where('product_id','=',$item['product_id'])
+                    ->groupBy('product_id')
+                    ->first();
+
+                $saldo = ($querySaldo->saldo ?? 0) + $item['quantity'];
+
                 $product_transaction = new ProductTransaction();
                 $product_transaction->user_id = Auth::id();
                 $product_transaction->product_id = $item['product_id'];
+                $product_transaction->invoice_number = $invoiceNumber;
+                $product_transaction->type = 1;
                 $product_transaction->price = $item['price'];
                 $product_transaction->in = $item['quantity'];
                 $product_transaction->out = 0;
-                $product_transaction->saldo = 0;
+                $product_transaction->saldo = $saldo;
                 $product_transaction->save();
             }
 
@@ -130,7 +142,10 @@ class ReceivingOrderService
             return response()->json([
                 'status' => 'error',
                 'message' => $th->getMessage(),
-                'details' => $th
+                'details' => [
+                    $th->getFile(),
+                    $th->getLine()
+                ]
             ]);
         }
     }
