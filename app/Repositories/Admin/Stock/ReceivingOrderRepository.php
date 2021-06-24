@@ -45,6 +45,7 @@ class ReceivingOrderRepository
                    rop.quantity,
                    rop.price,
                    rop.total_price,
+                   p.code,
                    p.name,
                    p.stock,
                    p.last_price,

@@ -89,6 +89,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
+                            <th>Kode</th>
                             <th>Produk</th>
                             <th>Quantity</th>
                             <th>Price</th>
@@ -98,6 +99,7 @@
                         <tbody>
                         @foreach($data->products AS $item)
                             <tr>
+                                <td class="font-weight-bold">{{ $item->product->code }}</td>
                                 <td>{{ $item->product->name }}</td>
                                 <td class="text-right">{{ number_format($item->quantity,0,',','.').' '.$item->product->satuan->nama }}</td>
                                 <td class="text-right">
@@ -106,12 +108,22 @@
                                 <td class="text-right">{{ number_format($item->total_price,0,',','.') }}</td>
                             </tr>
                         @endforeach
-                        <tr class="bg-info">
-                            <td class="font-weight-bold" colspan="3">Total</td>
-                            <td class="text-right font-weight-bold">{{ number_format($data->total_price,0,',','.') }}</td>
-                        </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="card-footer">
+                    <div class="row justify-content-end">
+                        <div class="col-4">
+                            <table class="table table-borderless">
+                                <tbody>
+                                <tr>
+                                    <td class="font-weight-bold">Subtotal</td>
+                                    <td class="text-right font-weight-bold">{{ number_format($data->total_price,0,',','.') }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

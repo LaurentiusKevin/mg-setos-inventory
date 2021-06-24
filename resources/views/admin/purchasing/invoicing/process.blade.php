@@ -27,11 +27,20 @@
                     </div>
                     <div class="card-body">
                         <dl class="row">
+                            <dt class="col-sm-2">No</dt>
+                            <dd class="col-sm-10">{{ $info_sr->invoice_number }}</dd>
+
+                            <dt class="col-sm-2">Department</dt>
+                            <dd class="col-sm-10">{{ $info_sr->department }}</dd>
+
                             <dt class="col-sm-2">Info Penggunaan</dt>
                             <dd class="col-sm-10">{{ $info_sr->info_penggunaan }}</dd>
 
                             <dt class="col-sm-2">Catatan Tambahan</dt>
                             <dd class="col-sm-10">{{ $info_sr->catatan ?? '-' }}</dd>
+
+                            <dt class="col-sm-2">Dibuat Pada</dt>
+                            <dd class="col-sm-10">{{ date('d F Y H:i:s', strtotime($info_sr->created_at)) }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -80,11 +89,13 @@
                             <thead>
                             <tr>
                                 <th>Kode</th>
-                                <th>Item</th>
+                                <th>Nama Item</th>
                                 <th>Stock</th>
-                                <th>Last Price</th>
-                                <th>Price</th>
-                                <th>Quantity Left</th>
+                                <th>Harga Receiving</th>
+                                <th>Permintaan SR</th>
+                                <th>Belum Invoicing</th>
+                                <th>Sudah Invoicing</th>
+                                <th>Harga Invoicing</th>
                                 <th>Quantity</th>
                             </tr>
                             </thead>
@@ -149,30 +160,34 @@
         let list_product_counter = 0;
         const list_produk = $('#list_produk').DataTable({
             scrollX: true,
+            paging: false,
+            ordering: false,
             columns: [
                 {data: 'product_code', className: "align-middle font-weight-bold", width: '5%'},
                 {data: 'product_name', className: "align-middle"},
                 {data: 'product_stock', width: '10%', className: "align-middle text-right"},
                 {data: 'last_price', width: '10%', className: "align-middle text-right"},
-                {data: 'price', orderable: false, width: '15%', className: "align-middle text-right"},
                 {data: 'quantity_max', width: '10%', className: "align-middle text-right"},
+                {data: 'quantity_max', width: '10%', className: "align-middle text-right"},
+                {data: 'quantity_sent', width: '10%', className: "align-middle text-right"},
+                {data: 0, orderable: false, width: '15%', className: "align-middle text-right"},
                 {data: 'quantity', orderable: false, width: '10%'},
             ],
             columnDefs: [
                 {
                     targets: 2,
                     render: (data, type, row, meta) => {
-                        return numeral(data).format('0,0') + ' ' + row.satuan;
+                        return new Intl.NumberFormat(['id']).format(data) + ' ' + row.satuan;
                     }
                 },
                 {
                     targets: 3,
                     render: (data, type, row, meta) => {
-                        return 'Rp '+numeral(data).format('0,0');
+                        return 'Rp '+new Intl.NumberFormat(['id']).format(data);
                     }
                 },
                 {
-                    targets: 4,
+                    targets: 7,
                     render: (data, type, row, meta) => {
                         return `<input type="text" class="form-control text-right border-primary input-price" data-id="${list_product_counter}" name="price[]" value="${data}">`;
                     }
@@ -185,6 +200,18 @@
                 },
                 {
                     targets: 6,
+                    render: (data, type, row, meta) => {
+                        return numeral(data).format('0,0') + ' ' + row.satuan;
+                    }
+                },
+                {
+                    targets: 4,
+                    render: (data, type, row, meta) => {
+                        return numeral(data).format('0,0') + ' ' + row.satuan;
+                    }
+                },
+                {
+                    targets: 8,
                     render: (data, type, row, meta) => {
                         return `<input type="text" class="form-control text-right border-primary input-quantity" data-id="${list_product_counter}" name="quantity[]">`;
                     }

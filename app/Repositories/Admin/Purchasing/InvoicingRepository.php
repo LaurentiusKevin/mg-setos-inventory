@@ -55,6 +55,7 @@ class InvoicingRepository
                 'srp.id AS store_requisition_product_id',
                 'store_requisition_info_id',
                 'srp.product_id',
+                'p.last_price',
                 'p.code AS product_code',
                 'p.name AS product_name',
                 'p.stock AS product_stock',
