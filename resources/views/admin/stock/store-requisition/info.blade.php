@@ -19,6 +19,9 @@
                 </div>
                 <div class="card-body">
                     <dl class="row">
+                        <dt class="col-sm-2">No</dt>
+                        <dd class="col-sm-10">{{ $info->invoice_number }}</dd>
+
                         <dt class="col-sm-2">Penginput</dt>
                         <dd class="col-sm-10">{{ $info->penginput }}</dd>
 
@@ -87,23 +90,54 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
+                            <th>Kode</th>
                             <th>Produk</th>
                             <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Avg Price</th>
+                            <th>Harga @</th>
+                            <th>Total</th>
                         </tr>
                         </thead>
                         <tbody>
+                        @php($subtotal = 0)
                         @foreach($product AS $item)
                             <tr>
+                                <td class="font-weight-bold">{{ $item->product_code }}</td>
                                 <td>{{ $item->product_name }}</td>
                                 <td class="text-right">{{ number_format($item->quantity,0,',','.').' '.$item->satuan }}</td>
-                                <td class="text-right">Rp {{ number_format($item->price,0,',','.') }}</td>
-                                <td class="text-right">Rp {{ number_format($item->avg_price,0,',','.') }}</td>
+                                <td class="text-right">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Rp</span>
+                                        <span>{{ number_format($item->price,0,',','.') }}</span>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Rp</span>
+                                        <span>{{ number_format(($item->quantity * $item->price),0,',','.') }}</span>
+                                    </div>
+                                </td>
                             </tr>
+                            @php($subtotal += $item->quantity * $item->price)
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="card-footer">
+                    <div class="row justify-content-end">
+                        <div class="col-3">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <th>
+                                        <div class="d-flex justify-content-between">
+                                            <span>Rp</span>
+                                            <span>{{ number_format($subtotal,0,',','.') }}</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
