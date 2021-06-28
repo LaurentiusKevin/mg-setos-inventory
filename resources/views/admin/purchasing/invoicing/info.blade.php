@@ -4,6 +4,11 @@
 
 @section('description','')
 
+@section('style')
+    <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fancybox.css') }}">
+@endsection
+
 @section('breadcrumb')
     <li class="breadcrumb-item">Purchasing</li>
     <li class="breadcrumb-item">Invoicing</li>
@@ -62,7 +67,7 @@
                     <strong>Produk</strong>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" id="product-table" style="width: 100%">
                         <thead>
                         <tr>
                             <th>No</th>
@@ -92,4 +97,13 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/datatables.js') }}"></script>
+    <script>
+        $('#product-table').DataTable({
+            scrollX: true
+        });
+    </script>
 @endsection

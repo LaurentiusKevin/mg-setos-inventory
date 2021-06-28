@@ -125,10 +125,9 @@ class InvoicingService
 
     public function indexDetailData($invoicing_info_id, $group = false)
     {
-//        dd($this->repository->invoicingInfo(null,$invoicing_info_id)->first());
         return [
             'info' => $this->repository->invoicingInfo(null,$invoicing_info_id)->first(),
-            'product' => $this->getInvoicingProducts($invoicing_info_id, $group)
+            'product' => $this->repository->invoicingProductInfo($invoicing_info_id, $group)
         ];
     }
 }

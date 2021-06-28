@@ -82,10 +82,10 @@
                 <td class="font-weight-bold text-nowrap" style="width: 10%">{{ $item->product_code }}</td>
                 <td>{{ $item->product_name }}</td>
                 <td class="text-right">{{ number_format($item->quantity_sent,0,',','.').' '.$item->satuan }}</td>
-                <td class="text-right">{{ number_format($item->price,0,',','.') }}</td>
-                <td class="text-right">{{ number_format($item->quantity_sent * $item->price,0,',','.') }}</td>
+                <td class="text-right">{{ number_format(($item->total_price / $item->quantity_sent),0,',','.') }}</td>
+                <td class="text-right">{{ number_format($item->total_price,0,',','.') }}</td>
             </tr>
-            @php($total += $item->quantity_sent * $item->price)
+            @php($total += $item->total_price)
         @endforeach
         <tr>
             <td class="text-right text-bold" colspan="5">TOTAL</td>

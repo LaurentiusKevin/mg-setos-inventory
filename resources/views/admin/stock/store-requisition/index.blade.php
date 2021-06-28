@@ -77,7 +77,7 @@
         },
         columns: [
             {data: 'invoice_number', name: 'store_requisition_infos.invoice_number', width: '10%', className: 'align-middle font-weight-bold text-nowrap'},
-            {data: 'department', name: 'store_requisition_infos.department', className: 'align-middle'},
+            {data: 'department', name: 'departments.name', className: 'align-middle'},
             {data: 'info_penggunaan', name: 'store_requisition_infos.info_penggunaan', className: 'align-middle'},
             {data: 'catatan', name: 'store_requisition_infos.catatan', className: 'align-middle'},
             {data: 'total_item', name: 'store_requisition_infos.total_item', width: '5%', className: 'align-middle text-right'},

@@ -84,4 +84,54 @@ class InvoicingRepository
 
         return $data->get();
     }
+
+    public function invoicingProductInfo($store_requisition_info_id, $group = false)
+    {
+        $data = DB::table(DB::raw('invoicing_products ip'))
+            ->join(DB::raw('store_requisition_products srp'),'ip.store_requisition_product_id','=','srp.id')
+            ->join(DB::raw('products p'),'ip.product_id','=','p.id')
+            ->join(DB::raw('satuans s'),'p.satuan_id','=','s.id')
+            ->join(DB::raw('users u'),'ip.user_id','=','u.id')
+            ->where('ip.invoicing_info_id','=',$store_requisition_info_id)
+            ->whereNull('ip.deleted_at');
+
+        if ($group == false) {
+            $data
+                ->select([
+                    'srp.store_requisition_info_id',
+                    'srp.id AS store_requisition_product_id',
+                    'p.id AS product_id',
+                    'p.last_price',
+                    'p.code AS product_code',
+                    'p.name AS product_name',
+                    'p.stock AS product_stock',
+                    's.nama AS satuan',
+                    'srp.quantity AS quantity_max',
+                    'ip.quantity AS quantity_sent',
+                    'ip.price',
+                    'ip.user_id',
+                    'u.name AS penginput',
+                    'ip.created_at AS invoicing_created_at',
+                ])
+                ->orderBy('ip.created_at');
+        } else {
+            $data
+                ->select([
+                    'p.id AS product_id',
+                    'p.last_price',
+                    'p.code AS product_code',
+                    'p.name AS product_name',
+                    'p.stock AS product_stock',
+                    's.nama AS satuan',
+                    DB::raw('SUM(ip.quantity) AS quantity_sent'),
+                    DB::raw('SUM(ip.quantity*ip.price) AS total_price'),
+                    DB::raw('GROUP_CONCAT(u.name) AS penginput'),
+                    DB::raw('GROUP_CONCAT(ip.created_at) AS invoicing_created_at'),
+                ])
+                ->groupBy('p.id')
+                ->orderBy('p.code');
+        }
+
+        return $data->get();
+    }
 }
