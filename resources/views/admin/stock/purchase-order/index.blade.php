@@ -88,7 +88,7 @@
             {
                 targets: 4,
                 render: (data, type, row, meta) => {
-                    let now = row.received_item/data*100;
+                    let now = Math.round(row.received_item/data*100);
                     if (now < 100) {
                         return `<div class="progress"><div class="progress-bar progress-bar-striped bg-info" style="width: ${now}%" role="progressbar" aria-valuenow="${now}" aria-valuemin="0" aria-valuemax="${data}">${now}%</div></div>`;
                     } else {

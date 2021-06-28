@@ -178,7 +178,7 @@
             scrollX: true,
             ordering: false,
             paging: false,
-            info: false,
+            searching: false,
             columns: [
                 {data: 'code', width: '5%', className: "align-middle font-weight-bold text-nowrap"},
                 {data: 'name', className: "align-middle font-weight-bold"},

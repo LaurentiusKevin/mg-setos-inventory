@@ -205,6 +205,8 @@
         const list_po_produk = $('#list_po_produk').DataTable({
             scrollX: true,
             ordering: false,
+            paging: false,
+            searching: false,
             columns: [
                 {data: 'name', className: "align-middle font-weight-bold"},
                 {data: 'stock', className: "align-middle text-right"},

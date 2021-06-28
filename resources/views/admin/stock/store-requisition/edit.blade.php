@@ -209,6 +209,7 @@
             scrollX: true,
             paging: false,
             ordering: false,
+            searching: false,
             columns: [
                 {data: 'product_code', width: '5%', className: "align-middle font-weight-bold text-nowrap"},
                 {data: 'product_name', className: "align-middle font-weight-bold"},
