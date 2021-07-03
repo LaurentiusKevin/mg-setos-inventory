@@ -146,7 +146,7 @@
                             if (response.data.status === 'success') {
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Data Tersimpan',
+                                    title: 'Dokumen telah terverifikasi!',
                                     showConfirmButton: false,
                                     timer: 1200,
                                     willClose(popup) {

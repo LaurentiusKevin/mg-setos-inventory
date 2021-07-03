@@ -70,7 +70,6 @@
         processing: true,
         serverSide: true,
         scrollX: true,
-        ordering: false,
         ajax: {
             url: '{{ route('admin.stock.store-requisition.api.data') }}',
             method: 'post'
@@ -106,6 +105,7 @@
                 }
             }
         ],
+        order: [[7,'desc']]
     });
 
     document.addEventListener("DOMContentLoaded", () => {

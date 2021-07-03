@@ -54,7 +54,7 @@ footer-tdd {
 }
 
 hr {
-    border: 1px solid #6C3D94;
+    border: 1px solid #382100;
 }
 
 .logo {
@@ -73,16 +73,16 @@ header td, header th {
 }
 
 .bg-setos {
-    background-color: #6C3D94;
+    background-color: #382100;
 }
 
 .text-setos {
-    color: #6C3D94;
+    color: #382100;
 }
 
 .header-brt {
     height: 1cm;
-    background-color: #6C3D94;
+    background-color: #382100;
     color: white;
     font-size: 15px;
     font-weight: bold;

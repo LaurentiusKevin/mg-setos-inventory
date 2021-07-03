@@ -32,28 +32,28 @@
     <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sweetalert2-default.css') }}" rel="stylesheet">
     <style>
-        .c-sidebar .c-sidebar-brand, .c-sidebar .c-sidebar-header {
-            background: #331c45;
-        }
-        .c-sidebar {
-            position: relative;
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex: 0 0 256px;
-            flex: 0 0 256px;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            -ms-flex-order: -1;
-            order: -1;
-            width: 256px;
-            padding: 0;
-            box-shadow: none;
-            color: #fff;
-            background: #6C3D94;
-            transition: box-shadow 0.3s 0.15s, margin-left 0.3s, margin-right 0.3s, width 0.3s, z-index 0s ease 0.3s, -webkit-transform 0.3s;
-            transition: box-shadow 0.3s 0.15s, transform 0.3s, margin-left 0.3s, margin-right 0.3s, width 0.3s, z-index 0s ease 0.3s;
-            transition: box-shadow 0.3s 0.15s, transform 0.3s, margin-left 0.3s, margin-right 0.3s, width 0.3s, z-index 0s ease 0.3s, -webkit-transform 0.3s;
-        }
+        /*.c-sidebar .c-sidebar-brand, .c-sidebar .c-sidebar-header {*/
+        /*    background: #331c45;*/
+        /*}*/
+        /*.c-sidebar {*/
+        /*    position: relative;*/
+        /*    display: -ms-flexbox;*/
+        /*    display: flex;*/
+        /*    -ms-flex: 0 0 256px;*/
+        /*    flex: 0 0 256px;*/
+        /*    -ms-flex-direction: column;*/
+        /*    flex-direction: column;*/
+        /*    -ms-flex-order: -1;*/
+        /*    order: -1;*/
+        /*    width: 256px;*/
+        /*    padding: 0;*/
+        /*    box-shadow: none;*/
+        /*    color: #fff;*/
+        /*    background: #6C3D94;*/
+        /*    transition: box-shadow 0.3s 0.15s, margin-left 0.3s, margin-right 0.3s, width 0.3s, z-index 0s ease 0.3s, -webkit-transform 0.3s;*/
+        /*    transition: box-shadow 0.3s 0.15s, transform 0.3s, margin-left 0.3s, margin-right 0.3s, width 0.3s, z-index 0s ease 0.3s;*/
+        /*    transition: box-shadow 0.3s 0.15s, transform 0.3s, margin-left 0.3s, margin-right 0.3s, width 0.3s, z-index 0s ease 0.3s, -webkit-transform 0.3s;*/
+        /*}*/
         .sk-chase {
             width: 40px;
             height: 40px;

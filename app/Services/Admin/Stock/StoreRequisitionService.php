@@ -263,12 +263,9 @@ class StoreRequisitionService
                 ->get();
 
             if ($checkVerification->count() == 0) {
-                StoreRequisitionInfo::query()
-                    ->update([
-                        'verified_at' => now()
-                    ]);
-
                 $sr_info = StoreRequisitionInfo::find($store_requisition_info_id);
+                $sr_info->verified_at = now();
+                $sr_info->save();
 
                 $invoice_number = CounterHelper::getNewCode('Inv');
 

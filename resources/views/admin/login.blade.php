@@ -37,24 +37,24 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card-group">
-                <div class="card p-4 text-white" style="background-color: #6C3D94">
+                <div class="card p-4 text-gold" style="background-color: #D3AC67">
                     <div class="card-body">
-                        <h1>Login</h1>
-                        <p class="text-muted">Sign In to your account</p>
+                        <h1 class="text-gold">Login</h1>
+                        <p class="text-gold">Sign In to your account</p>
                         <form id="formData">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="c-icon fas fa-user"></i>
-                                </span>
+                                    <span class="input-group-text">
+                                        <i class="c-icon fas fa-user"></i>
+                                    </span>
                                 </div>
                                 <input class="form-control" type="text" placeholder="Username" id="username">
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="c-icon fas fa-lock"></i>
-                                </span>
+                                    <span class="input-group-text">
+                                        <i class="c-icon fas fa-lock"></i>
+                                    </span>
                                 </div>
                                 <input class="form-control" type="password" placeholder="Password" id="password">
                             </div>
@@ -80,7 +80,7 @@
                 <div class="card text-white bg-white py-5 d-md-down-none" style="width:44%">
                     <div class="d-flex align-content-center flex-wrap" style="height: 100%">
                         <div class="p-2 bd-highlight">
-                            <img class="img-fluid" alt="logo" src="{{ asset('icons/logo-mg-setos-hotel.png') }}" style="top: 50%">
+                            <img class="img-fluid" alt="logo" src="{{ asset('icons/logo-mg-setos-hotel.webp') }}" style="top: 50%">
                         </div>
                     </div>
                 </div>

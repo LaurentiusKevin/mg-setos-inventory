@@ -74,6 +74,7 @@ class InvoicingRepository
             ->join(DB::raw('satuans s'),'p.satuan_id','=','s.id')
             ->leftJoin(DB::raw('invoicing_products ip'),'srp.id','=','ip.store_requisition_product_id')
             ->leftJoin(DB::raw('users u'),'srp.user_id','=','u.id')
+            ->whereNull('srp.deleted_at')
             ->whereNull('ip.deleted_at')
             ->where('store_requisition_info_id','=',$store_requisition_info_id)
             ->groupBy('srp.id')
