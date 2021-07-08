@@ -136,7 +136,6 @@ class StoreRequisitionRepository
                 'users.name',
                 'users.email',
                 'users.email_verified_at',
-                'users.password',
                 'users.department_id',
                 'users.remember_token',
                 'users.created_at',
@@ -145,8 +144,10 @@ class StoreRequisitionRepository
             ])
             ->leftJoin('users','store_requisition_verificators.user_id','=','users.id')
             ->where('store_requisition_verificators.primary','=',0)
-            ->whereNull('users.department_id')
-            ->orWhere('users.department_id','=',$department_id)
+            ->where(function ($query) use ($department_id) {
+                $query->whereNull('users.department_id')
+                    ->orWhere('users.department_id','=',$department_id);
+            })
             ->get();
     }
 
