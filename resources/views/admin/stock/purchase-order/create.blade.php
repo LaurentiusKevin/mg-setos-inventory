@@ -190,7 +190,7 @@
             input_price: []
         }
 
-        let data_supplier = $.map(JSON.parse('{!! $supplier !!}'), function (obj) {
+        let data_supplier = $.map(JSON.parse(`{!! $supplier !!}`), function (obj) {
             obj.text = obj.text || obj.name;
             return obj;
         });
