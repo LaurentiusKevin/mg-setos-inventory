@@ -12,6 +12,7 @@
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('css/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
 @endsection
 
 @section('content')
@@ -45,11 +46,16 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
+{{--                    <div class="d-flex justify-content-end">--}}
+{{--                        <button class="btn btn-outline-info" id="export_excel">Download Excel</button>--}}
+{{--                    </div>--}}
+                </div>
+                <div class="card-body border-top">
                     <table id="t_list" class="table table-hover table-bordered" style="width: 100%">
                         <thead class="bg-dark">
                         <tr>
-                            <th>No Invoice</th>
+                            <th>No SR</th>
+                            <th>No Invoicing</th>
                             <th>Department</th>
                             <th>Info Penggunaan</th>
                             <th>Total Harga</th>
@@ -68,6 +74,7 @@
     <script src="{{ asset('js/datatables.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('js/daterangepicker.js') }}"></script>
+    <script src="{{ asset('js/select2.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -76,8 +83,10 @@
         });
     </script>
     <script type="text/javascript">
-        let filter_department = document.getElementById('filter_department');
-        let filter_department_val = () => filter_department.value;
+        let filter_department = $('#filter_department').select2({
+            theme: 'bootstrap4'
+        });
+        let filter_department_val = () => filter_department.val();
 
         let filter_tanggal = $('#filter_tanggal');
         filter_tanggal.daterangepicker({
@@ -110,7 +119,8 @@
                 }
             },
             columns: [
-                {data: 'invoice_number', name: 'ii.invoice_number', width: '5%', className: 'font-weight-bold align-middle'},
+                {data: 'invoice_number_sr', name: 'sri.invoice_number', width: '5%', className: 'font-weight-bold align-middle'},
+                {data: 'invoice_number_invoicing', name: 'ii.invoice_number', width: '5%', className: 'font-weight-bold align-middle'},
                 {data: 'department_name', name: 'd.name', className: 'align-middle'},
                 {data: 'info_penggunaan', name: 'ii.info_penggunaan', className: 'align-middle'},
                 {
@@ -125,8 +135,7 @@
         });
 
         document.addEventListener("DOMContentLoaded", () => {
-            filter_department.addEventListener('change', event => {
-                event.preventDefault();
+            filter_department.on('change', function (e) {
                 t_list.ajax.reload();
             });
 
