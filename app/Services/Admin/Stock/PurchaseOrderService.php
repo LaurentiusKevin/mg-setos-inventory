@@ -38,11 +38,15 @@ class PurchaseOrderService
         $supplier = Supplier::all()->toArray();
         array_unshift($supplier,[
             'id' => '',
-            'text' => '-- Pilih Supplier --'
+            'name' => '-- Pilih Supplier --'
         ]);
 
+        foreach ($supplier AS $item) {
+            $item['text'] = $item['name'];
+        }
+
         return [
-            'supplier' => json_encode($supplier)
+            'supplier' => base64_encode(json_encode($supplier))
         ];
     }
 
