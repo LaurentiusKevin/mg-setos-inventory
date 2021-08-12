@@ -57,7 +57,7 @@ class InvoicingService
             foreach ($product AS $item) {
                 if ($item['quantity'] !== null && $item['quantity'] !== 0) {
                     $masterProduct = Product::find($item['product_id']);
-                    $masterProduct->stock -= $item['quantity'];
+                    $masterProduct->stock = $masterProduct->stock - $item['quantity'];
                     $masterProduct->save();
 
                     $invoicingProduct = new InvoicingProduct();
