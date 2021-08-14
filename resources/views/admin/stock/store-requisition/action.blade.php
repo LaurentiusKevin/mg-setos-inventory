@@ -2,8 +2,8 @@
     @if($data->verified_at == null)
         @if($verification > 0)
             <button class="btn btn-ghost-success action-verification" title="Verification">
-            <i class="fas fa-check"></i>
-        </button>
+                <i class="fas fa-check"></i>
+            </button>
         @endif
         @if($data->user_id == auth()->id())
             <button class="btn btn-ghost-warning action-edit" title="Edit SR">

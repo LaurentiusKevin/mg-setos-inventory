@@ -108,6 +108,57 @@
             let data = t_list_data($(event.target).parents('tr'));
             window.location = `{{ url('admin/purchasing/purchase-order/info') }}/${data.id}`;
         });
+
+        t_list_tbody.on('click','button.action-delete', function (event) {
+            let data = t_list_data($(event.target).parents('tr'));
+
+            Swal.fire({
+                title: 'Hapus PO ini?',
+                text: "Data tidak dapat dikembalikan!",
+                icon: 'warning',
+                reverseButtons: true,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Silahkan Tunggu!');
+                    Swal.showLoading();
+                    axios({
+                        url: '{{ route('admin.purchasing.purchase-order.api.delete') }}',
+                        method: 'post',
+                        data: {
+                            purchase_order_info_id: data.id
+                        }
+                    }).then(response => {
+                        if (response.data.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Purchase Order terhapus!',
+                                showConfirmButton: false,
+                                timer: 1200,
+                                willClose: function () {
+                                    t_list.ajax.reload(null, false)
+                                }
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Purchase Order gagal dihapus!',
+                                text: 'Silahkan coba lagi.'
+                            })
+                        }
+                    }).catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Terdapat kesalahan pada sistem!',
+                            text: error.response.data.message
+                        })
+                    })
+                }
+            })
+        });
     });
 </script>
 @endsection

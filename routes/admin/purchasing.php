@@ -30,6 +30,7 @@ Route::group(
                 Route::post('data',[PurchaseOrderController::class,'data'])->name('data');
                 Route::post('product-list',[PurchaseOrderController::class,'getProductList'])->name('product-list');
                 Route::post('store',[PurchaseOrderController::class,'store'])->name('store');
+                Route::post('delete',[PurchaseOrderController::class,'delete'])->name('delete');
             }
         );
     }

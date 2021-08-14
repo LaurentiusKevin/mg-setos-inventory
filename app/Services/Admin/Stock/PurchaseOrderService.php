@@ -157,8 +157,7 @@ class PurchaseOrderService
         try {
             DB::beginTransaction();
 
-            $data = Supplier::find($id);
-            $data->delete();
+            PurchaseOrderInfo::query()->where('id','=',$id)->delete();
 
             DB::commit();
 

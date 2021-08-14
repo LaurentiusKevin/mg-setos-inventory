@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\PurchaseOrderInfo;
 use App\Services\Admin\Stock\PurchaseOrderService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -32,7 +33,9 @@ class PurchaseOrderController extends Controller
         try {
             return DataTables::of($this->service->data())
                 ->addColumn('action', function ($data) {
-                    return view('admin.stock.purchase-order.action');
+                    return view('admin.stock.purchase-order.action',[
+                        'data' => $data
+                    ]);
                 })
                 ->make(true);
         } catch (\Throwable $th) {
@@ -77,6 +80,13 @@ class PurchaseOrderController extends Controller
         $catatan = $request->get('catatan');
 
         return $this->service->storeData($supplier_id,$product,$catatan);
+    }
+
+    public function delete(Request $request): JsonResponse
+    {
+        $purchase_order_info_id = $request->get('purchase_order_info_id');
+
+        return $this->service->deleteData($purchase_order_info_id);
     }
 
     public function indexInfo($id)
