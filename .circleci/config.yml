@@ -32,6 +32,10 @@ jobs:
             - v1-dependencies-
 
       - run:
+          name: "Update Dependencies"
+          command: composer update
+
+      - run:
           name: "Install Dependencies"
           command: composer install
 
