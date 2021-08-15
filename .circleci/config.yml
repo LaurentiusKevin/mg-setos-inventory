@@ -36,8 +36,16 @@ jobs:
 #          command: composer update
 
       - run:
+          name: "Add Repository"
+          command: sudo add-apt-repository ppa:ondrej/php
+
+      - run:
+          name: "Update Repo List"
+          command: sudo apt-get update
+
+      - run:
           name: "Install Extension"
-          command: sudo apt-get install php7.4-gd
+          command: sudo apt-get install -y php7.4-gd
 
       - run:
           name: "Install Dependencies"
