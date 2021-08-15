@@ -48,7 +48,7 @@
                                         <i class="c-icon fas fa-user"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" placeholder="Username" id="username">
+                                <input class="form-control" type="text" placeholder="Username" name="username" id="username">
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
@@ -56,7 +56,7 @@
                                         <i class="c-icon fas fa-lock"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="password" placeholder="Password" id="password">
+                                <input class="form-control" type="password" placeholder="Password" name="password" id="password">
                             </div>
 
 {{--                            <div class="custom-control custom-checkbox text-right">--}}

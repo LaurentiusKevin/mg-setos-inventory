@@ -143,6 +143,12 @@ class StoreRequisitionController extends Controller
         return $this->service->storeVerification($store_requisition_info_id);
     }
 
+    public function delete(Request $request)
+    {
+        $store_requisition_info_id = $request->get('store_requisition_info_id');
+        return $this->service->delete($store_requisition_info_id);
+    }
+
     public function indexPdf($id)
     {
         try {

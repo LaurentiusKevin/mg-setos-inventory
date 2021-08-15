@@ -319,4 +319,24 @@ class StoreRequisitionService
             ]);
         }
     }
+
+    public function delete($store_requisition_info_id)
+    {
+        try {
+            DB::beginTransaction();
+            StoreRequisitionInfo::find($store_requisition_info_id)
+                ->delete();
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success'
+            ]);
+        } catch (\Throwable $throwable) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $throwable->getMessage(),
+                'details' => $throwable
+            ]);
+        }
+    }
 }

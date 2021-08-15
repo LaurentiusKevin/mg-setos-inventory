@@ -131,7 +131,7 @@
             let data = t_list_data($(event.target).parents('tr'));
 
             Swal.fire({
-                title: 'Hapus supplier ini?',
+                title: 'Hapus SR ini?',
                 icon: 'warning',
                 showCancelButton: true,
                 reverseButtons: true,
@@ -142,7 +142,7 @@
                         url: '{{ route('admin.stock.store-requisition.api.delete') }}',
                         method: 'post',
                         data: {
-                            id: data.id
+                            store_requisition_info_id: data.id
                         }
                     }).then(response => {
                         if (response.data.status === 'success') {
@@ -152,7 +152,7 @@
                                 timer: 1200,
                                 showConfirmButton: false,
                                 willClose(popup) {
-                                    t_list.ajax.reload();
+                                    t_list.ajax.reload(null,false);
                                 }
                             });
                         } else {
