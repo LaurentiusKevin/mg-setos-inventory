@@ -15,9 +15,9 @@ jobs:
       - run:
           name: "Prepare Environment"
           command: |
-            apt-get update && apt-get install -y software-properties-common
-            LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
-            apt-get update -y && apt-get install -y apache2
+            sudo apt-get update && sudo apt-get install -y software-properties-common
+            LC_ALL=C.UTF-8 sudo add-apt-repository -y ppa:ondrej/php
+            sudo apt-get update -y && sudo apt-get install -y apache2
             sudo apt update
             sudo apt-get install -y php7.4-gd
             sudo docker-php-ext-install zip
