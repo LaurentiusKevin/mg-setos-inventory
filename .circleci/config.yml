@@ -36,6 +36,10 @@ jobs:
 #          command: composer update
 
       - run:
+          name: "Install Extension"
+          command: sudo apt-get install php-gd
+
+      - run:
           name: "Install Dependencies"
           command: composer install
 
