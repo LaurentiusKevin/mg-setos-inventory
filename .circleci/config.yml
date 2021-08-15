@@ -17,6 +17,9 @@ jobs:
           command: |
             sudo apt update
             sudo docker-php-ext-install zip
+            sudo add-apt-repository ppa:ondrej/php
+            sudo apt-get update
+            sudo apt-get install -y php7.4-gd
 
       - run:
           name: "Create Environment file"
@@ -35,17 +38,17 @@ jobs:
 #          name: "Update Dependencies"
 #          command: composer update
 
-      - run:
-          name: "Add Repository"
-          command: sudo add-apt-repository ppa:ondrej/php
-
-      - run:
-          name: "Update Repo List"
-          command: sudo apt-get update
-
-      - run:
-          name: "Install Extension"
-          command: sudo apt-get install -y php7.4-gd
+#      - run:
+#          name: "Add Repository"
+#          command: sudo add-apt-repository ppa:ondrej/php
+#
+#      - run:
+#          name: "Update Repo List"
+#          command: sudo apt-get update
+#
+#      - run:
+#          name: "Install Extension"
+#          command: sudo apt-get install -y php7.4-gd
 
       - run:
           name: "Install Dependencies"
