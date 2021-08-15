@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
-      - image: circleci/php:7.4-apache
+      - image: php:7.4-cli
 
     steps:
       - checkout
@@ -16,7 +16,7 @@ jobs:
           name: "Prepare Environment"
           command: |
             sudo apt-get update && sudo apt-get install -y software-properties-common
-            sudo add-apt-repository --allow-unauthenticated -y ppa:ondrej/php
+            sudo add-apt-repository -y ppa:ondrej/php
             sudo apt-get update -y && sudo apt-get install -y apache2
             sudo apt update
             sudo apt-get install -y php7.4-gd
