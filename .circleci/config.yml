@@ -37,7 +37,7 @@ jobs:
 
       - run:
           name: "Install Extension"
-          command: sudo apt-get install php-gd
+          command: sudo apt-get install php7.4-gd
 
       - run:
           name: "Install Dependencies"
