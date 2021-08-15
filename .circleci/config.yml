@@ -18,7 +18,7 @@ jobs:
             apt-get update && apt-get install gpg && echo -n 'deb http://ppa.launchpad.net/ondrej/php/ubuntu groovy main' > /etc/apt/sources.list.d/ondrej-ubuntu-php-groovy.list && \
                     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 14AA40EC0831756756D7F66C4F4EA0AAE5267A6C
             sudo apt update
-            sudo apt-get install -y php-gd
+            sudo apt-get install -y php7.4-gd
             sudo docker-php-ext-install zip
 
       - run:
