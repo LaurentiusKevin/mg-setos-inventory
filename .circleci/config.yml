@@ -32,6 +32,10 @@ jobs:
             - v1-dependencies-
 
       - run:
+          name: "Install php plugin"
+          command: sudo apt-get install docker-php-ext-intl docker-php-ext-sodium docker-php-ext-xdebug docker-php-ext-zip
+
+      - run:
           name: "Update Dependencies"
           command: composer update
 
