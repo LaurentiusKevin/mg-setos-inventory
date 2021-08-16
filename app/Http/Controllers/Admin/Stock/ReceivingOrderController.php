@@ -48,7 +48,7 @@ class ReceivingOrderController extends Controller
         try {
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
-                    return view('admin.stock.purchase-order.action');
+                    return view('admin.stock.receiving-order.action');
                 })
                 ->make(true);
         } catch (\Throwable $th) {
