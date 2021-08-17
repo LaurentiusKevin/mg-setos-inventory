@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Laporan\InvoicingPerDepartmentController;
 use App\Http\Controllers\Admin\Laporan\MutasiStockController;
+use App\Http\Controllers\Admin\Laporan\ProductStockController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(
@@ -28,5 +29,18 @@ Route::group(
         Route::post('datatable',[MutasiStockController::class,'datatable'])->name('datatable');
         Route::post('product-list',[MutasiStockController::class,'productList'])->name('product-list');
         Route::get('export-excel',[MutasiStockController::class,'exportExcel'])->name('export-excel');
+    }
+);
+
+Route::group(
+    [
+        'prefix' => 'admin/laporan/product-stock',
+        'as' => 'admin.laporan.product-stock.',
+        'middleware' => ['auth']
+    ],
+    function () {
+        Route::get('/',[ProductStockController::class,'index'])->name('index');
+        Route::post('datatable',[ProductStockController::class,'datatable'])->name('datatable');
+        Route::get('export-excel',[ProductStockController::class,'exportExcel'])->name('export-excel');
     }
 );
