@@ -56,9 +56,12 @@ class InvoicingService
 
             foreach ($product AS $item) {
                 if ($item['quantity'] !== null && $item['quantity'] !== 0) {
-                    $masterProduct = Product::find($item['product_id']);
-                    $masterProduct->stock = $masterProduct->stock - $item['quantity'];
-                    $masterProduct->save();
+                    $product = DB::table('products')
+                        ->where('id','=',$item['product_id']);
+                    $stock = clone $product->first();
+                    $product->update([
+                        'stock' => $stock->stock - $item['quantity']
+                    ]);
 
                     $invoicingProduct = new InvoicingProduct();
                     $invoicingProduct->invoicing_info_id = $invoicing_info_id;
