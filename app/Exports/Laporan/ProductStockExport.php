@@ -20,25 +20,19 @@ class ProductStockExport implements FromCollection, WithHeadings, WithMapping, W
 {
     use Exportable;
 
+    private $filter_tgl;
+
+    public function __construct($filter_tgl = null)
+    {
+        $this->filter_tgl = $filter_tgl;
+    }
+
     /**
     * @return Collection
     */
     public function collection(): Collection
     {
-        return Product::query()
-            ->select([
-                'products.code',
-                'products.name',
-                'products.stock',
-                'satuans.nama AS satuan',
-                'products.supplier_price',
-                'products.last_price',
-                'products.avg_price',
-                'products.created_at',
-                'products.updated_at'
-            ])
-            ->leftJoin('satuans','products.satuan_id','=','satuans.id')
-            ->get();
+        return Product::laporan($this->filter_tgl)->get();
     }
 
     public function headings(): array

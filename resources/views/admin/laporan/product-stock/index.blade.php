@@ -11,13 +11,25 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('css/datatables.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/daterangepicker.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('css/daterangepicker.css') }}">--}}
     <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
 @endsection
 
 @section('content')
     <div class="row">
-        <div class="col">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-2">
+                    <div class="form-group">
+                        <label for="filter_tgl">Tanggal</label>
+                        <input class="form-control" id="filter_tgl" style="width: 100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -69,8 +81,9 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/datatables.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
-    <script src="{{ asset('js/daterangepicker.js') }}"></script>
+{{--    <script src="{{ asset('js/daterangepicker.js') }}"></script>--}}
     <script src="{{ asset('js/select2.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -79,39 +92,35 @@
         });
     </script>
     <script type="text/javascript">
-        let filter_product = $('#filter_product').select2({
-            theme: 'bootstrap4',
-            ajax: {
-                url: '{{ route('admin.laporan.mutasi-stock.product-list') }}',
-                method: 'post',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: function (params) {
-                    // Query parameters will be ?search=[term]&page=[page]
-                    return {
-                        search: params.term,
-                        page: params.page || 1
-                    };
-                }
-            }
-        });
-        let filter_product_val = () => filter_product.val();
+        {{--let filter_product = $('#filter_product').select2({--}}
+        {{--    theme: 'bootstrap4',--}}
+        {{--    ajax: {--}}
+        {{--        url: '{{ route('admin.laporan.mutasi-stock.product-list') }}',--}}
+        {{--        method: 'post',--}}
+        {{--        headers: {--}}
+        {{--            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+        {{--        },--}}
+        {{--        data: function (params) {--}}
+        {{--            // Query parameters will be ?search=[term]&page=[page]--}}
+        {{--            return {--}}
+        {{--                search: params.term,--}}
+        {{--                page: params.page || 1--}}
+        {{--            };--}}
+        {{--        }--}}
+        {{--    }--}}
+        {{--});--}}
+        {{--let filter_product_val = () => filter_product.val();--}}
 
-        let filter_tanggal = $('#filter_tanggal');
-        filter_tanggal.daterangepicker({
-            startDate: moment().startOf('month'),
-            endDate: moment().endOf('month'),
-            locale: {
-                format: 'DD/MM/YYYY'
-            }
+        let filter_tanggal_selector = document.getElementById('filter_tgl');
+        const filter_tanggal = new Datepicker(filter_tanggal_selector, {
+            autohide: true,
+            clearBtn: true,
+            format: 'dd-mm-yyyy'
+        });
+        let filter_tanggal_val = () => filter_tanggal.getDate('yyyy-mm-dd');
+        filter_tanggal_selector.addEventListener('changeDate', function () {
+            t_list.ajax.reload();
         })
-        let filter_tanggal_val = () => {
-            return {
-                start_date: filter_tanggal.data('daterangepicker').startDate.format('YYYY-MM-DD'),
-                end_date: filter_tanggal.data('daterangepicker').endDate.format('YYYY-MM-DD')
-            }
-        }
 
         let export_excel = document.getElementById('export_excel');
 
@@ -123,11 +132,9 @@
             ajax: {
                 url: '{{ route('admin.laporan.product-stock.datatable') }}',
                 method: 'post',
-                // data: function (d) {
-                //     d.product_id = filter_product_val();
-                //     d.start_date = filter_tanggal_val().start_date;
-                //     d.end_date = filter_tanggal_val().end_date;
-                // }
+                data: function (d) {
+                    d.filter_tgl = filter_tanggal_val();
+                }
             },
             columns: [
                 {data: 'code', name: 'products.code', width: '5%', className: 'align-middle font-weight-bold'},
@@ -138,7 +145,7 @@
                         return new Intl.NumberFormat('id').format(data)
                     }
                 },
-                {data: 'satuan', name: 'satuans.nama AS satuan', className: 'align-middle'},
+                {data: 'satuan', name: 'satuans.nama', className: 'align-middle'},
                 {
                     data: 'supplier_price', name: 'products.supplier_price', className: 'align-middle text-right',
                     render: function (data) {
@@ -174,17 +181,23 @@
         });
 
         document.addEventListener("DOMContentLoaded", () => {
-            filter_product.on('change', function (e) {
-                t_list.ajax.reload();
-            });
+            // filter_product.on('change', function (e) {
+            //     t_list.ajax.reload();
+            // });
 
-            filter_tanggal.on('apply.daterangepicker', function(ev, picker) {
-                t_list.ajax.reload()
-            });
+            // filter_tanggal.on('apply.daterangepicker', function(ev, picker) {
+            //     t_list.ajax.reload()
+            // });
 
             export_excel.addEventListener('click', event => {
                 event.preventDefault();
                 let url = new URL('{{ route('admin.laporan.product-stock.export-excel') }}');
+                let filter_tgl = filter_tanggal_val();
+
+                if (filter_tgl !== undefined) {
+                    url.searchParams.set('filter_tgl',filter_tgl);
+                }
+
                 window.open(url.href);
             });
         });
